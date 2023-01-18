@@ -3,9 +3,9 @@ package layout
 import android.content.Context
 import androidx.room.*
 import androidx.sqlite.db.SupportSQLiteOpenHelper
-import com.example.guru2.ExerciseListModel
+import com.example.guru2.DataExerciseName
 
-@Database(entities = [ExerciseListModel::class], version = 1)
+@Database(entities = [DataExerciseName::class], version = 1)
 abstract class ExerciseListDatabase : RoomDatabase() {
     abstract fun exerciseNameDao() : ExerciseListDao
     companion object {
