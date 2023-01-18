@@ -6,14 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 
-
-class ExerciseRecordFragment : Fragment() {
+class InputExerciseFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
 
-        }
     }
 
     override fun onCreateView(
@@ -21,13 +18,13 @@ class ExerciseRecordFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_exercise_record, container, false)
+        return inflater.inflate(R.layout.fragment_input_exercise, container, false)
     }
 
     companion object {
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            ExerciseRecordFragment().apply {
+            InputExerciseFragment().apply {
                 arguments = Bundle().apply {
 
                 }
