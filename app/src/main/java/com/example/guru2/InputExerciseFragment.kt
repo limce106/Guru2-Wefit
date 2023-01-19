@@ -193,7 +193,7 @@ class InputExerciseFragment : Fragment() {
                 exerciseCountalertDialog.show();
 
                 // 확인 버튼
-                btnOk.setOnClickListener() {
+                btnCancel2.setOnClickListener() {
                     // 프래그먼트 전환
                     
                     // 팝업창 해제
@@ -201,7 +201,7 @@ class InputExerciseFragment : Fragment() {
 
                 }
                 // 취소 버튼
-                btnCancel.setOnClickListener() {
+                btnOk.setOnClickListener() {
                     exerciseCountalertDialog.dismiss()
                 }
             }
@@ -215,10 +215,22 @@ class InputExerciseFragment : Fragment() {
             exerciseCustombuilder.setView(exerciseCustompopupView)
 
             val exerciseCustomalertDialog: AlertDialog = exerciseCustombuilder.create();
+
+            // 팝업창을 따로 만들지 않아도 사용 가능
+//            AlertDialog.Builder(this)
+//                .setTitle("권한이 필요합니다")
+//                .setMessage("전자액자에서 사진을 선택하려면 권한이 필요합니다.")
+//                .setPositiveButton("동의하기", {_, _ ->
+//                    requestPermissions(arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE),1000)
+//                })
+//                .setNegativeButton("취소하기",{ _,_ ->})
+//                .create()
+//                .show()
+
             exerciseCustomalertDialog.show();
 
             // 확인 버튼
-            custom_btnOk.setOnClickListener() {
+            custom_btnCancel.setOnClickListener() {
                 // 프래그먼트 전환
 //                supportFragmentManager().beginTransaction()
 //                    .replace(R.id.framelayout, fragment_main).commit()
@@ -227,7 +239,7 @@ class InputExerciseFragment : Fragment() {
 
             }
             // 취소 버튼
-            custom_btnCancel.setOnClickListener() {
+            custom_btnOk.setOnClickListener() {
                 exerciseCustomalertDialog.dismiss()
             }
         }
