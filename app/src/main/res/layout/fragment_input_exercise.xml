@@ -74,7 +74,6 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:queryBackground="#6F6D73"
         app:queryHint="검색어를 입력하시오" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
