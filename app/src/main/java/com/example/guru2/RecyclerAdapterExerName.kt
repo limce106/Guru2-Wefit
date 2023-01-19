@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.exercise_list.view.*
 
@@ -16,13 +15,9 @@ class RecyclerAdapterExerName(private var ExerciseNames: ArrayList<DataExerciseN
     override fun getItemCount(): Int = ExerciseNames.size
 
     override fun onBindViewHolder(holder: RecyclerAdapterExerName.ViewHolder, position: Int){
-        val item = ExerciseNames[position]
-        val listener = View.OnClickListener { it ->
-            Toast.makeText(it.context, "Clicked: "+item.exerciseName, Toast.LENGTH_SHORT).show()
-        }
-        holder.apply{
-            bind(listener, item)
-            itemView.tag = item
+        // 운동 항목 클릭 이벤트
+        holder.itemView.setOnClickListener {
+            nameClickListener.onClick(it, position)
         }
     }
 
@@ -91,4 +86,16 @@ class RecyclerAdapterExerName(private var ExerciseNames: ArrayList<DataExerciseN
             notifyDataSetChanged()
         }
     }
+
+    // 리사이클러뷰 클릭 이벤트
+    // 리스너 인터페이스
+    interface OnItemClickListener {
+        fun onClick(v: View, position: Int)
+    }
+    // 외부에서 클릭 시 이벤트 설정
+    fun setItemClickListener(onItemClickListener: OnItemClickListener) {
+        this.nameClickListener = onItemClickListener
+    }
+    // setItemClickListener로 설정한 함수 실행
+    private lateinit var nameClickListener : OnItemClickListener
 }

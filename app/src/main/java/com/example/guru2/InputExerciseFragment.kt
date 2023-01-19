@@ -1,12 +1,16 @@
 package com.example.guru2
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.fragment_input_exercise.*
+import kotlinx.android.synthetic.main.popup_customexercise.*
+import kotlinx.android.synthetic.main.popup_exercisecount.*
 
 class InputExerciseFragment : Fragment() {
 
@@ -168,6 +172,65 @@ class InputExerciseFragment : Fragment() {
                     return false
                 }
             }
+
+        // 운동 항목 클릭 이벤트
+        RVExerNameadapter.setItemClickListener(object: RecyclerAdapterExerName.OnItemClickListener{
+            override fun onClick(v: View, position: Int) {
+                // 클릭 시 이벤트 작성
+
+                // 토스트 메시지: 운동 이름
+                Toast.makeText(
+                    view!!.context,
+                    "${list[position].exerciseName}",
+                    Toast.LENGTH_SHORT).show()
+
+                // 횟수 세트/입력 팝업창 띄우기
+                val exerciseCountpopupView: View = layoutInflater.inflate(R.layout.popup_exercisecount, null)
+                val exerciseCountbuilder: AlertDialog.Builder = AlertDialog.Builder(context)
+                exerciseCountbuilder.setView(exerciseCountpopupView)
+
+                val exerciseCountalertDialog: AlertDialog = exerciseCountbuilder.create();
+                exerciseCountalertDialog.show();
+
+                // 확인 버튼
+                btnOk.setOnClickListener() {
+                    // 프래그먼트 전환
+                    
+                    // 팝업창 해제
+                    exerciseCountalertDialog.dismiss()
+
+                }
+                // 취소 버튼
+                btnCancel.setOnClickListener() {
+                    exerciseCountalertDialog.dismiss()
+                }
+            }
+        })
+
+        // 커스텀 운동 추가
+        btnCustom.setOnClickListener() {
+            // 커스텀 운동 팝업 창 띄우기
+            val exerciseCustompopupView: View = layoutInflater.inflate(R.layout.popup_customexercise, null)
+            val exerciseCustombuilder: AlertDialog.Builder = AlertDialog.Builder(context)
+            exerciseCustombuilder.setView(exerciseCustompopupView)
+
+            val exerciseCustomalertDialog: AlertDialog = exerciseCustombuilder.create();
+            exerciseCustomalertDialog.show();
+
+            // 확인 버튼
+            custom_btnOk.setOnClickListener() {
+                // 프래그먼트 전환
+//                supportFragmentManager().beginTransaction()
+//                    .replace(R.id.framelayout, fragment_main).commit()
+                // 팝업창 해제
+                exerciseCustomalertDialog.dismiss()
+
+            }
+            // 취소 버튼
+            custom_btnCancel.setOnClickListener() {
+                exerciseCustomalertDialog.dismiss()
+            }
+        }
 
         return inflater.inflate(R.layout.fragment_input_exercise, container, false)
     }

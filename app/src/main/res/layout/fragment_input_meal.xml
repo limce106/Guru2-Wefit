@@ -8,9 +8,9 @@
 
     <ImageView
         android:id="@+id/img_load"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_marginTop="136dp"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_marginTop="55dp"
         android:src="@drawable/ic_baseline_add_24"
         app:layout_constraintBottom_toTopOf="@+id/btnLoadImg"
         app:layout_constraintEnd_toEndOf="parent"
@@ -20,10 +20,10 @@
 
     <Button
         android:id="@+id/btnLoadImg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="240dp"
+        android:layout_height="50dp"
         android:layout_marginTop="16dp"
-        android:layout_marginBottom="38dp"
+        android:layout_marginBottom="20dp"
         android:text="사진 불러오기"
         app:layout_constraintBottom_toTopOf="@+id/spinnerMealTime"
         app:layout_constraintEnd_toEndOf="parent"
@@ -33,24 +33,26 @@
 
     <Spinner
         android:id="@+id/spinnerMealTime"
-        android:layout_width="112dp"
-        android:layout_height="23dp"
+        android:layout_width="240dp"
+        android:layout_height="50dp"
         android:layout_marginStart="150dp"
-        android:layout_marginTop="21dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="150dp"
-        android:layout_marginBottom="36dp"
+        android:layout_marginBottom="20dp"
         app:layout_constraintBottom_toTopOf="@+id/tvMealTime"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnLoadImg" />
+        app:layout_constraintTop_toBottomOf="@+id/btnLoadImg"
+        android:contentDescription="식사 시간대 선택" />
 
     <EditText
         android:id="@+id/edtMealName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="240dp"
+        android:layout_height="50dp"
         android:layout_marginStart="150dp"
         android:layout_marginEnd="150dp"
-        android:layout_marginBottom="222dp"
+        android:layout_marginBottom="55dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="식단"
@@ -61,11 +63,13 @@
 
     <TextView
         android:id="@+id/tvMealTime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="192dp"
-        android:layout_marginBottom="12dp"
+        android:layout_width="240dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="85dp"
+        android:layout_marginBottom="20dp"
         android:text="시간"
+        android:textAlignment="center"
+        android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/edtMealName"
         app:layout_constraintStart_toStartOf="parent" />
 
