@@ -4,7 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".TestFragment">
+    tools:context=".schedule">
+
+    <FrameLayout
+        android:id="@+id/exerciseRecordContainer"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     <TextView
@@ -48,8 +57,9 @@
             android:clickable="true"
             android:contentDescription="운동 기록"
             android:paddingLeft="0dp"
+            android:src="@drawable/ic_baseline_create_24"
             app:backgroundTint="#FFFFFF"
-            app:fabSize="mini"/>
+            app:fabSize="mini" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab_meal"
@@ -59,8 +69,9 @@
             android:clickable="true"
             android:contentDescription="식단 기록"
             android:paddingLeft="10dp"
+            android:src="@drawable/ic_baseline_create_24"
             app:backgroundTint="#FFFFFF"
-            app:fabSize="mini"/>
+            app:fabSize="mini" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab_add"
@@ -68,7 +79,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:clickable="true"
-            android:contentDescription="추가하기"/>
+            android:contentDescription="추가하기"
+            android:src="@drawable/ic_baseline_add_24" />
 
     </LinearLayout>
 

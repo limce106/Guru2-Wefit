@@ -5,10 +5,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.SearchView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import kotlinx.android.synthetic.main.fragment_input_exercise.*
+import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.popup_customexercise.*
 import kotlinx.android.synthetic.main.popup_exercisecount.*
 
@@ -24,6 +25,7 @@ class InputExerciseFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
+        val rootView = inflater.inflate(R.layout.fragment_input_exercise, container, false)
         val list = ArrayList<DataExerciseName>()
 
         //가슴
@@ -155,6 +157,8 @@ class InputExerciseFragment : Fragment() {
         list.add(DataExerciseName("버피"))
         list.add(DataExerciseName("유산소 운동"))
 
+
+        val rv_exerciseName: RecyclerView = rootView.findViewById(R.id.rv_exerciseName)
         val RVExerNameadapter = RecyclerAdapterExerName(list)
         rv_exerciseName.adapter = RVExerNameadapter
 
@@ -180,7 +184,7 @@ class InputExerciseFragment : Fragment() {
 
                 // 토스트 메시지: 운동 이름
                 Toast.makeText(
-                    view!!.context,
+                    v.context,
                     "${list[position].exerciseName}",
                     Toast.LENGTH_SHORT).show()
 
@@ -208,6 +212,7 @@ class InputExerciseFragment : Fragment() {
         })
 
         // 커스텀 운동 추가
+        val btnCustom: Button = rootView.findViewById(R.id.btnCustom)
         btnCustom.setOnClickListener() {
             // 커스텀 운동 팝업 창 띄우기
             val exerciseCustompopupView: View = layoutInflater.inflate(R.layout.popup_customexercise, null)
@@ -232,8 +237,7 @@ class InputExerciseFragment : Fragment() {
             // 확인 버튼
             custom_btnCancel.setOnClickListener() {
                 // 프래그먼트 전환
-//                supportFragmentManager().beginTransaction()
-//                    .replace(R.id.framelayout, fragment_main).commit()
+
                 // 팝업창 해제
                 exerciseCustomalertDialog.dismiss()
 
@@ -244,7 +248,7 @@ class InputExerciseFragment : Fragment() {
             }
         }
 
-        return inflater.inflate(R.layout.fragment_input_exercise, container, false)
+        return rootView
     }
 
     companion object {

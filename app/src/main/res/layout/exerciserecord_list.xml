@@ -34,27 +34,6 @@
                 android:weightSum="100">
 
                 <!-- seq -->
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="15"
-                    android:gravity="top"
-                    android:orientation="vertical"
-                    android:weightSum="100">
-
-                    <TextView
-                        android:id="@+id/tv_seq"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_margin="6dp"
-                        android:layout_weight="45"
-
-                        android:elevation="4dp"
-                        android:gravity="center"
-                        android:text="12"
-                        android:textColor="@color/black"
-                        android:textSize="12sp" />
-                </LinearLayout>
 
                 <!-- title, content, date -->
                 <LinearLayout
@@ -70,7 +49,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="44"
-                        android:text="myTodo Title"
+                        android:text="운동명"
                         android:textColor="@color/black"
                         android:textSize="18sp"
                         android:textStyle="bold" />
