@@ -6,10 +6,76 @@
     android:layout_height="match_parent"
     tools:context=".schedule">
 
+    <TextView
+        android:id="@+id/tv_mealRecord3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="100dp"
+        android:text="개인 운동"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/linearLayout" />
+
+    <TextView
+        android:id="@+id/tv_mealRecord4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="35dp"
+        android:text="수업 예약"
+        app:layout_constraintBottom_toTopOf="@+id/tv_mealRecord3"
+        app:layout_constraintEnd_toStartOf="@+id/linearLayout" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="70dp"
+        android:layout_height="183dp"
+        android:layout_marginBottom="16dp"
+        android:baselineAligned="false"
+        android:orientation="vertical"
+        android:paddingLeft="0dp"
+        android:paddingBottom="0dp"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_exercise"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:clickable="true"
+            android:contentDescription="운동 기록"
+            android:paddingLeft="0dp"
+            app:backgroundTint="#FFFFFF"
+            app:fabSize="mini" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_meal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:clickable="true"
+            android:contentDescription="식단 기록"
+            android:paddingLeft="10dp"
+            app:backgroundTint="#FFFFFF"
+            app:fabSize="mini" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:clickable="true"
+            android:contentDescription="추가하기" />
+
+    </LinearLayout>
+
     <CalendarView
+        android:id="@+id/cal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="35dp"
         android:layout_marginBottom="1dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
