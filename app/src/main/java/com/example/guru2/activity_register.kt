@@ -5,10 +5,7 @@ import android.database.sqlite.SQLiteDatabase
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.webkit.WebView.FindListener
-import android.widget.Button
-import android.widget.EditText
-import android.widget.RadioButton
-import android.widget.RadioGroup
+import android.widget.*
 
 class activity_register : AppCompatActivity() {
 
@@ -56,6 +53,7 @@ class activity_register : AppCompatActivity() {
             var str_ID:String=edtID.text.toString()
             var str_PW:String=""
 
+
             //비밀번호와 비밀번호 확인이 같으면 넣는다
             if(edtPW.text.toString()==re_PW.text.toString()){
                 str_PW=edtPW.text.toString()
@@ -86,6 +84,12 @@ class activity_register : AppCompatActivity() {
             if(rb_purpose.checkedRadioButtonId==R.id.rb_P4){
                 str_purpose=rb_P4.text.toString()
 
+            }
+
+            //모든 정보가 채워져야 회원가입 성공
+            if(str_name.isBlank()||str_ID.isBlank()||str_PW.isBlank()||str_Tel.isBlank()||
+                str_gender.isBlank()||str_purpose.isBlank()){
+                Toast.makeText(applicationContext, "모든 빈칸을 채워주세요", Toast.LENGTH_SHORT).show()
             }
 
             sqlitedb=dbManager.writableDatabase
