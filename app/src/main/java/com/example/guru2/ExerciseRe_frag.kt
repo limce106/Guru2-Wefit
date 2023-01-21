@@ -29,12 +29,11 @@ class ExerciseRe_frag : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_exercise_re_frag, container, false)
-        val fabexercise: FloatingActionButton = view.findViewById(R.id.fab_exercise)
+        val fab_add: FloatingActionButton = view.findViewById(R.id.fab_add)
         val transaction: FragmentTransaction = parentFragmentManager.beginTransaction()
         val inputExerciseFragment = InputExerciseFragment();
-        fabexercise.setOnClickListener() {
-            transaction.replace(R.id.exerciseRecordContainer, inputExerciseFragment);
-            transaction.commit();
+        fab_add.setOnClickListener() {
+            transaction.replace(R.id.exerciseRecordContainer, inputExerciseFragment).commit();
             Log.d("test", "화면 전환")
         }
         return view

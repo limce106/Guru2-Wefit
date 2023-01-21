@@ -42,7 +42,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        tools:listitem="@layout/exercise_list" />
+        tools:listitem="@layout/exercise_name_form" />
 
     <android.widget.SearchView
         android:id="@+id/searchView"
