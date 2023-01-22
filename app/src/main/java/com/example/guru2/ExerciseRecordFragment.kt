@@ -7,10 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import kotlinx.android.synthetic.main.fragment_exercise_re_frag.*
+import kotlinx.android.synthetic.main.fragment_exercise_record.*
 
 
-class ExerciseRe_frag : Fragment() {
+class ExerciseRecordFragment : Fragment() {
     private var text: String? = null
 
 
@@ -27,7 +27,7 @@ class ExerciseRe_frag : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_exercise_re_frag, container, false)
+        val view = inflater.inflate(R.layout.fragment_exercise_record, container, false)
         val fab_add: FloatingActionButton = view.findViewById(R.id.fab_add)
         val mActivity = MainActivity.getInstance()
         fab_add.setOnClickListener() {
@@ -47,7 +47,7 @@ class ExerciseRe_frag : Fragment() {
 
     companion object {
         fun newInstance(text1: String) =
-            ExerciseRe_frag().apply {
+            ExerciseRecordFragment().apply {
                 arguments = Bundle().apply {
                     putString("text", text1)
                 }

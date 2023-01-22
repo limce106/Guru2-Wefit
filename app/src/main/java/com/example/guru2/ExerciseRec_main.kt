@@ -46,7 +46,7 @@ class ExerciseRec_main : AppCompatActivity() {
 
             return when (position) {
 
-                0 -> ExerciseRe_frag.newInstance("${currentDay.minusDays(3)}")
+                0 -> ExerciseRecordFragment.newInstance("${currentDay.minusDays(3)}")
 //                1 -> ExerciseRe_frag.newInstance("${currentDay.minusDays(2)}")
 //                2 -> ExerciseRe_frag.newInstance("${currentDay.minusDays(1)}")
 //                3 -> ExerciseRe_frag.newInstance("${currentDay}")
@@ -54,7 +54,7 @@ class ExerciseRec_main : AppCompatActivity() {
 //                5 -> ExerciseRe_frag.newInstance("${currentDay.plusDays(2)}")
 //                6 -> ExerciseRe_frag.newInstance("${currentDay.plusDays(3)}")
 
-                else -> ExerciseRe_frag.newInstance("")
+                else -> ExerciseRecordFragment.newInstance("")
 
             }
 

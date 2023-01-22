@@ -71,7 +71,22 @@ class MainActivity : AppCompatActivity() {
                     .replace(R.id.exerciseRecordContainer, inputMealFragment)
                     .commit()
             }
+
+            3 -> {
+                val exerciseRecordFragment = ExerciseRecordFragment();
+                supportFragmentManager
+                    .beginTransaction()
+                    .replace(R.id.exerciseRecordContainer, exerciseRecordFragment)
+                    .commit()
+            }
+
+            4 -> {
+                val mealRecordFragment = MealRecordFragment();
+                supportFragmentManager
+                    .beginTransaction()
+                    .replace(R.id.exerciseRecordContainer, mealRecordFragment)
+                    .commit()
+            }
         }
     }
-
 }
