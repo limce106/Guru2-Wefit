@@ -2,12 +2,19 @@ package com.example.guru2
 
 import android.content.Intent
 import android.database.sqlite.SQLiteDatabase
+import android.nfc.Tag
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.webkit.WebView.FindListener
 import android.widget.*
+import com.google.firebase.auth.FirebaseAuth
 
 class activity_register : AppCompatActivity() {
+
+
+    private lateinit var auth:FirebaseAuth
+    private val TAG:String=activity_register::class.java.simpleName
 
     lateinit var dbManager: DBManager
     lateinit var sqlitedb:SQLiteDatabase
@@ -28,78 +35,41 @@ class activity_register : AppCompatActivity() {
     lateinit var rb_P4:RadioButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        edtID=findViewById(R.id.edtID)
+        edtPW=findViewById(R.id.edtPW)
+
+        val reg_id=edtID.text.toString()
+        val reg_pw=edtPW.text.toString()
+
+        auth=FirebaseAuth.getInstance()
+
+
+
+        btn_finish_reg.setOnClickListener {
+
+            if(edtID.text.isEmpty()||edtPW.text.isEmpty()){
+                Toast.makeText(this, "모든 항목을 채워주세요", Toast.LENGTH_SHORT)
+                    .show()
+            }
+
+            auth.createUserWithEmailAndPassword(reg_id,reg_pw)
+                .addOnCompleteListener(this){ task->
+                    if(task.isSuccessful){
+
+                        Log.d(TAG, "성공")
+                    }else{
+                        Log.d(TAG, "실패")
+                    }
+                }
+        }
+
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
 
-        btn_finish_reg=findViewById(R.id.btn_finish_reg)
-        edtName=findViewById(R.id.edtName)
-        edtID=findViewById(R.id.edtID)
-        edtPW=findViewById(R.id.edtPW)
-        re_PW=findViewById(R.id.re_PW)
-        edtTEL=findViewById(R.id.edtTEL)
-        rb_gender=findViewById(R.id.rb_gender)
-        male=findViewById(R.id.male)
-        female=findViewById(R.id.female)
-        rb_purpose=findViewById(R.id.rb_purpose)
-        rb_P1=findViewById(R.id.rb_P1)
-        rb_P2=findViewById(R.id.rb_P2)
-        rb_P3=findViewById(R.id.rb_P3)
-        rb_P4=findViewById(R.id.rb_P4)
-
-        dbManager= DBManager(this, "memberDB", null, 1)
-
-        btn_finish_reg.setOnClickListener{
-            var str_name:String=edtName.text.toString()
-            var str_ID:String=edtID.text.toString()
-            var str_PW:String=""
 
 
-            //비밀번호와 비밀번호 확인이 같으면 넣는다
-            if(edtPW.text.toString()==re_PW.text.toString()){
-                str_PW=edtPW.text.toString()
-            }
-
-            var str_Tel:String=edtTEL.text.toString()
-            var str_gender:String=""
-            if(rb_gender.checkedRadioButtonId==R.id.male){
-                str_gender=male.text.toString()
-            }
-            if(rb_gender.checkedRadioButtonId==R.id.female){
-                str_gender=female.text.toString()
-            }
-
-            var str_purpose:String=""
-            if(rb_purpose.checkedRadioButtonId==R.id.rb_P1){
-                str_purpose=rb_P1.text.toString()
-
-            }
-            if(rb_purpose.checkedRadioButtonId==R.id.rb_P2){
-                str_purpose=rb_P2.text.toString()
-
-            }
-            if(rb_purpose.checkedRadioButtonId==R.id.rb_P3){
-                str_purpose=rb_P3.text.toString()
-
-            }
-            if(rb_purpose.checkedRadioButtonId==R.id.rb_P4){
-                str_purpose=rb_P4.text.toString()
-
-            }
-
-            //모든 정보가 채워져야 회원가입 성공
-            if(str_name.isBlank()||str_ID.isBlank()||str_PW.isBlank()||str_Tel.isBlank()||
-                str_gender.isBlank()||str_purpose.isBlank()){
-                Toast.makeText(applicationContext, "모든 빈칸을 채워주세요", Toast.LENGTH_SHORT).show()
-            }
-
-            sqlitedb=dbManager.writableDatabase
-            sqlitedb.execSQL("INSERT INTO members VALUES ('"  +
-                str_name+"','" +str_ID+"', '"+str_PW+"',"+ str_Tel+"', '"+str_gender+"','"+str_purpose+"')")
-
-            sqlitedb.close()
-
-            // 넘길 화면 > val intent=Intent
-        }
     }
 }
 

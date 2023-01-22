@@ -1,180 +1,184 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="70dp"
-    android:paddingLeft="5dp"
-    tools:context=".MainActivity">
+    tools:context=".activity_register">
 
-    <ScrollView
+    <ImageView
+        android:id="@+id/logo_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="70dp"/>
+
+
+
+
+    <EditText
+        android:id="@+id/edtName"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="50dp"
+        android:layout_below="@id/logo_image"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp"
+        android:hint="Name"
+        android:inputType="textEmailAddress"
+        android:paddingStart="15dp"/>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:text="이름 및 닉네임"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-            <EditText
-                android:id="@+id/edtName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="이름 또는 닉네임을 입력하세요."
-                android:minHeight="48dp"
-                android:singleLine="true" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:text="아이디"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-            <EditText
-                android:id="@+id/edtID"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="이메일 양식으로 입력하세요."
-                android:inputType="textEmailAddress"
-                android:minHeight="48dp" />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:text="비밀번호"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-            <EditText
-                android:id="@+id/edtPW"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="비밀번호를 입력하세요."
-                android:inputType="textEmailAddress"
-                android:minHeight="48dp" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:text="비밀번호 확인"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-            <EditText
-                android:id="@+id/re_PW"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="비밀번호를 입력하세요."
-                android:inputType="textEmailAddress"
-                android:minHeight="48dp" />
+    <EditText
+        android:id="@+id/edtID"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@id/edtName"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp"
+        android:hint="ID (이메일 형식으로 입력하시오)"
+        android:inputType="textEmailAddress"
+        android:paddingStart="15dp"/>
 
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:text="전화번호"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-            <EditText
-                android:id="@+id/edtTEL"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="전화번호를 입력하세요."
-                android:inputType="textEmailAddress"
-                android:minHeight="48dp" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:text="성별"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+    <EditText
+        android:id="@+id/edtPW"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@id/edtID"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp"
+        android:hint="PW"
+        android:inputType="numberPassword"
+        android:paddingStart="15dp"/>
 
 
-            <RadioGroup
-                android:id="@+id/rb_gender"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+
+
+
+    <EditText
+        android:id="@+id/re_PW"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@id/edtPW"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp"
+        android:hint="Confirm PW"
+        android:inputType="numberPassword"
+        android:paddingStart="15dp" />
+
+    <EditText
+        android:id="@+id/edtTEL"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@+id/re_PW"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp"
+        android:hint="PhoneNumber"
+        android:inputType="number"
+        android:paddingStart="15dp" />
+
+
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@+id/edtTEL"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp"
+        android:text="성별"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <RadioGroup
+        android:id="@+id/rb_gender"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@+id/edtTEL"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginRight="20dp"
+        android:orientation="horizontal">
 
                 <RadioButton
                     android:id="@+id/male"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="남성" />
+                    android:text="Male" />
 
                 <RadioButton
                     android:id="@+id/female"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="여성" />
+                    android:layout_marginLeft="30dp"
+                    android:text="Femle" />
             </RadioGroup>
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
+                android:layout_height="50dp"
+                android:layout_below="@+id/rb_gender"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
                 android:text="운동 목적"
-                android:textSize="16sp"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
             <RadioGroup
                 android:id="@+id/rb_purpose"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
+                android:layout_below="@+id/rb_gender"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginRight="20dp"
                 android:orientation="horizontal">
 
                 <RadioButton
                     android:id="@+id/rb_P1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="다이어트" />
+                    android:text="다이어트"
+                    android:textSize="13sp" />
 
                 <RadioButton
                     android:id="@+id/rb_P2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="체력 및 근육 증대" />
+                    android:text="체력/근육 증대"
+                    android:textSize="13sp" />
 
                 <RadioButton
                     android:id="@+id/rb_P3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="체형교정 및 재활" />
+                    android:text="체형교정/재활"
+                    android:textSize="13sp" />
 
                 <RadioButton
                     android:id="@+id/rb_P4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="기타" />
+                    android:text="기타"
+                    android:textSize="13sp" />
             </RadioGroup>
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_finish_reg"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
+                android:layout_below="@id/rb_purpose"
+                android:layout_marginLeft="20dp"
                 android:layout_marginTop="10dp"
-                android:text="가입 완료"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-        </LinearLayout>
-    </ScrollView>
+                android:layout_marginRight="20dp"
+                android:text="JOIN"
+                android:paddingStart="15dp" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>
