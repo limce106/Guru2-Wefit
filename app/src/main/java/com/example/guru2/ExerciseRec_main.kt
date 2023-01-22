@@ -1,9 +1,9 @@
 package com.example.guru2
 
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
@@ -47,12 +47,12 @@ class ExerciseRec_main : AppCompatActivity() {
             return when (position) {
 
                 0 -> ExerciseRe_frag.newInstance("${currentDay.minusDays(3)}")
-                1 -> ExerciseRe_frag.newInstance("${currentDay.minusDays(2)}")
-                2 -> ExerciseRe_frag.newInstance("${currentDay.minusDays(1)}")
-                3 -> ExerciseRe_frag.newInstance("${currentDay}")
-                4 -> ExerciseRe_frag.newInstance("${currentDay.plusDays(1)}")
-                5 -> ExerciseRe_frag.newInstance("${currentDay.plusDays(2)}")
-                6 -> ExerciseRe_frag.newInstance("${currentDay.plusDays(3)}")
+//                1 -> ExerciseRe_frag.newInstance("${currentDay.minusDays(2)}")
+//                2 -> ExerciseRe_frag.newInstance("${currentDay.minusDays(1)}")
+//                3 -> ExerciseRe_frag.newInstance("${currentDay}")
+//                4 -> ExerciseRe_frag.newInstance("${currentDay.plusDays(1)}")
+//                5 -> ExerciseRe_frag.newInstance("${currentDay.plusDays(2)}")
+//                6 -> ExerciseRe_frag.newInstance("${currentDay.plusDays(3)}")
 
                 else -> ExerciseRe_frag.newInstance("")
 

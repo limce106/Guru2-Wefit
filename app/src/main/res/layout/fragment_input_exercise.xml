@@ -6,6 +6,11 @@
     android:layout_height="match_parent"
     tools:context=".InputExerciseFragment">
 
+    <FrameLayout
+        android:id="@+id/fragment_input_exercise"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
     <Button
         android:id="@+id/btnCustom"
         android:layout_width="117dp"

@@ -13,6 +13,7 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.fragment_input_meal.*
+import kotlinx.android.synthetic.main.fragment_input_meal.view.*
 
 class InputMealFragment : Fragment() {
     private var uri:String?=null
@@ -37,10 +38,10 @@ class InputMealFragment : Fragment() {
         bundle.putBoolean("isSaveData", isSaveDta)
 
         // 버튼 클릭 시 권한 승인 요청
-        btnLoadImg.setOnClickListener(){
+        rootView.btnLoadImg.setOnClickListener(){
             requestPermissionLauncher.launch(android.Manifest.permission.READ_EXTERNAL_STORAGE)
         }
-        btnSaveMealrecord.setOnClickListener() {
+        rootView.btnSaveMealrecord.setOnClickListener() {
             isSaveDta = true
         }
         return rootView

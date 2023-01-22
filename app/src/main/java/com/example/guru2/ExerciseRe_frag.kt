@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.fragment_exercise_re_frag.*
 
@@ -30,11 +29,9 @@ class ExerciseRe_frag : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_exercise_re_frag, container, false)
         val fab_add: FloatingActionButton = view.findViewById(R.id.fab_add)
-        val fabexercise: FloatingActionButton = view.findViewById(R.id.btn_class)
-        val transaction: FragmentTransaction = parentFragmentManager.beginTransaction()
-        val inputExerciseFragment = InputExerciseFragment();
+        val mActivity = MainActivity.getInstance()
         fab_add.setOnClickListener() {
-            transaction.replace(R.id.exerciseRecordContainer, inputExerciseFragment).commit();
+            mActivity?.changeFragment(2)
             Log.d("test", "화면 전환")
         }
         return view

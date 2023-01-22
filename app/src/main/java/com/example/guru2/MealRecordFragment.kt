@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.fragment_input_exercise.*
 
 class MealRecordFragment : Fragment() {
 
@@ -34,7 +33,8 @@ class MealRecordFragment : Fragment() {
 
         val rv_mealRecord: RecyclerView = rootView.findViewById(R.id.rv_mealRecord)
         val RVMealRecadapter = RecyclerAdapterMeal(list)
-        rv_exerciseName.adapter = RVMealRecadapter
+        rv_mealRecord.adapter = RVMealRecadapter
+        RVMealRecadapter.notifyDataSetChanged()
 
         return rootView
     }

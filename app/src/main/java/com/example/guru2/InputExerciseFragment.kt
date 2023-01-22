@@ -10,8 +10,8 @@ import android.widget.SearchView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.popup_customexercise.*
-import kotlinx.android.synthetic.main.popup_exercisecount.*
+import kotlinx.android.synthetic.main.popup_customexercise.view.*
+import kotlinx.android.synthetic.main.popup_exercisecount.view.*
 
 class InputExerciseFragment : Fragment() {
 
@@ -197,7 +197,7 @@ class InputExerciseFragment : Fragment() {
                 exerciseCountalertDialog.show();
 
                 // 확인 버튼
-                btnCancel2.setOnClickListener() {
+                exerciseCountpopupView.btnOk.setOnClickListener() {
                     // 프래그먼트 전환
                     
                     // 팝업창 해제
@@ -205,7 +205,7 @@ class InputExerciseFragment : Fragment() {
 
                 }
                 // 취소 버튼
-                btnOk.setOnClickListener() {
+                exerciseCountpopupView.btnCancel2.setOnClickListener() {
                     exerciseCountalertDialog.dismiss()
                 }
             }
@@ -235,7 +235,7 @@ class InputExerciseFragment : Fragment() {
             exerciseCustomalertDialog.show();
 
             // 확인 버튼
-            custom_btnCancel.setOnClickListener() {
+            exerciseCustompopupView.custom_btnCancel.setOnClickListener() {
                 // 프래그먼트 전환
 
                 // 팝업창 해제
@@ -243,7 +243,7 @@ class InputExerciseFragment : Fragment() {
 
             }
             // 취소 버튼
-            custom_btnOk.setOnClickListener() {
+            exerciseCustompopupView.custom_btnOk.setOnClickListener() {
                 exerciseCustomalertDialog.dismiss()
             }
         }

@@ -21,13 +21,16 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-
         Button1.setOnClickListener{
             moveToAnotherPage()
-
         }
+    }
 
-
+    companion object{
+        private var instance:MainActivity? = null
+        fun getInstance(): MainActivity? {
+            return instance
+        }
     }
 
     override fun  onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -47,6 +50,26 @@ class MainActivity : AppCompatActivity() {
 
             else->{
                 Toast.makeText(this, "사진을 가져오지 못했습니다.", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    fun changeFragment(index: Int) {
+        when (index) {
+            1 -> {
+                val inputExerciseFragment = InputExerciseFragment();
+                supportFragmentManager
+                    .beginTransaction()
+                    .replace(R.id.exerciseRecordContainer, inputExerciseFragment)
+                    .commit()
+            }
+
+            2 -> {
+                val inputMealFragment = InputMealFragment();
+                supportFragmentManager
+                    .beginTransaction()
+                    .replace(R.id.exerciseRecordContainer, inputMealFragment)
+                    .commit()
             }
         }
     }

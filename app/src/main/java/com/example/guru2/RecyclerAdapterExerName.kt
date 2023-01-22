@@ -19,6 +19,10 @@ class RecyclerAdapterExerName(private var ExerciseNames: ArrayList<ExerciseNameM
         holder.itemView.setOnClickListener {
             nameClickListener.onClick(it, position)
         }
+        holder.apply {
+            itemView.tag = ExerciseNames[position]
+        }
+        holder.bind(ExerciseNames[position])
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):
@@ -29,9 +33,8 @@ class RecyclerAdapterExerName(private var ExerciseNames: ArrayList<ExerciseNameM
 
     class ViewHolder(v: View) : RecyclerView.ViewHolder(v) {
         private var view: View = v
-        fun bind(listener: View.OnClickListener, item:ExerciseNameModel) {
+        fun bind(item:ExerciseNameModel) {
             view.tv_exerciseName.text = item.exerciseName
-            view.setOnClickListener(listener)
         }
     }
 
