@@ -1,76 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".schedule">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".calender">
 
-    <TextView
-        android:id="@+id/text_indi"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="280dp"
-        android:text="개인 운동"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@id/btn_add"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/btn_add" />
-
-    <TextView
-        android:id="@+id/text_class"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="280dp"
-        android:layout_marginBottom="35dp"
-        android:text="수업 예약"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@id/btn_add"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/btn_add" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/btn_add"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="15dp"
-        android:layout_marginBottom="20dp"
-        android:clickable="true"
-        android:contentDescription="추가하기"
-        android:src="@drawable/ic_baseline_add_24"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/btn_indi"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        android:contentDescription="개인 운동"
-        android:paddingLeft="10dp"
-        android:visibility="invisible"
-        app:backgroundTint="#FFFFFF"
-        app:fabSize="mini"
-        app:layout_constraintTop_toTopOf="@id/btn_add"
-        app:layout_constraintBottom_toBottomOf="@id/btn_add"
-        app:layout_constraintStart_toStartOf="@id/btn_add"
-        app:layout_constraintEnd_toEndOf="@id/btn_add"/>
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/btn_class"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        android:contentDescription="수업 예약"
-        android:paddingLeft="0dp"
-        android:visibility="invisible"
-        app:backgroundTint="#FFFFFF"
-        app:fabSize="mini"
-        app:layout_constraintTop_toTopOf="@id/btn_add"
-        app:layout_constraintBottom_toBottomOf="@id/btn_add"
-        app:layout_constraintStart_toStartOf="@id/btn_add"
-        app:layout_constraintEnd_toEndOf="@id/btn_add"/>
 
     <CalendarView
         android:id="@+id/cal"
@@ -85,5 +20,68 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
+    <TextView
+        android:id="@+id/text_indi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="280dp"
+        android:text="개인 운동"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@id/btn_add"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/btn_add" />
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btn_class"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:contentDescription="수업 예약"
+        android:paddingLeft="0dp"
+        android:visibility="invisible"
+        app:backgroundTint="#FFFFFF"
+        app:fabSize="mini"
+        app:layout_constraintBottom_toBottomOf="@id/btn_add"
+        app:layout_constraintEnd_toEndOf="@id/btn_add"
+        app:layout_constraintStart_toStartOf="@id/btn_add"
+        app:layout_constraintTop_toTopOf="@id/btn_add" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btn_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="20dp"
+        android:clickable="true"
+        android:contentDescription="추가하기"
+        android:src="@drawable/ic_baseline_add_24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btn_indi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:contentDescription="개인 운동"
+        android:paddingLeft="10dp"
+        android:visibility="invisible"
+        app:backgroundTint="#FFFFFF"
+        app:fabSize="mini"
+        app:layout_constraintBottom_toBottomOf="@id/btn_add"
+        app:layout_constraintEnd_toEndOf="@id/btn_add"
+        app:layout_constraintStart_toStartOf="@id/btn_add"
+        app:layout_constraintTop_toTopOf="@id/btn_add" />
+
+    <TextView
+        android:id="@+id/text_class"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="280dp"
+        android:layout_marginBottom="35dp"
+        android:text="수업 예약"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@id/btn_add"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/btn_add" />
 </androidx.constraintlayout.widget.ConstraintLayout>
