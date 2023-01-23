@@ -56,8 +56,8 @@
         android:layout_below="@id/btn_login"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
-        android:text="LogIn"
-        android:textSize="20sp"/>
+        android:text="Join"
+        android:textSize="20sp" />
 
 </RelativeLayout>
 

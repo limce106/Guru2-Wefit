@@ -2,18 +2,18 @@ package com.example.guru2
 
 import android.content.Intent
 import android.database.sqlite.SQLiteDatabase
-import android.nfc.Tag
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.webkit.WebView.FindListener
 import android.widget.*
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 class activity_register : AppCompatActivity() {
 
+    lateinit var mAuth:FirebaseAuth
 
-    private lateinit var auth:FirebaseAuth
     private val TAG:String=activity_register::class.java.simpleName
 
     lateinit var dbManager: DBManager
@@ -42,9 +42,8 @@ class activity_register : AppCompatActivity() {
         val reg_id=edtID.text.toString()
         val reg_pw=edtPW.text.toString()
 
-        auth=FirebaseAuth.getInstance()
-
-
+        //인증 초기화
+        mAuth= Firebase.auth
 
         btn_finish_reg.setOnClickListener {
 
@@ -53,25 +52,40 @@ class activity_register : AppCompatActivity() {
                     .show()
             }
 
-            auth.createUserWithEmailAndPassword(reg_id,reg_pw)
+            signUp(reg_id,reg_pw)
+
+        }
+
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_register)
+    }
+
+
+        //회원가입
+        private fun signUp (reg_id:String, reg_pw:String){
+
+
+            mAuth.createUserWithEmailAndPassword(reg_id,reg_pw)
                 .addOnCompleteListener(this){ task->
                     if(task.isSuccessful){
-
-                        Log.d(TAG, "성공")
+                    //성공 시 실행
+                        Toast.makeText(this, "회원가입 성공", Toast.LENGTH_SHORT).show()
+                        val intent = Intent(this,MainActivity::class.java)
+                        startActivity(intent)
                     }else{
-                        Log.d(TAG, "실패")
+                    //실패 시 실행행
+                        Toast.makeText(this, "회원가입 실패", Toast.LENGTH_SHORT).show()
                     }
                 }
         }
 
 
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_register)
+
 
 
 
     }
-}
+
 
 
 

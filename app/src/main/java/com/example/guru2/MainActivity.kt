@@ -15,6 +15,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val Button1 = findViewById<Button>(R.id.button)
+        val loginTest=findViewById<Button>(R.id.loginTest)
 
         fun moveToAnotherPage(){
             val intent = Intent(this,ExerciseRec_main::class.java)
@@ -23,6 +24,11 @@ class MainActivity : AppCompatActivity() {
 
         Button1.setOnClickListener{
             moveToAnotherPage()
+        }
+
+        loginTest.setOnClickListener {
+            val intent2 = Intent(this,activity_login::class.java)
+            startActivity(intent2)
         }
     }
 
