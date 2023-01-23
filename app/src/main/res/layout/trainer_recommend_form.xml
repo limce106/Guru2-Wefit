@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="70dp"
     android:layout_margin="8dp"
     app:cardCornerRadius="20dp">
 
@@ -52,22 +52,15 @@
             android:layout_margin="10dp"
             android:layout_weight="15"
             android:gravity="center"
-            android:orientation="vertical"
+            android:orientation="horizontal"
             android:weightSum="100">
-
-            <ImageView
-                android:id="@+id/iv_modify"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="50"
-                android:src="@drawable/ic_baseline_create_24" />
 
             <ImageView
                 android:id="@+id/iv_delete"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="50"
-                android:src="@drawable/ic_baseline_delete_24" />
+                android:layout_height="match_parent"
+                android:layout_weight="100"
+                android:src="@drawable/ic_baseline_check_circle_24" />
         </LinearLayout>
 
     </LinearLayout>

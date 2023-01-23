@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.fragment_input_exercise.view.*
 import kotlinx.android.synthetic.main.popup_customexercise.view.*
 import kotlinx.android.synthetic.main.popup_exercisecount.view.*
 
-class InputExerciseFragment : Fragment() {
+class Instructure_Recommend_Fragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,7 +31,7 @@ class InputExerciseFragment : Fragment() {
         val list = ArrayList<ExerciseNameModel>()
 
         //가슴
-        list.add(ExerciseNameModel("knee pushup"))
+        list.add(ExerciseNameModel("니 푸시업"))
         list.add(ExerciseNameModel("중량 푸시업"))
         list.add(ExerciseNameModel("중량 딥스"))
         list.add(ExerciseNameModel("인클라인 벤치프레스 머신"))
@@ -201,7 +201,7 @@ class InputExerciseFragment : Fragment() {
                 // 확인 버튼
                 exerciseCountpopupView.btnOk.setOnClickListener() {
                     // 프래그먼트 전환
-                    
+
                     // 팝업창 해제
                     exerciseCountalertDialog.dismiss()
 

@@ -31,7 +31,7 @@ class MealRecordFragment : Fragment() {
             list.add(MealRecModel(timeSlot.toString(), mealName.toString()))
         }
 
-        val rv_mealRecord: RecyclerView = rootView.findViewById(R.id.rv_mealRecord)
+        val rv_mealRecord: RecyclerView = rootView.findViewById(R.id.rv_exerciseRecord)
         val RVMealRecadapter = RecyclerAdapterMeal(list)
         rv_mealRecord.adapter = RVMealRecadapter
         RVMealRecadapter.notifyDataSetChanged()
