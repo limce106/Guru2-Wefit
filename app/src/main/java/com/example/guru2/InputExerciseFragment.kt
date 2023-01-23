@@ -2,6 +2,7 @@ package com.example.guru2
 
 import android.app.AlertDialog
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +11,7 @@ import android.widget.SearchView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.android.synthetic.main.fragment_input_exercise.view.*
 import kotlinx.android.synthetic.main.popup_customexercise.view.*
 import kotlinx.android.synthetic.main.popup_exercisecount.view.*
 
@@ -29,7 +31,7 @@ class InputExerciseFragment : Fragment() {
         val list = ArrayList<ExerciseNameModel>()
 
         //가슴
-        list.add(ExerciseNameModel("니 푸시업"))
+        list.add(ExerciseNameModel("knee pushup"))
         list.add(ExerciseNameModel("중량 푸시업"))
         list.add(ExerciseNameModel("중량 딥스"))
         list.add(ExerciseNameModel("인클라인 벤치프레스 머신"))
@@ -165,17 +167,17 @@ class InputExerciseFragment : Fragment() {
         // 검색 기능
         var searchViewTextListener: SearchView.OnQueryTextListener =
             object : SearchView.OnQueryTextListener {
-                //검색버튼 입력시 호출, 검색버튼이 없으므로 사용하지 않음
-                override fun onQueryTextSubmit(s: String): Boolean {
+                override fun onQueryTextSubmit(query: String?): Boolean {
                     return false
                 }
 
-                //텍스트 입력/수정시에 호출
-                override fun onQueryTextChange(s: String): Boolean {
-                    RVExerNameadapter.getFilter().filter(s)
+                override fun onQueryTextChange(s: String?): Boolean {
+                    RVExerNameadapter.filter.filter(s)
+                    Log.d("Search", "SearchVies Text is changed : $s")
                     return false
                 }
             }
+        rootView.searchView.setOnQueryTextListener(searchViewTextListener)
 
         // 운동 항목 클릭 이벤트
         RVExerNameadapter.setItemClickListener(object: RecyclerAdapterExerName.OnItemClickListener{
@@ -193,8 +195,8 @@ class InputExerciseFragment : Fragment() {
                 val exerciseCountbuilder: AlertDialog.Builder = AlertDialog.Builder(context)
                 exerciseCountbuilder.setView(exerciseCountpopupView)
 
-                val exerciseCountalertDialog: AlertDialog = exerciseCountbuilder.create();
-                exerciseCountalertDialog.show();
+                val exerciseCountalertDialog: AlertDialog = exerciseCountbuilder.create()
+                exerciseCountalertDialog.show()
 
                 // 확인 버튼
                 exerciseCountpopupView.btnOk.setOnClickListener() {
@@ -219,7 +221,7 @@ class InputExerciseFragment : Fragment() {
             val exerciseCustombuilder: AlertDialog.Builder = AlertDialog.Builder(context)
             exerciseCustombuilder.setView(exerciseCustompopupView)
 
-            val exerciseCustomalertDialog: AlertDialog = exerciseCustombuilder.create();
+            val exerciseCustomalertDialog: AlertDialog = exerciseCustombuilder.create()
 
             // 팝업창을 따로 만들지 않아도 사용 가능
 //            AlertDialog.Builder(this)
@@ -232,7 +234,7 @@ class InputExerciseFragment : Fragment() {
 //                .create()
 //                .show()
 
-            exerciseCustomalertDialog.show();
+            exerciseCustomalertDialog.show()
 
             // 확인 버튼
             exerciseCustompopupView.custom_btnCancel.setOnClickListener() {
