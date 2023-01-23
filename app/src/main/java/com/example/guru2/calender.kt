@@ -1,14 +1,19 @@
 package com.example.guru2
 
 import android.animation.ObjectAnimator
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CalendarView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.fragment.app.DialogFragment
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import kotlinx.coroutines.newFixedThreadPoolContext
+import java.util.Calendar
 
 
 class calender : Fragment() {
@@ -20,12 +25,25 @@ class calender : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         val view = inflater.inflate(R.layout.fragment_calender, container, false)
+
+        return view
+
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+
         val btnAdd = view.findViewById<FloatingActionButton>(R.id.btn_add) //일정 추가하기 버튼
         val btnClass = view.findViewById<FloatingActionButton>(R.id.btn_class)//수업 예약 버튼
         val btnIndi = view.findViewById<FloatingActionButton>(R.id.btn_indi)//개인 운동 버튼
         val textClass = view.findViewById<TextView>(R.id.text_class)//수업 예약 글씨
         val textIndi = view.findViewById<TextView>(R.id.text_indi)//개인 운동 글씨
+        val cal = view.findViewById<CalendarView>(R.id.cal) //캘린더
+        val dialog: ClassDialog = ClassDialog().getInstance()
+
 
         btnAdd.setOnClickListener{
 
@@ -57,9 +75,14 @@ class calender : Fragment() {
             isFabOpen = !isFabOpen
         }
 
-        return view
+        btnClass.setOnClickListener{
+            //다이얼로그 띄우기
+            activity?.supportFragmentManager?.let {fragmentManager ->
+                dialog.show(fragmentManager,"TAG_DIALOG_EVENT")
+            }
+        }
+
+
     }
-
-
 
 }
