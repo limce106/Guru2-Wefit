@@ -27,14 +27,16 @@ class ExerciseRecordFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_exercise_record, container, false)
-        val fab_add: FloatingActionButton = view.findViewById(R.id.fab_add)
+        val rootView = inflater.inflate(R.layout.fragment_exercise_record, container, false)
+
+        val fab_add: FloatingActionButton = rootView.findViewById(R.id.fab_add)
         val mActivity = MainActivity.getInstance()
         fab_add.setOnClickListener() {
             mActivity?.changeFragment(2)
             Log.d("test", "화면 전환")
         }
-        return view
+
+        return rootView
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

@@ -3,13 +3,13 @@ package com.example.guru2
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.android.synthetic.main.meal_record_form.view.*
 
 class RecyclerAdapterMeal(private var mealRec: ArrayList<MealRecModel>):
     RecyclerView.Adapter<RecyclerAdapterMeal.ViewHolder>(){
 
-        override fun getItemCount(): Int = mealRec.size
+    override fun getItemCount(): Int = mealRec.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.itemView.setOnClickListener {
@@ -28,13 +28,8 @@ class RecyclerAdapterMeal(private var mealRec: ArrayList<MealRecModel>):
     class ViewHolder(v: View) : RecyclerView.ViewHolder(v) {
         private var view: View = v
         fun bind(item:MealRecModel) {
-            //view.mealImg.setImageDrawable(item.mealImg)
-            var edtTimeSlot: String = view.findViewById<EditText>(R.id.edtTimeSlot).text.toString()
-            edtTimeSlot = item.timeSlot
-            //var tv_eatTime: String = view.findViewById<EditText>(R.id.tv_eatTime).text.toString()
-            //tv_eatTime = item.eatTime
-            var edtMealName: String = view.findViewById<EditText>(R.id.edtMealName).text.toString()
-            edtMealName = item.mealName
+            view.tv_mealTime.text = item.timeSlot
+            view.tv_menuName.text = item.mealName
         }
     }
 

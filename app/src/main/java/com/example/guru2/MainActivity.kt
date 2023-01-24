@@ -7,9 +7,13 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.fragment_input_meal.*
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
+    lateinit var mAuth: FirebaseAuth
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -27,8 +31,34 @@ class MainActivity : AppCompatActivity() {
         }
 
         loginTest.setOnClickListener {
-            val intent2 = Intent(this,activity_login::class.java)
-            startActivity(intent2)
+            val intent = Intent(this,RegisterActivity::class.java)
+            startActivity(intent)
+        }
+
+        mAuth= FirebaseAuth.getInstance()
+        var currentUser = mAuth?.currentUser
+
+        //이미 로그인한적이 있는지 확인 (자동로그인)
+        if (currentUser == null) {
+
+            Timer().schedule(object : TimerTask() {
+                override fun run() {
+                    val intent: Intent = Intent(applicationContext, MainActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                }
+            }, 2000)
+
+        }else{
+
+            Timer().schedule(object : TimerTask() {
+                override fun run() {
+                    val intent: Intent = Intent(applicationContext, activity_login::class.java)
+                    startActivity(intent)
+                    finish()
+                }
+            }, 2000)
+
         }
     }
 

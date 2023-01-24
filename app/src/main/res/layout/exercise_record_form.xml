@@ -23,7 +23,7 @@
             android:weightSum="100">
 
             <TextView
-                android:id="@+id/tv_title"
+                android:id="@+id/tv_exerciseName2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="30"
@@ -34,7 +34,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/tv_date"
+                android:id="@+id/tv_countSet"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="70"
