@@ -13,7 +13,6 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TimePicker
 import androidx.fragment.app.DialogFragment
-import com.example.guru2.db.DBLoader
 
 
 class IndividualExerciseDialog : DialogFragment() {
