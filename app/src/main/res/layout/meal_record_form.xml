@@ -24,7 +24,7 @@
             android:weightSum="100">
 
             <TextView
-                android:id="@+id/tv_title"
+                android:id="@+id/tv_mealTime"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="80"
@@ -35,7 +35,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/tv_date"
+                android:id="@+id/tv_menuName"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="40"

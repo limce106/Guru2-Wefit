@@ -3,20 +3,19 @@ package com.example.guru2
 import android.annotation.SuppressLint
 import android.os.Build
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
-import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
 import kotlinx.android.synthetic.main.activity_exercise_rec_main.*
 import java.time.LocalDate
 
 
-class ExerciseRecrdMain : Fragment() {
+class ExerciseRecordMain : Fragment() {
 
     private var vpAdapter: FragmentStatePagerAdapter? = null
 
@@ -59,7 +58,7 @@ class ExerciseRecrdMain : Fragment() {
 
 
            return when(position){
-                  0 -> Instructure_Recommend_Fragment.newInstance("${currentDay.minusDays(3)}", "")
+                  0 -> ExerciseRecordFragment.newInstance("${currentDay.minusDays(3)}")
 //                1 -> ExerciseRe_frag.newInstance("${currentDay.minusDays(2)}")
 //                2 -> ExerciseRe_frag.newInstance("${currentDay.minusDays(1)}")
 //                3 -> ExerciseRe_frag.newInstance("${currentDay}")
@@ -67,7 +66,7 @@ class ExerciseRecrdMain : Fragment() {
 //                5 -> ExerciseRe_frag.newInstance("${currentDay.plusDays(2)}")
 //                6 -> ExerciseRe_frag.newInstance("${currentDay.plusDays(3)}")
 
-               else -> Instructure_Recommend_Fragment.newInstance("", "")
+               else -> ExerciseRecordFragment.newInstance("")
            }
         }
     }
