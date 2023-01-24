@@ -9,7 +9,6 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.fragment_input_meal.*
-import java.util.*
 
 class MainActivity : AppCompatActivity() {
     lateinit var mAuth: FirebaseAuth
@@ -22,7 +21,7 @@ class MainActivity : AppCompatActivity() {
         val loginTest=findViewById<Button>(R.id.loginTest)
 
         fun moveToAnotherPage(){
-            val intent = Intent(this,ExerciseRec_main::class.java)
+            val intent = Intent(this,containerActivity::class.java)
             startActivity(intent)
         }
 
@@ -39,27 +38,27 @@ class MainActivity : AppCompatActivity() {
         var currentUser = mAuth?.currentUser
 
         //이미 로그인한적이 있는지 확인 (자동로그인)
-        if (currentUser == null) {
+        /*  if (currentUser == null) {
 
-            Timer().schedule(object : TimerTask() {
-                override fun run() {
-                    val intent: Intent = Intent(applicationContext, MainActivity::class.java)
-                    startActivity(intent)
-                    finish()
-                }
-            }, 2000)
+              Timer().schedule(object : TimerTask() {
+                  override fun run() {
+                      val intent: Intent = Intent(applicationContext, MainActivity::class.java)
+                      startActivity(intent)
+                      finish()
+                  }
+              }, 2000)
 
-        }else{
+          }else{
 
-            Timer().schedule(object : TimerTask() {
-                override fun run() {
-                    val intent: Intent = Intent(applicationContext, activity_login::class.java)
-                    startActivity(intent)
-                    finish()
-                }
-            }, 2000)
+              Timer().schedule(object : TimerTask() {
+                  override fun run() {
+                      val intent: Intent = Intent(applicationContext, activity_login::class.java)
+                      startActivity(intent)
+                      finish()
+                  }
+              }, 2000)
 
-        }
+          }*/
     }
 
     companion object{
@@ -96,7 +95,7 @@ class MainActivity : AppCompatActivity() {
                 val inputExerciseFragment = InputExerciseFragment();
                 supportFragmentManager
                     .beginTransaction()
-                    .replace(R.id.exerciseRecordContainer, inputExerciseFragment)
+                    .replace(R.id.fragment_container, inputExerciseFragment)
                     .commit()
             }
 
@@ -104,7 +103,7 @@ class MainActivity : AppCompatActivity() {
                 val inputMealFragment = InputMealFragment();
                 supportFragmentManager
                     .beginTransaction()
-                    .replace(R.id.exerciseRecordContainer, inputMealFragment)
+                    .replace(R.id.fragment_container, inputMealFragment)
                     .commit()
             }
 
@@ -112,7 +111,7 @@ class MainActivity : AppCompatActivity() {
                 val exerciseRecordFragment = ExerciseRecordFragment();
                 supportFragmentManager
                     .beginTransaction()
-                    .replace(R.id.exerciseRecordContainer, exerciseRecordFragment)
+                    .replace(R.id.fragment_container, exerciseRecordFragment)
                     .commit()
             }
 
@@ -120,7 +119,7 @@ class MainActivity : AppCompatActivity() {
                 val mealRecordFragment = MealRecordFragment();
                 supportFragmentManager
                     .beginTransaction()
-                    .replace(R.id.exerciseRecordContainer, mealRecordFragment)
+                    .replace(R.id.fragment_container, mealRecordFragment)
                     .commit()
             }
         }

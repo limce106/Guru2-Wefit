@@ -11,11 +11,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.viewpager.widget.ViewPager
-import kotlinx.android.synthetic.main.activity_exercise_rec_main.*
 import java.time.LocalDate
 
 
-class ExerciseRecordMain : Fragment() {
+class RecordMain : Fragment() {
 
     private var vpAdapter: FragmentStatePagerAdapter? = null
 
@@ -32,7 +31,7 @@ class ExerciseRecordMain : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        val view = inflater.inflate(R.layout.fragment_exercise_recrd_main, container, false)
+        val view = inflater.inflate(R.layout.fragment_record_main, container, false)
         val viewpager= view.findViewById<ViewPager>(R.id.viewpager) //뷰 페이지 불러오기
         val adapter = CustomerPagerAdapter(activity!!.supportFragmentManager) //어댑터
 

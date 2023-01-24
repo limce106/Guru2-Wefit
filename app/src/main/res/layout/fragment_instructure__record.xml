@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ExerciseRec_main">
+    tools:context=".Instructure_Record">
 
     <EditText
         android:id="@+id/edtNickName"
