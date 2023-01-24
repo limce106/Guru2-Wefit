@@ -10,9 +10,7 @@ import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_register.*
-import kotlin.math.log
 
 class activity_login : AppCompatActivity() {
 
@@ -38,9 +36,8 @@ class activity_login : AppCompatActivity() {
 
 
         btn_register.setOnClickListener {
-            val intent=Intent(this, activity_register::class.java)
+            val intent=Intent(this, RegisterActivity::class.java)
             startActivity(intent)
-
         }
 
         btn_login.setOnClickListener {
