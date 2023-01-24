@@ -72,6 +72,7 @@
         android:clickable="true"
         android:contentDescription="개인 운동"
         android:paddingLeft="10dp"
+        android:src="@drawable/ic_individual_exercise"
         android:visibility="invisible"
         app:backgroundTint="#FFFFFF"
         app:fabSize="mini"

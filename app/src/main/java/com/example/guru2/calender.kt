@@ -35,16 +35,18 @@ class calender : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
+        //객체 생성
         val btnAdd = view.findViewById<FloatingActionButton>(R.id.btn_add) //일정 추가하기 버튼
         val btnClass = view.findViewById<FloatingActionButton>(R.id.btn_class)//수업 예약 버튼
         val btnIndi = view.findViewById<FloatingActionButton>(R.id.btn_indi)//개인 운동 버튼
         val textClass = view.findViewById<TextView>(R.id.text_class)//수업 예약 글씨
         val textIndi = view.findViewById<TextView>(R.id.text_indi)//개인 운동 글씨
         val cal = view.findViewById<CalendarView>(R.id.cal) //캘린더
-        val dialog: ClassDialog = ClassDialog().getInstance()
+        val dialog: ClassDialog = ClassDialog().getInstance() //수업 예약 팝업창
+        val dialog2: IndividualExerciseDialog = IndividualExerciseDialog().getInstance() //개인 운동 팝업창
 
 
+        //일정 추가하기 버튼 클릭시
         btnAdd.setOnClickListener{
 
             if(isFabOpen) //플로팅액션 버튼 열기 - 닫혀있는 플로팅 버튼 꺼내는 애니메이션 세팅
@@ -75,12 +77,22 @@ class calender : Fragment() {
             isFabOpen = !isFabOpen
         }
 
+        //수업 예약하기 버튼 클릭시
         btnClass.setOnClickListener{
             //다이얼로그 띄우기
             activity?.supportFragmentManager?.let {fragmentManager ->
                 dialog.show(fragmentManager,"TAG_DIALOG_EVENT")
             }
         }
+
+        //개인 운동 버튼 클릭시
+        btnIndi.setOnClickListener{
+            //다이얼로그 띄우기
+            activity?.supportFragmentManager?.let {fragmentManager ->
+                dialog2.show(fragmentManager,"TAG_DIALOG_EVENT")
+            }
+        }
+
 
 
     }
