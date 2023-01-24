@@ -2,7 +2,6 @@ package com.example.guru2
 
 import android.content.Intent
 import android.os.Bundle
-import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,7 +17,7 @@ import kotlinx.android.synthetic.main.fragment_input_meal.view.*
 class InputMealFragment : Fragment() {
     private var uri:String?=null
     var isSaveDta: Boolean = false
-
+    val mActivity = MainActivity.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,15 +50,11 @@ class InputMealFragment : Fragment() {
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted->
             if(isGranted){
                 Toast.makeText(context, "권한이 승인되었습니다.", Toast.LENGTH_SHORT).show()
-//                val intent = Intent()
-//                intent.type="image/*"
-//                intent.action = Intent.ACTION_GET_CONTENT
-//                startActivity(intent)
-                val i = Intent(
-                    Intent.ACTION_PICK,
-                    MediaStore.Images.Media.EXTERNAL_CONTENT_URI
-                )
-                startActivityForResult(i, 1);
+                val intent = Intent(Intent.ACTION_PICK)
+                intent.type="image/*"
+                //intent.action = Intent.ACTION_GET_CONTENT
+                startActivity(intent)
+                mActivity?.activityResult
             }
             else{
                 Toast.makeText(context, "권한이 거부되었습니다.", Toast.LENGTH_SHORT).show()
@@ -69,6 +64,7 @@ class InputMealFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        tp_Choice_eatTime.setIs24HourView(true);
         // TimePicker 클릭 이벤트: 먹은 시간 텍스트 변경
         tp_Choice_eatTime.setOnTimeChangedListener(OnTimeChangedListener { timePicker, hour, minute -> // 오전 / 오후 를 확인하기 위한 if 문
             var hour = hour
