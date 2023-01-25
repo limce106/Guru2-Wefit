@@ -30,9 +30,9 @@ class ExerciseRecordFragment : Fragment() {
         val rootView = inflater.inflate(R.layout.fragment_exercise_record, container, false)
 
         val fab_add: FloatingActionButton = rootView.findViewById(R.id.fab_add)
-        val mActivity = MainActivity.getInstance()
+        val mActivity = containerActivity.getInstance()
         fab_add.setOnClickListener() {
-            mActivity?.changeFragment(2)
+            mActivity?.setFrag(0)
             Log.d("test", "화면 전환")
         }
 
@@ -41,7 +41,7 @@ class ExerciseRecordFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        textView.text = text
+        exerciseDate.text = text
 
     }
 

@@ -22,15 +22,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
-
         val loginTest=findViewById<Button>(R.id.loginTest)
         val frag = findViewById<Button>(R.id.frag)
 
-        frag.setOnClickListener {
-            val intent = Intent(this,NaviActivity::class.java)
-            startActivity(intent)
-             }
+        frag.setOnClickListener {   val intent = Intent(this,NaviActivity::class.java)
+            startActivity(intent)  }
+
 
         loginTest.setOnClickListener {
             val intent = Intent(this,RegisterActivity::class.java)
@@ -138,7 +135,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-
 
 
 

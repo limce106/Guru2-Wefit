@@ -7,15 +7,28 @@
     android:padding="16dp">
 
     <EditText
+        android:id="@+id/edtExerciseDate2"
+        android:layout_width="0dp"
+        android:layout_height="65dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:hint="20230101"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
         android:id="@+id/edt_custom_exercise_name"
         android:layout_width="0dp"
         android:layout_height="67dp"
+        android:layout_marginTop="8dp"
         android:hint="운동을 입력하세요. "
         android:textColor="#000000"
         android:textSize="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/edtExerciseDate2" />
 
     <EditText
         android:id="@+id/edt_custom_set"
