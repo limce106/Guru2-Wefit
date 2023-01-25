@@ -9,7 +9,14 @@ class containerActivity : AppCompatActivity() {
         setContentView(R.layout.activity_container)
 
         val transaction = supportFragmentManager.beginTransaction()
-        .add(R.id.fragment_container, RecordMain())
+        .add(R.id.fragment_container, InputMealFragment())
         transaction.commit()
+    }
+
+    companion object{
+        private var instance:containerActivity? = null
+        fun getInstance(): containerActivity? {
+            return instance
+        }
     }
 }
