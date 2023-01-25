@@ -21,7 +21,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val Button1 = findViewById<Button>(R.id.button)
         val loginTest=findViewById<Button>(R.id.loginTest)
         val frag = findViewById<Button>(R.id.frag)
 
@@ -30,10 +29,6 @@ class MainActivity : AppCompatActivity() {
         fun moveToAnotherPage(){
             val intent = Intent(this,containerActivity::class.java)
             startActivity(intent)
-        }
-
-        Button1.setOnClickListener{
-            moveToAnotherPage()
         }
 
         loginTest.setOnClickListener {

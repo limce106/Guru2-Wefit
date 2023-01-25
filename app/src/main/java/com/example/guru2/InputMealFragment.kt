@@ -6,8 +6,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
-import android.widget.TextView
 import android.widget.TimePicker.OnTimeChangedListener
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
@@ -17,17 +15,11 @@ import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.fragment_input_meal.*
 import kotlinx.android.synthetic.main.fragment_input_meal.view.*
 import kotlinx.android.synthetic.main.meal_record_form.*
-import java.time.LocalDate
 
 
 class InputMealFragment : Fragment() {
     private var uri:String?=null
     val mActivity = MainActivity.getInstance()
-    @RequiresApi(Build.VERSION_CODES.O)
-    val currentDay= LocalDate.now();
-    @RequiresApi(Build.VERSION_CODES.O)
-    var ref = FirebaseDatabase.getInstance().getReference("MealRecord")
-        .child("NickName").child("$currentDay")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,9 +34,6 @@ class InputMealFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val rootView = inflater.inflate(R.layout.fragment_input_meal, container, false)
-        val bundle = Bundle()
-        bundle.putString("timeSlot", rootView.findViewById<EditText>(R.id.edtTimeSlot).text.toString())
-        bundle.putString("mealName", rootView.findViewById<TextView>(R.id.edtMealName).text.toString())
 
         // 사진 불러오기 클릭 시 권한 승인 요청
         rootView.btnLoadImg.setOnClickListener(){
@@ -52,9 +41,17 @@ class InputMealFragment : Fragment() {
         }
         // 저장하기 클릭 시 입력한 데이터 저장
         rootView.btnSaveMealrecord.setOnClickListener() {
-            ref.push().setValue(MealRecModel
-                (mealImg.drawable, edtTimeSlot.text.toString(), tv_mealTime.text.toString(), edtMealName.text.toString())
+
+            val database = FirebaseDatabase.getInstance()
+            val myRef = database.getReference()
+
+            val dataInput = MealRecModel(
+                mealImg.drawable, edtMealDate.text.toString(), edtTimeSlot.text.toString(),
+                tv_mealTime.text.toString(), edtMealName.text.toString()
             )
+
+            myRef.child("Swuni").push().setValue(dataInput)
+
         }
 
         return rootView

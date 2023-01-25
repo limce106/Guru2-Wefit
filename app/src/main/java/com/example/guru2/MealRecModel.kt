@@ -6,7 +6,8 @@ import androidx.room.Entity
 @Entity(tableName = "meal")
 data class MealRecModel (
     val mealImg: Drawable?,
-    var timeSlot: String = "아침",
-    val eatTime: String,
-    var mealName: String
+    var eatDate: String = "",
+    var timeSlot: String = "",
+    var eatTime: String = "",
+    var mealName: String = ""
 )
