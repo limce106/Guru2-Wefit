@@ -46,7 +46,7 @@ class InputMealFragment : Fragment() {
             val myRef = database.getReference()
 
             val dataInput = MealRecModel(
-                mealImg.toString(), edtMealDate.text.toString(), edtTimeSlot.text.toString(),
+                mealImg.drawable, edtMealDate.text.toString(), edtTimeSlot.text.toString(),
                 tv_mealTime.text.toString(), edtMealName.text.toString()
             )
 
