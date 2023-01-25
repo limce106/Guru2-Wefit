@@ -19,7 +19,7 @@
         android:id="@+id/calendarFragment"
         app:showAsAction="always"
         android:title="일정 예약"
-        android:icon="@drawable/ic_baseline_create_24"/>
+        android:icon="@drawable/ic_navi_calender"/>
     <item
         android:id="@+id/graphFragment"
         app:showAsAction="always"
