@@ -32,7 +32,7 @@ class RecyclerAdapterMeal(private var mealRecords: ArrayList<MealRecModel>):
     class ViewHolder(v: View) : RecyclerView.ViewHolder(v) {
         private var view: View = v
         fun bind(item:MealRecModel) {
-            view.mealImg.setImageDrawable(item.mealImg)
+            //view.mealImg.setImageDrawable(item.mealImg)
             view.tv_mealTime.text = item.timeSlot
             view.tv_eatTime.text = item.eatTime
             view.tv_menuName.text = item.mealName
