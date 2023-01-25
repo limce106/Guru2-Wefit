@@ -149,7 +149,7 @@ class MainActivity : AppCompatActivity() {
         when(fragNum)
         {
             0->{
-                ft.replace(R.id.main_frame,InputExerciseFragment()).commit()
+                ft.replace(R.id.fragment_container,InputExerciseFragment()).commit()
             }
             1->{
                 ft.replace(R.id.main_frame,InputMealFragment()).commit()

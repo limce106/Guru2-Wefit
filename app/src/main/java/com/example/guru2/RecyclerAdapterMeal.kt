@@ -4,18 +4,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.android.synthetic.main.fragment_input_meal.view.*
 import kotlinx.android.synthetic.main.meal_record_form.view.*
 
-class RecyclerAdapterMeal(private var mealRec: ArrayList<MealRecModel>):
+class RecyclerAdapterMeal(private var mealRecords: ArrayList<MealRecModel>):
     RecyclerView.Adapter<RecyclerAdapterMeal.ViewHolder>(){
 
-    override fun getItemCount(): Int = mealRec.size
+    override fun getItemCount(): Int = mealRecords.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.itemView.setOnClickListener {
             mealRecClickListener.onClick(it, position)
         }
-        holder.bind(mealRec[position])
+        holder.apply {
+            itemView.tag = mealRecords[position]
+        }
+        holder.bind(mealRecords[position])
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):
@@ -28,7 +32,9 @@ class RecyclerAdapterMeal(private var mealRec: ArrayList<MealRecModel>):
     class ViewHolder(v: View) : RecyclerView.ViewHolder(v) {
         private var view: View = v
         fun bind(item:MealRecModel) {
+            view.mealImg.setImageDrawable(item.mealImg)
             view.tv_mealTime.text = item.timeSlot
+            view.tv_eatTime.text = item.eatTime
             view.tv_menuName.text = item.mealName
         }
     }

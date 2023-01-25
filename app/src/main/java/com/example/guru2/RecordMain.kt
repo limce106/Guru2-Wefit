@@ -11,12 +11,14 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.viewpager.widget.ViewPager
+import com.google.android.material.tabs.TabLayout
 import java.time.LocalDate
 
 
 class RecordMain : Fragment() {
 
     private var vpAdapter: FragmentStatePagerAdapter? = null
+    lateinit var tabLayout: TabLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,6 +34,7 @@ class RecordMain : Fragment() {
     ): View? {
 
         val view = inflater.inflate(R.layout.fragment_record_main, container, false)
+        tabLayout = view.findViewById<TabLayout>(R.id.tabLayout) // 탭 레이아웃
         val viewpager= view.findViewById<ViewPager>(R.id.viewpager) //뷰 페이지 불러오기
         val adapter = CustomerPagerAdapter(activity!!.supportFragmentManager) //어댑터
 
@@ -57,7 +60,8 @@ class RecordMain : Fragment() {
 
 
            return when(position){
-                  0 -> ExerciseRecordFragment.newInstance("${currentDay.minusDays(3)}")
+
+               0 -> ExerciseRecordFragment.newInstance("${currentDay.minusDays(3)}")
 //                1 -> ExerciseRe_frag.newInstance("${currentDay.minusDays(2)}")
 //                2 -> ExerciseRe_frag.newInstance("${currentDay.minusDays(1)}")
 //                3 -> ExerciseRe_frag.newInstance("${currentDay}")
@@ -68,8 +72,8 @@ class RecordMain : Fragment() {
                else -> ExerciseRecordFragment.newInstance("")
            }
         }
-    }
 
+    }
 
 }
 

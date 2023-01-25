@@ -19,4 +19,26 @@ class containerActivity : AppCompatActivity() {
             return instance
         }
     }
+
+    //프래그먼트 변경 함수
+    fun setFrag(fragNum: Int){
+        val ft = supportFragmentManager.beginTransaction()
+        when(fragNum)
+        {
+            0->{
+                ft.replace(R.id.fragment_container,InputExerciseFragment()).commit()
+            }
+            1->{
+                ft.replace(R.id.main_frame,InputMealFragment()).commit()
+            }
+            2->{
+                ft.replace(R.id.main_frame,ExerciseRecordFragment()).commit()
+            }
+            3->{
+                ft.replace(R.id.main_frame,MealRecordFragment()).commit()
+            }
+
+        }
+
+    }
 }
