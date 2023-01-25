@@ -6,25 +6,30 @@
     <item
         android:id="@+id/recommendFragment"
         app:showAsAction="always"
-        android:title="추천"/>
+        android:title="추천"
+        android:icon="@drawable/ic_baseline_create_24"/>
 
     <item
         android:id="@+id/recordFragment"
         app:showAsAction="always"
-        android:title="기록"/>
+        android:title="기록"
+        android:icon="@drawable/ic_baseline_create_24"/>
 
     <item
         android:id="@+id/calendarFragment"
         app:showAsAction="always"
-        android:title="일정 예약"/>
+        android:title="일정 예약"
+        android:icon="@drawable/ic_baseline_create_24"/>
     <item
         android:id="@+id/graphFragment"
         app:showAsAction="always"
-        android:title="변화"/>
+        android:title="변화"
+        android:icon="@drawable/ic_baseline_create_24"/>
     <item
         android:id="@+id/messageFragment"
         app:showAsAction="always"
-        android:title="메세지"/>
+        android:title="메세지"
+        android:icon="@drawable/ic_baseline_create_24"/>
 
 
 
