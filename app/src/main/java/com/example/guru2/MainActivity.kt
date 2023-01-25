@@ -21,20 +21,15 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val Button1 = findViewById<Button>(R.id.button)
+
+
         val loginTest=findViewById<Button>(R.id.loginTest)
         val frag = findViewById<Button>(R.id.frag)
 
-        frag.setOnClickListener {  setFrag(3) }
-
-        fun moveToAnotherPage(){
-            val intent = Intent(this,containerActivity::class.java)
+        frag.setOnClickListener {
+            val intent = Intent(this,NaviActivity::class.java)
             startActivity(intent)
-        }
-
-        Button1.setOnClickListener{
-            moveToAnotherPage()
-        }
+             }
 
         loginTest.setOnClickListener {
             val intent = Intent(this,RegisterActivity::class.java)
@@ -143,27 +138,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    //프래그먼트 변경 함수
-    fun setFrag(fragNum: Int){
-        val ft = supportFragmentManager.beginTransaction()
-        when(fragNum)
-        {
-            0->{
-                ft.replace(R.id.main_frame,InputExerciseFragment()).commit()
-            }
-            1->{
-                ft.replace(R.id.main_frame,InputMealFragment()).commit()
-            }
-            2->{
-                ft.replace(R.id.main_frame,ExerciseRecordFragment()).commit()
-            }
-            3->{
-                ft.replace(R.id.main_frame,MealRecordFragment()).commit()
-            }
 
-        }
-
-    }
 
 
 }

@@ -8,9 +8,7 @@ class containerActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_container)
 
-        val transaction = supportFragmentManager.beginTransaction()
-        .add(R.id.fragment_container, InputMealFragment())
-        transaction.commit()
+
     }
 
     companion object{
