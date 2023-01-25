@@ -17,6 +17,7 @@ import kotlinx.android.synthetic.main.fragment_input_meal.*
 class MainActivity : AppCompatActivity() {
     lateinit var mAuth: FirebaseAuth
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
