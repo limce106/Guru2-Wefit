@@ -1,7 +1,6 @@
 package com.example.guru2
 
 import android.animation.ObjectAnimator
-import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,17 +8,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.CalendarView
 import android.widget.TextView
-import android.widget.Toast
-import androidx.fragment.app.DialogFragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import kotlinx.coroutines.newFixedThreadPoolContext
-import java.util.Calendar
+import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.android.synthetic.main.calender_item.view.*
+import kotlinx.android.synthetic.main.fragment_calender.*
 
 
-class calender : Fragment() {
+class Calender : Fragment() {
 
     var isFabOpen : Boolean = false //fab 버튼 클릭 확인용 변수
-    var subBtnOn : Boolean = false //서브 버튼들 활성화 확인용 변수
+    var firestore : FirebaseFirestore? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,10 +27,59 @@ class calender : Fragment() {
     ): View? {
 
         val view = inflater.inflate(R.layout.fragment_calender, container, false)
+        firestore =  FirebaseFirestore.getInstance() //파이어스토어 인스턴스 초기화
+
+        recyclerview.adapter=RecyclerViewAdapter()
+        recyclerview.layoutManager=LinearLayoutManager(activity)
 
         return view
+    }
+
+
+    inner class RecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
+       //Schedule 클래스 ArrayList 생성
+       var scheduleList:ArrayList<Schedule> = arrayListOf()
+            init{ //schedulelist의 문서를 불러온 뒤 Schedule으로 변환해 ArrayList에 담음
+                firestore?.collection("scheduleList")?.addSnapshotListener{
+                    querySnapshot, firebaseFirestoreException ->
+                    //ArrayList 비워줌
+                    scheduleList.clear()
+
+                    for(snapshot in querySnapshot!!.documents){
+                        var item = snapshot.toObject(Schedule::class.java)
+                        scheduleList.add(item!!)
+                    }
+                    notifyDataSetChanged()
+                }
+
+            }
+
+        //xml파일을 inflate하여 ViewHolder를 생성
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+           var view = LayoutInflater.from(parent.context).inflate(R.layout.calender_item,parent,false)
+            return RecyclerAdapterMeal.ViewHolder(view)
+        }
+
+        inner class ViewHolder(view:View) : RecyclerView.ViewHolder(view){}
+
+        //onCreateViewHolder에서 만든 view와 실제 데이터를 연결
+        override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+            var viewHolder =(holder as ViewHolder).itemView
+
+            viewHolder.hour.text = scheduleList[position].hour.toString()
+            viewHolder.minute.text = scheduleList[position].minute.toString()
+
+        }
+
+        //리사이클러뷰의 아이템 총 개수 반환
+        override fun getItemCount(): Int {
+            return scheduleList.size
+
+        }
+
 
     }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -63,7 +112,6 @@ class calender : Fragment() {
             }
             else if(!isFabOpen)  //플로팅 액션 버튼 닫기 - 열려있는 플로팅 버튼 집어넣는 애니메이션 세팅
             {
-
                 btnClass.visibility= View.VISIBLE
                 btnIndi.visibility=View.VISIBLE
                 textClass.visibility=View.VISIBLE
