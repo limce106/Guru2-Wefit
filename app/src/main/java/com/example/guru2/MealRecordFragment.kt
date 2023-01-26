@@ -10,6 +10,7 @@ import androidx.annotation.Nullable
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.database.*
 
 
@@ -20,6 +21,7 @@ class MealRecordFragment : Fragment() {
     private var arrayList: ArrayList<MealRecModel>? = null
     private var database: FirebaseDatabase? = null
     private var databaseReference: DatabaseReference? = null
+    var buttonClick:Boolean =false //식단 기록 추가 버튼을 클릭했는지 확인하는 변수
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,6 +37,8 @@ class MealRecordFragment : Fragment() {
     ): View? {
         val rootView = inflater.inflate(R.layout.fragment_meal_record, container, false)
         val list = ArrayList<MealRecModel>()
+        val fab_add2: FloatingActionButton = rootView.findViewById(R.id.fab_add2)
+        val mActivity = activity as NaviActivity
 
         recyclerView = rootView.findViewById(R.id.rv_mealRecord)
         recyclerView!!.setHasFixedSize(true) // 리사이클러뷰 기존성능 강화
@@ -63,6 +67,13 @@ class MealRecordFragment : Fragment() {
 
         adapter = RecyclerAdapterMeal2(arrayList!!, context)
         recyclerView!!.adapter = adapter // 리사이클러뷰에 어댑터 연결
+
+        fab_add2.setOnClickListener(){
+            buttonClick = true
+            mActivity.MealCheck(buttonClick) //운동 기록 추가 버튼 클릭했다는 데이터 넘기기
+            Log.d("test", "화면 전환")
+        }
+
 
         return rootView
     }
