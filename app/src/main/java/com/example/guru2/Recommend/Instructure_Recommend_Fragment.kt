@@ -203,7 +203,7 @@ class Instructure_Recommend_Fragment : Fragment() {
                 exerciseCountalertDialog.show()
 
                 // 확인 버튼
-                exerciseCountpopupView.btnOk.setOnClickListener() {
+                exerciseCountpopupView.btnOk2.setOnClickListener() {
                     // 프래그먼트 전환
 
                     // 팝업창 해제

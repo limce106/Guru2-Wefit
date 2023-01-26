@@ -2,6 +2,8 @@ package com.example.guru2.Records
 
 import android.app.AlertDialog
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -19,6 +21,10 @@ import kotlinx.android.synthetic.main.popup_customexercise.view.*
 import kotlinx.android.synthetic.main.popup_exercisecount.view.*
 
 class InputExerciseFragment : Fragment() {
+
+    lateinit var strExerciseDate: String
+    lateinit var strSet: String
+    lateinit var strCount: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -196,7 +202,7 @@ class InputExerciseFragment : Fragment() {
                     Toast.LENGTH_SHORT).show()
 
                 // 횟수 세트/입력 팝업창 띄우기
-                val exerciseCountpopupView: View = layoutInflater.inflate(R.layout.popup_exercisecount, null)
+                val exerciseCountpopupView: View = inflater.inflate(R.layout.popup_exercisecount, container, false)
                 val exerciseCountbuilder: AlertDialog.Builder = AlertDialog.Builder(context)
                 exerciseCountbuilder.setView(exerciseCountpopupView)
 
@@ -207,29 +213,29 @@ class InputExerciseFragment : Fragment() {
                 val myRef = database.getReference()
 
                 // 확인 버튼
-                exerciseCountpopupView.btnOk.setOnClickListener() {
+                exerciseCountpopupView.btnOk2.setOnClickListener() {
                     // 프래그먼트 전환
 
                     // 입력한 데이터 저장
-                    val view: View = inflater.inflate(R.layout.popup_exercisecount, container, false)
-                    val edtExerciseDate: EditText = view.findViewById(R.id.edtExerciseDate)
-                    val edt_set: EditText = view.findViewById(R.id.edt_set)
-                    val edt_count: EditText = view.findViewById(R.id.edt_count)
+                    if(!::strExerciseDate.isInitialized || !::strSet.isInitialized
+                        || !::strCount.isInitialized) {
+                        Toast.makeText(context, "빈칸을 모두 채워주세요.", Toast.LENGTH_SHORT).show()
+                        Log.d("Check 날짜", "${::strExerciseDate.isInitialized}")
+                        Log.d("Check 세트", "${::strSet.isInitialized}")
+                        Log.d("Check 횟수", "${::strCount.isInitialized}")
+                    }
+                    else{
+                        val dataInput = ExerciseRecModel(
+                            clickedExerciseName, strExerciseDate, strSet, strCount
+                        )
 
-                    val dataInput = ExerciseRecModel(
-                        clickedExerciseName,
-                        edtExerciseDate.text.toString(),
-                        edt_set.text.toString(), edt_count.text.toString()
-                    )
-
-                    myRef.child("exerciserecord").push().setValue(dataInput)
-
-                    // 팝업창 해제
-                    exerciseCountalertDialog.dismiss()
+                        myRef.child("exerciserecord").push().setValue(dataInput)
+                    }
 
                 }
                 // 취소 버튼
                 exerciseCountpopupView.btnCancel2.setOnClickListener() {
+                    // 팝업창 해제
                     exerciseCountalertDialog.dismiss()
                 }
             }
@@ -261,6 +267,47 @@ class InputExerciseFragment : Fragment() {
         }
 
         return rootView
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        val exerciseCountbuilder: AlertDialog.Builder = AlertDialog.Builder(context)
+        val exerciseCountalertDialog: AlertDialog = exerciseCountbuilder.create()
+
+        exerciseCountalertDialog.findViewById<EditText>(R.id.edtExerciseDate).addTextChangedListener(object : TextWatcher {
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                strExerciseDate = s.toString()
+            }
+
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int,
+                                           after: Int, ) {}
+
+            override fun afterTextChanged(s: Editable) {
+            }
+        })
+
+        exerciseCountalertDialog.findViewById<EditText>(R.id.edt_set).addTextChangedListener(object : TextWatcher {
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                strSet = s.toString()
+            }
+
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int,
+                                           after: Int, ) {}
+
+            override fun afterTextChanged(s: Editable) {
+            }
+        })
+
+        exerciseCountalertDialog.findViewById<EditText>(R.id.edt_count).addTextChangedListener(object : TextWatcher {
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                strCount = s.toString()
+            }
+
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int,
+                                           after: Int, ) {}
+
+            override fun afterTextChanged(s: Editable) {
+            }
+        })
     }
 
     companion object {
