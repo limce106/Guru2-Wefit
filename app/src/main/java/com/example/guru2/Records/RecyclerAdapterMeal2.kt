@@ -1,10 +1,11 @@
-package com.example.guru2
+package com.example.guru2.Records
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.NonNull
 import androidx.recyclerview.widget.RecyclerView
+import com.example.guru2.R
 import com.google.firebase.database.core.Context
 import kotlinx.android.synthetic.main.meal_record_form.view.*
 
@@ -30,8 +31,8 @@ class RecyclerAdapterMeal2(arrayList: ArrayList<MealRecModel>?, context: android
         this.context = context
         val inflatedView=
             LayoutInflater.from(parent.context)
-                .inflate(com.example.guru2.R.layout.meal_record_form, parent, false)
-        return RecyclerAdapterMeal2.ViewHolder(inflatedView)
+                .inflate(R.layout.meal_record_form, parent, false)
+        return ViewHolder(inflatedView)
     }
 
 //    override fun onBindViewHolder(@NonNull holder: RecyclerAdapterMeal2.ViewHolder, position: Int) {
@@ -45,7 +46,7 @@ class RecyclerAdapterMeal2(arrayList: ArrayList<MealRecModel>?, context: android
 //    }
 
 
-    override fun onBindViewHolder(@NonNull holder: RecyclerAdapterMeal2.ViewHolder, position: Int) {
+    override fun onBindViewHolder(@NonNull holder: ViewHolder, position: Int) {
 //        Glide.with(holder.itemView)
 //            .load(arrayList!![position].mealImg)
 //            .into(holder.mealImg)
@@ -65,7 +66,7 @@ class RecyclerAdapterMeal2(arrayList: ArrayList<MealRecModel>?, context: android
 
     class ViewHolder(v: View) : RecyclerView.ViewHolder(v) {
         private var view: View = v
-        fun bind(item:MealRecModel) {
+        fun bind(item: MealRecModel) {
             view.tv_eatDate.text = item.eatDate
             view.tv_mealTime.text = item.timeSlot
             view.tv_menuName.text = item.mealName
@@ -77,9 +78,9 @@ class RecyclerAdapterMeal2(arrayList: ArrayList<MealRecModel>?, context: android
         fun onClick(v: View, position: Int)
     }
     // 외부에서 클릭 시 이벤트 설정
-    fun setItemClickListener(onItemClickListener: RecyclerAdapterMeal2.OnItemClickListener) {
+    fun setItemClickListener(onItemClickListener: OnItemClickListener) {
         this.mealRecClickListener = onItemClickListener
     }
     // setItemClickListener로 설정한 함수 실행
-    private lateinit var mealRecClickListener : RecyclerAdapterMeal2.OnItemClickListener
+    private lateinit var mealRecClickListener : OnItemClickListener
 }

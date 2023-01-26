@@ -1,4 +1,4 @@
-package com.example.guru2
+package com.example.guru2.Records
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
+import com.example.guru2.R
 import com.google.android.material.tabs.TabLayout
 
 

@@ -11,6 +11,10 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
+import com.example.guru2.Records.ExerciseRecordFragment
+import com.example.guru2.Records.InputExerciseFragment
+import com.example.guru2.Records.InputMealFragment
+import com.example.guru2.Records.MealRecordFragment
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.fragment_input_meal.*
 

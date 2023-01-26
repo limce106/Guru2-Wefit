@@ -1,11 +1,10 @@
-package com.example.guru2
+package com.example.guru2.Records
 
-import android.graphics.drawable.Drawable
 import androidx.room.Entity
 
 @Entity(tableName = "meal")
 data class MealRecModel (
-    val mealImg: Drawable?,
+    //val mealImg: Drawable?,
     var eatDate: String = "",
     var timeSlot: String = "",
     var eatTime: String = "",

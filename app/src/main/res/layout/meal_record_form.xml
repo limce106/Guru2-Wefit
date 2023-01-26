@@ -40,22 +40,24 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="20"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:paddingLeft="10dp">
 
                 <TextView
                     android:id="@+id/tv_menuName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="60"
-                    android:paddingTop="20dp"
+                    android:layout_weight="80"
+                    android:paddingTop="10dp"
                     android:text="메뉴명"
+                    android:textAlignment="textStart"
                     android:textSize="20sp" />
 
                 <TextView
                     android:id="@+id/tv_eatDate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="100"
+                    android:layout_weight="20"
                     android:text="20220126" />
             </LinearLayout>
 

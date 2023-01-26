@@ -1,4 +1,4 @@
-package com.example.guru2
+package com.example.guru2.Records
 
 import android.content.Intent
 import android.os.Build
@@ -6,11 +6,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
+import android.widget.ImageView
+import android.widget.TextView
 import android.widget.TimePicker.OnTimeChangedListener
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
+import com.example.guru2.MainActivity
+import com.example.guru2.R
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.fragment_input_meal.*
 import kotlinx.android.synthetic.main.fragment_input_meal.view.*
@@ -45,12 +50,20 @@ class InputMealFragment : Fragment() {
             val database = FirebaseDatabase.getInstance()
             val myRef = database.getReference()
 
+            val view: View = inflater.inflate(R.layout.fragment_input_meal, container, false)
+            val mealImg: ImageView = view.findViewById(R.id.mealImg)
+            val edtMealDate: EditText = view.findViewById(R.id.edtMealDate)
+            val edtTimeSlot: EditText = view.findViewById(R.id.edtTimeSlot)
+            val tv_eatTime: TextView = view.findViewById(R.id.tv_eatTime)
+            val edtMealName: EditText = view.findViewById(R.id.edtMealName)
+
             val dataInput = MealRecModel(
-                mealImg.drawable, edtMealDate.text.toString(), edtTimeSlot.text.toString(),
-                tv_mealTime.text.toString(), edtMealName.text.toString()
+                // mealImg.drawable,
+                edtMealDate.text.toString(), edtTimeSlot.text.toString(),
+                tv_eatTime.text.toString(), edtMealName.text.toString()
             )
 
-            myRef.child("Swuni").push().setValue(dataInput)
+            myRef.child("mealrecord").push().setValue(dataInput)
 
         }
 

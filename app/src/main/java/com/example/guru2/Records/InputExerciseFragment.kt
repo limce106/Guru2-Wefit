@@ -1,4 +1,4 @@
-package com.example.guru2
+package com.example.guru2.Records
 
 import android.app.AlertDialog
 import android.os.Bundle
@@ -7,10 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.EditText
 import android.widget.SearchView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
+import com.example.guru2.R
+import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.fragment_input_exercise.view.*
 import kotlinx.android.synthetic.main.popup_customexercise.view.*
 import kotlinx.android.synthetic.main.popup_exercisecount.view.*
@@ -31,7 +34,7 @@ class InputExerciseFragment : Fragment() {
         val list = ArrayList<ExerciseNameModel>()
 
         //가슴
-        list.add(ExerciseNameModel("knee pushup"))
+        list.add(ExerciseNameModel("니 푸시업"))
         list.add(ExerciseNameModel("중량 푸시업"))
         list.add(ExerciseNameModel("중량 딥스"))
         list.add(ExerciseNameModel("인클라인 벤치프레스 머신"))
@@ -180,9 +183,11 @@ class InputExerciseFragment : Fragment() {
         rootView.searchView.setOnQueryTextListener(searchViewTextListener)
 
         // 운동 항목 클릭 이벤트
-        RVExerNameadapter.setItemClickListener(object: RecyclerAdapterExerName.OnItemClickListener{
+        RVExerNameadapter.setItemClickListener(object: RecyclerAdapterExerName.OnItemClickListener {
             override fun onClick(v: View, position: Int) {
                 // 클릭 시 이벤트 작성
+
+                var clickedExerciseName: String = "${list[position].exerciseName}"
 
                 // 토스트 메시지: 운동 이름
                 Toast.makeText(
@@ -198,10 +203,27 @@ class InputExerciseFragment : Fragment() {
                 val exerciseCountalertDialog: AlertDialog = exerciseCountbuilder.create()
                 exerciseCountalertDialog.show()
 
+                val database = FirebaseDatabase.getInstance()
+                val myRef = database.getReference()
+
                 // 확인 버튼
                 exerciseCountpopupView.btnOk.setOnClickListener() {
                     // 프래그먼트 전환
-                    
+
+                    // 입력한 데이터 저장
+                    val view: View = inflater.inflate(R.layout.popup_exercisecount, container, false)
+                    val edtExerciseDate: EditText = view.findViewById(R.id.edtExerciseDate)
+                    val edt_set: EditText = view.findViewById(R.id.edt_set)
+                    val edt_count: EditText = view.findViewById(R.id.edt_count)
+
+                    val dataInput = ExerciseRecModel(
+                        clickedExerciseName,
+                        edtExerciseDate.text.toString(),
+                        edt_set.text.toString(), edt_count.text.toString()
+                    )
+
+                    myRef.child("exerciserecord").push().setValue(dataInput)
+
                     // 팝업창 해제
                     exerciseCountalertDialog.dismiss()
 

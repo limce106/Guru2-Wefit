@@ -1,4 +1,4 @@
-package com.example.guru2
+package com.example.guru2.Records
 
 import androidx.room.Entity
 

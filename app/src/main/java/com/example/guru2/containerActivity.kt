@@ -2,6 +2,10 @@ package com.example.guru2
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.example.guru2.Records.ExerciseRecordFragment
+import com.example.guru2.Records.InputExerciseFragment
+import com.example.guru2.Records.InputMealFragment
+import com.example.guru2.Records.MealRecordFragment
 
 class containerActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,16 +28,16 @@ class containerActivity : AppCompatActivity() {
         when(fragNum)
         {
             0->{
-                ft.replace(R.id.fragment_container,InputExerciseFragment()).commit()
+                ft.replace(R.id.fragment_container, InputExerciseFragment()).commit()
             }
             1->{
-                ft.replace(R.id.main_frame,InputMealFragment()).commit()
+                ft.replace(R.id.main_frame, InputMealFragment()).commit()
             }
             2->{
-                ft.replace(R.id.main_frame,ExerciseRecordFragment()).commit()
+                ft.replace(R.id.main_frame, ExerciseRecordFragment()).commit()
             }
             3->{
-                ft.replace(R.id.main_frame,MealRecordFragment()).commit()
+                ft.replace(R.id.main_frame, MealRecordFragment()).commit()
             }
 
         }
