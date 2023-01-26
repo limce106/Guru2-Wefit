@@ -1,14 +1,13 @@
-package com.example.guru2
+package com.example.guru2.calender_user
 
-import android.app.Dialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
+import com.example.guru2.R
 
 
 class ClassDialog : DialogFragment() {
@@ -28,7 +27,7 @@ class ClassDialog : DialogFragment() {
         return inflater.inflate(R.layout.fragment_class_dialog, container, false)
     }
 
-    fun getInstance():ClassDialog{
+    fun getInstance(): ClassDialog {
         return ClassDialog()
     }
 
