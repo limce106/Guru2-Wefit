@@ -1,14 +1,15 @@
 package com.example.guru2
 
 import android.os.Bundle
-import android.renderscript.ScriptGroup.Input
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import com.example.guru2.Records.ExerciseRecordFragment
 import com.example.guru2.Records.InputExerciseFragment
+import com.example.guru2.Records.InputMealFragment
+import com.example.guru2.Records.MealRecordFragment
 import com.example.guru2.calender_user.Calender
 import com.example.guru2.databinding.ActivityNaviBinding
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_navi.*
 
 
@@ -40,8 +41,8 @@ class NaviActivity : AppCompatActivity() {
         binding.bottomNavigationView.setOnItemSelectedListener { item ->
             when(item.itemId){
                 //각 프래그먼트 연결하기
-                R.id.recommendFragment -> setFragment(TAG_RECOMMEND,ExerciseRecordFragment())
-                R.id.recordFragment-> setFragment(TAG_RECORD,MealRecordFragment())
+                R.id.recommendFragment -> setFragment(TAG_RECOMMEND, ExerciseRecordFragment())
+                R.id.recordFragment-> setFragment(TAG_RECORD, MealRecordFragment())
                 R.id.calendarFragment -> setFragment(TAG_CALENDAR, Calender())
                 R.id.graphFragment -> setFragment(TAG_GRAPH,Graph())
                 R.id.messageFragment -> setFragment(TAG_MESSAGE,Graph())
@@ -90,8 +91,8 @@ class NaviActivity : AppCompatActivity() {
         if (tag == TAG_RECOMMEND) {
             if (recommend != null) {
                 if (ExerciseInputButtonClick) {
-                    fragTransition.hide(recommend)
                     fragTransition.add(R.id.main_frame, InputExerciseFragment(), TAG_RECOMMEND)
+                    fragTransition.hide(recommend)
                 } else {
                     fragTransition.hide(InputExerciseFragment())
                     fragTransition.show(recommend)
@@ -135,7 +136,6 @@ class NaviActivity : AppCompatActivity() {
         fun MealCheck(click: Boolean) {
             MealInputButtonClick = click
         }
-
 
 
 

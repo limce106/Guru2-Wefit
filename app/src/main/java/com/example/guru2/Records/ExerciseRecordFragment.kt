@@ -10,6 +10,7 @@ import androidx.annotation.Nullable
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.guru2.NaviActivity
 import com.example.guru2.R
 import com.example.guru2.containerActivity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -23,6 +24,7 @@ class ExerciseRecordFragment : Fragment() {
     private var arrayList: ArrayList<ExerciseRecModel>? = null
     private var database: FirebaseDatabase? = null
     private var databaseReference: DatabaseReference? = null
+    var buttonClick:Boolean =false //운동 기록 추가 버튼을 클릭했는지 확인하는 변수
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -70,9 +72,10 @@ class ExerciseRecordFragment : Fragment() {
         recyclerView!!.adapter = adapter // 리사이클러뷰에 어댑터 연결
 
         val fab_add: FloatingActionButton = rootView.findViewById(R.id.fab_add)
-        val mActivity = containerActivity.getInstance()
+        val mActivity = activity as NaviActivity
         fab_add.setOnClickListener() {
-            mActivity?.setFrag(0)
+            buttonClick = true
+            mActivity.ExerciseCheck(buttonClick) //운동 기록 추가 버튼 클릭했다는 데이터 넘기기
             Log.d("test", "화면 전환")
         }
 
