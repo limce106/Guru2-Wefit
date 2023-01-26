@@ -29,7 +29,7 @@ class NaviActivity : AppCompatActivity() {
             when(item.itemId){
                 //각 프래그먼트 연결하기
                 R.id.recommendFragment -> setFragment(TAG_RECOMMEND,Instructure_Recommend_Fragment())
-                R.id.recordFragment-> setFragment(TAG_RECORD,ExerciseRecordFragment())
+                R.id.recordFragment-> setFragment(TAG_RECORD,RecordMain())
                 R.id.calendarFragment -> setFragment(TAG_CALENDAR,Graph())
                 R.id.graphFragment -> setFragment(TAG_GRAPH,Graph())
                 R.id.messageFragment -> setFragment(TAG_MESSAGE,Graph())

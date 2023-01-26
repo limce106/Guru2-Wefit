@@ -11,14 +11,11 @@ import kotlinx.android.synthetic.main.fragment_exercise_record.*
 
 
 class ExerciseRecordFragment : Fragment() {
-    private var text: String? = null
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            text = it.getString("text", "")
+
         }
     }
 
@@ -39,21 +36,7 @@ class ExerciseRecordFragment : Fragment() {
         return rootView
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        exerciseDate.text = text
-
-    }
 
 
-
-    companion object {
-        fun newInstance(text1: String) =
-            ExerciseRecordFragment().apply {
-                arguments = Bundle().apply {
-                    putString("text", text1)
-                }
-            }
-    }
 
 }
