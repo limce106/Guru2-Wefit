@@ -62,6 +62,7 @@ class InputMealFragment : Fragment() {
             // 갤러지 이미지 권한이 허가되었다면
             if(isGranted){
                 Toast.makeText(context, "권한이 승인되었습니다.", Toast.LENGTH_SHORT).show()
+                // 이미지 불러오기
                 val intent = Intent(Intent.ACTION_PICK)
                 intent.type="image/*"
                 //intent.action = Intent.ACTION_GET_CONTENT

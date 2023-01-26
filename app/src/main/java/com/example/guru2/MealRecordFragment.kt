@@ -42,7 +42,7 @@ class MealRecordFragment : Fragment() {
         recyclerView!!.layoutManager = layoutManager
         arrayList = ArrayList() // User 객체를 담을 어레이 리스트 (어댑터쪽으로)
         database = FirebaseDatabase.getInstance() // 파이어베이스 데이터베이스 연동
-        databaseReference = database!!.getReference("cafeList_ Gongneung") // DB 테이블 연결
+        databaseReference = database!!.getReference("MealRecord") // DB 테이블 연결
         databaseReference!!.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(@NonNull dataSnapshot: DataSnapshot) {
                 // 파이어베이스 데이터베이스의 데이터를 받아오는 곳
