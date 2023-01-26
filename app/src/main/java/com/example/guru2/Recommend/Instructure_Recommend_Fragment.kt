@@ -1,4 +1,4 @@
-package com.example.guru2
+package com.example.guru2.Recommend
 
 import android.app.AlertDialog
 import android.os.Bundle
@@ -11,11 +11,15 @@ import android.widget.SearchView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
+import com.example.guru2.R
+import com.example.guru2.Records.ExerciseNameModel
+import com.example.guru2.Records.InputExerciseFragment
+import com.example.guru2.Records.RecyclerAdapterExerName
 import kotlinx.android.synthetic.main.fragment_input_exercise.view.*
 import kotlinx.android.synthetic.main.popup_customexercise.view.*
 import kotlinx.android.synthetic.main.popup_exercisecount.view.*
 
-class InputExerciseFragment : Fragment() {
+class Instructure_Recommend_Fragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,7 +35,7 @@ class InputExerciseFragment : Fragment() {
         val list = ArrayList<ExerciseNameModel>()
 
         //가슴
-        list.add(ExerciseNameModel("knee pushup"))
+        list.add(ExerciseNameModel("니 푸시업"))
         list.add(ExerciseNameModel("중량 푸시업"))
         list.add(ExerciseNameModel("중량 딥스"))
         list.add(ExerciseNameModel("인클라인 벤치프레스 머신"))
@@ -199,9 +203,9 @@ class InputExerciseFragment : Fragment() {
                 exerciseCountalertDialog.show()
 
                 // 확인 버튼
-                exerciseCountpopupView.btnOk.setOnClickListener() {
+                exerciseCountpopupView.btnOk2.setOnClickListener() {
                     // 프래그먼트 전환
-                    
+
                     // 팝업창 해제
                     exerciseCountalertDialog.dismiss()
 

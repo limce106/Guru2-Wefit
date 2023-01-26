@@ -11,6 +11,10 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
+import com.example.guru2.Records.ExerciseRecordFragment
+import com.example.guru2.Records.InputExerciseFragment
+import com.example.guru2.Records.InputMealFragment
+import com.example.guru2.Records.MealRecordFragment
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.fragment_input_meal.*
 
@@ -24,6 +28,7 @@ class MainActivity : AppCompatActivity() {
 
         val loginTest=findViewById<Button>(R.id.loginTest)
         val frag = findViewById<Button>(R.id.frag)
+        val chatTest=findViewById<Button>(R.id.chatTest)
 
         frag.setOnClickListener {   val intent = Intent(this,NaviActivity::class.java)
             startActivity(intent)  }
@@ -31,6 +36,11 @@ class MainActivity : AppCompatActivity() {
 
         loginTest.setOnClickListener {
             val intent = Intent(this,RegisterActivity::class.java)
+            startActivity(intent)
+        }
+
+        chatTest.setOnClickListener {
+            val intent = Intent(this,userList::class.java)
             startActivity(intent)
         }
 

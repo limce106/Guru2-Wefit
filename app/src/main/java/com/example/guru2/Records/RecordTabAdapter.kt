@@ -1,9 +1,8 @@
-package com.example.guru2
+package com.example.guru2.Records
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
-import com.google.firestore.v1.StructuredAggregationQuery.Aggregation.Count
 
 class RecordTabAdapter(fragmentManager:FragmentManager,val tabCount: Int): FragmentStatePagerAdapter(fragmentManager) {
     override fun getCount(): Int {

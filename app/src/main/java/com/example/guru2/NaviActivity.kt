@@ -5,6 +5,7 @@ import android.renderscript.ScriptGroup.Input
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import com.example.guru2.Records.InputExerciseFragment
 import com.example.guru2.calender_user.Calender
 import com.example.guru2.databinding.ActivityNaviBinding
 import kotlinx.android.synthetic.main.activity_main.*

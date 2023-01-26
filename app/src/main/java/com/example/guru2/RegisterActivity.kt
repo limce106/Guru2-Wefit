@@ -10,6 +10,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import kotlinx.android.synthetic.main.activity_register.*
 
 class RegisterActivity : AppCompatActivity() {
 
@@ -21,7 +22,7 @@ class RegisterActivity : AppCompatActivity() {
     lateinit var edtName:EditText
     lateinit var edtID:EditText
     lateinit var edtPW:EditText
-    lateinit var re_PW:EditText
+   // lateinit var re_PW:EditText
     lateinit var edtTEL:EditText
     lateinit var rb_gender:RadioGroup
     lateinit var male:RadioButton
@@ -37,9 +38,12 @@ class RegisterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
 
+        btn_finish_reg=findViewById(R.id.btn_finish_reg)
         edtID=findViewById(R.id.edtID)
         edtPW=findViewById(R.id.edtPW)
-        re_PW=findViewById(R.id.re_PW)
+        //
+        //
+        // re_PW=findViewById(R.id.re_PW)
         edtName=findViewById(R.id.edtName)
         edtTEL=findViewById(R.id.edtTEL)
         rb_gender=findViewById(R.id.rb_gender)
@@ -94,7 +98,6 @@ class RegisterActivity : AppCompatActivity() {
 
 
 
-
             signUp(reg_id,reg_pw,reg_name, reg_tel,str_gender, str_purpose)
 
         }
@@ -118,7 +121,7 @@ class RegisterActivity : AppCompatActivity() {
                     addUserToDatabase(reg_id, reg_pw, reg_name, reg_tel,
                         str_gender, str_purpose, mAuth.currentUser?.uid!!)
                 }else{
-                    //실패 시 실행행
+                    //실패 시 실행
                     Toast.makeText(this, "회원가입 실패", Toast.LENGTH_SHORT).show()
                     Log.d("SignUp", "Error : ${task.exception}")
                 }

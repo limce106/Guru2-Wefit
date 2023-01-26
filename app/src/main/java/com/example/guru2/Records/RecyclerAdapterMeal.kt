@@ -1,9 +1,10 @@
-package com.example.guru2
+package com.example.guru2.Records
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.guru2.R
 import kotlinx.android.synthetic.main.fragment_input_meal.view.*
 import kotlinx.android.synthetic.main.meal_record_form.view.*
 
@@ -23,15 +24,15 @@ class RecyclerAdapterMeal(private var mealRecords: ArrayList<MealRecModel>):
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):
-            RecyclerAdapterMeal.ViewHolder {
+            ViewHolder {
         val inflatedView=
             LayoutInflater.from(parent.context).inflate(R.layout.meal_record_form, parent, false)
-        return RecyclerAdapterMeal.ViewHolder(inflatedView)
+        return ViewHolder(inflatedView)
     }
 
     class ViewHolder(v: View) : RecyclerView.ViewHolder(v) {
         private var view: View = v
-        fun bind(item:MealRecModel) {
+        fun bind(item: MealRecModel) {
             //view.mealImg.setImageDrawable(item.mealImg)
             view.tv_mealTime.text = item.timeSlot
             view.tv_eatTime.text = item.eatTime

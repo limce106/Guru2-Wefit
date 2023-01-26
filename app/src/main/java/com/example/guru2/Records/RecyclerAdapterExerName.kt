@@ -1,4 +1,4 @@
-package com.example.guru2
+package com.example.guru2.Records
 
 import android.annotation.SuppressLint
 import android.util.Log
@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
+import com.example.guru2.R
 import kotlinx.android.synthetic.main.exercise_name_form.view.*
 
 class RecyclerAdapterExerName(private var ExerciseNames: ArrayList<ExerciseNameModel>):
@@ -15,7 +16,7 @@ class RecyclerAdapterExerName(private var ExerciseNames: ArrayList<ExerciseNameM
 
     override fun getItemCount(): Int = ExerciseNames.size
 
-    override fun onBindViewHolder(holder: RecyclerAdapterExerName.ViewHolder, position: Int){
+    override fun onBindViewHolder(holder: ViewHolder, position: Int){
         // 운동 항목 클릭 이벤트
         holder.itemView.setOnClickListener {
             nameClickListener.onClick(it, position)
@@ -27,14 +28,14 @@ class RecyclerAdapterExerName(private var ExerciseNames: ArrayList<ExerciseNameM
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):
-            RecyclerAdapterExerName.ViewHolder {
+            ViewHolder {
         val inflatedView=LayoutInflater.from(parent.context).inflate(R.layout.exercise_name_form, parent, false)
-        return RecyclerAdapterExerName.ViewHolder(inflatedView)
+        return ViewHolder(inflatedView)
     }
 
     class ViewHolder(v: View) : RecyclerView.ViewHolder(v) {
         private var view: View = v
-        fun bind(item:ExerciseNameModel) {
+        fun bind(item: ExerciseNameModel) {
             view.tv_exerciseName.text = item.exerciseName
         }
     }

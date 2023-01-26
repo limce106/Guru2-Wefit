@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FAFAFA"
-    tools:context=".InputMealFragment"
+    tools:context=".Records.InputMealFragment"
     tools:layout_editor_absoluteX="-1dp"
     tools:layout_editor_absoluteY="-66dp">
 
@@ -79,7 +79,7 @@
         android:layout_width="240dp"
         android:layout_height="40dp"
         android:layout_marginBottom="8dp"
-        android:text="식사 시간"
+        android:hint="식사 시간"
         android:textAlignment="center"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/edtMealName"
