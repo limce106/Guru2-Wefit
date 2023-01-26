@@ -1,4 +1,4 @@
-package com.example.guru2
+package com.example.guru2.calender_user
 
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TimePicker
 import androidx.fragment.app.DialogFragment
+import com.example.guru2.R
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 
@@ -71,7 +72,7 @@ class IndividualExerciseDialog : DialogFragment() {
 
     }
 
-    fun getInstance():IndividualExerciseDialog{
+    fun getInstance(): IndividualExerciseDialog {
         return IndividualExerciseDialog()
     }
 

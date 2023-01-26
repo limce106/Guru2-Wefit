@@ -1,4 +1,4 @@
-package com.example.guru2
+package com.example.guru2.calender_user
 
 import android.animation.ObjectAnimator
 import android.os.Bundle
@@ -10,9 +10,9 @@ import android.widget.CalendarView
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.guru2.R
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.android.synthetic.main.calender_item.view.*
 import kotlinx.android.synthetic.main.fragment_calender.*
 
 
@@ -27,58 +27,28 @@ class Calender : Fragment() {
     ): View? {
 
         val view = inflater.inflate(R.layout.fragment_calender, container, false)
+        val recyclerview=view.findViewById<RecyclerView>(R.id.recyclerview)
         firestore =  FirebaseFirestore.getInstance() //파이어스토어 인스턴스 초기화
+        val itemList = arrayListOf<Schedule>() //아이템 배열
+        val ListAdapter = RecyclerViewAdapter(itemList) //어댑터
 
-        recyclerview.adapter=RecyclerViewAdapter()
+        recyclerview.adapter= ListAdapter //어댑터 연결
         recyclerview.layoutManager=LinearLayoutManager(activity)
+
+        //아이템 추가
+        itemList.add(Schedule("12","13"))
+        itemList.add(Schedule("13","14"))
+        itemList.add(Schedule("13","14"))
+        itemList.add(Schedule("13","14"))
+
+        //리스트가 변경됨을 어댑터에 알림
+        ListAdapter.notifyDataSetChanged()
 
         return view
     }
 
 
-    inner class RecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
-       //Schedule 클래스 ArrayList 생성
-       var scheduleList:ArrayList<Schedule> = arrayListOf()
-            init{ //schedulelist의 문서를 불러온 뒤 Schedule으로 변환해 ArrayList에 담음
-                firestore?.collection("scheduleList")?.addSnapshotListener{
-                    querySnapshot, firebaseFirestoreException ->
-                    //ArrayList 비워줌
-                    scheduleList.clear()
 
-                    for(snapshot in querySnapshot!!.documents){
-                        var item = snapshot.toObject(Schedule::class.java)
-                        scheduleList.add(item!!)
-                    }
-                    notifyDataSetChanged()
-                }
-
-            }
-
-        //xml파일을 inflate하여 ViewHolder를 생성
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-           var view = LayoutInflater.from(parent.context).inflate(R.layout.calender_item,parent,false)
-            return RecyclerAdapterMeal.ViewHolder(view)
-        }
-
-        inner class ViewHolder(view:View) : RecyclerView.ViewHolder(view){}
-
-        //onCreateViewHolder에서 만든 view와 실제 데이터를 연결
-        override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-            var viewHolder =(holder as ViewHolder).itemView
-
-            viewHolder.hour.text = scheduleList[position].hour.toString()
-            viewHolder.minute.text = scheduleList[position].minute.toString()
-
-        }
-
-        //리사이클러뷰의 아이템 총 개수 반환
-        override fun getItemCount(): Int {
-            return scheduleList.size
-
-        }
-
-
-    }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -94,6 +64,9 @@ class Calender : Fragment() {
         val dialog: ClassDialog = ClassDialog().getInstance() //수업 예약 팝업창
         val dialog2: IndividualExerciseDialog = IndividualExerciseDialog().getInstance() //개인 운동 팝업창
 
+
+        textClass.bringToFront()
+        textIndi.bringToFront()
 
         //일정 추가하기 버튼 클릭시
         btnAdd.setOnClickListener{
@@ -117,9 +90,9 @@ class Calender : Fragment() {
                 textClass.visibility=View.VISIBLE
                 textIndi.visibility=View.VISIBLE
                 ObjectAnimator.ofFloat(btnIndi, "translationY", -200f).apply { start() }
-                ObjectAnimator.ofFloat(btnClass, "translationY", -400f).apply { start() }
+                ObjectAnimator.ofFloat(btnClass, "translationY", -350f).apply { start() }
                 ObjectAnimator.ofFloat(textIndi, "translationY", -200f).apply { start() }
-                ObjectAnimator.ofFloat(textClass, "translationY", -350f).apply { start() }
+                ObjectAnimator.ofFloat(textClass, "translationY", -300f).apply { start() }
                 btnAdd.setImageResource(R.drawable.ic_baseline_clear_24)
             }
             isFabOpen = !isFabOpen
