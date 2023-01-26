@@ -17,7 +17,7 @@ private const val TAG_MESSAGE = "message_fragment" //메세지 프래그먼트
 
 class NaviActivity : AppCompatActivity() {
 
-    private lateinit var binding:ActivityNaviBinding
+    private lateinit var binding: ActivityNaviBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,8 +29,8 @@ class NaviActivity : AppCompatActivity() {
         binding.bottomNavigationView.setOnItemSelectedListener { item ->
             when(item.itemId){
                 //각 프래그먼트 연결하기
-                R.id.recommendFragment -> setFragment(TAG_RECOMMEND,Instructure_Recommend_Fragment())
-                R.id.recordFragment-> setFragment(TAG_RECORD,RecordMain())
+                R.id.recommendFragment -> setFragment(TAG_RECOMMEND,Graph())
+                R.id.recordFragment-> setFragment(TAG_RECORD,Graph())
                 R.id.calendarFragment -> setFragment(TAG_CALENDAR, Calender())
                 R.id.graphFragment -> setFragment(TAG_GRAPH,Graph())
                 R.id.messageFragment -> setFragment(TAG_MESSAGE,Graph())
