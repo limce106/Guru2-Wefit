@@ -24,6 +24,7 @@ class MainActivity : AppCompatActivity() {
 
         val loginTest=findViewById<Button>(R.id.loginTest)
         val frag = findViewById<Button>(R.id.frag)
+        val chatTest=findViewById<Button>(R.id.chatTest)
 
         frag.setOnClickListener {   val intent = Intent(this,NaviActivity::class.java)
             startActivity(intent)  }
@@ -31,6 +32,11 @@ class MainActivity : AppCompatActivity() {
 
         loginTest.setOnClickListener {
             val intent = Intent(this,RegisterActivity::class.java)
+            startActivity(intent)
+        }
+
+        chatTest.setOnClickListener {
+            val intent = Intent(this,userList::class.java)
             startActivity(intent)
         }
 
