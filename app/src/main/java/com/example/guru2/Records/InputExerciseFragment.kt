@@ -1,6 +1,5 @@
 package com.example.guru2.Records
 
-import android.app.AlertDialog
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -13,7 +12,6 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.example.guru2.R
 import kotlinx.android.synthetic.main.fragment_input_exercise.view.*
-import kotlinx.android.synthetic.main.popup_customexercise.view.*
 
 class InputExerciseFragment : Fragment() {
 
@@ -191,17 +189,11 @@ class InputExerciseFragment : Fragment() {
                 var clickedExerciseName: String = "${list[position].exerciseName}"
 
                 // 토스트 메시지: 운동 이름
-                Toast.makeText(
-                    v.context,
-                    "${list[position].exerciseName}",
-                    Toast.LENGTH_SHORT).show()
+                Toast.makeText(v.context, "${list[position].exerciseName}", Toast.LENGTH_SHORT).show()
 
                 // 횟수 세트/입력 팝업창 띄우기
                 val dialog = popup_exerciseCount(v.context)
                 dialog.saveData(clickedExerciseName)
-
-                // 확인 버튼
-
             }
         })
 
@@ -209,25 +201,8 @@ class InputExerciseFragment : Fragment() {
         val btnCustom: Button = rootView.findViewById(R.id.btnCustom)
         btnCustom.setOnClickListener() {
             // 커스텀 운동 팝업 창 띄우기
-            val exerciseCustompopupView: View = layoutInflater.inflate(R.layout.popup_customexercise, null)
-            val exerciseCustombuilder: AlertDialog.Builder = AlertDialog.Builder(context)
-            exerciseCustombuilder.setView(exerciseCustompopupView)
-
-            val exerciseCustomalertDialog: AlertDialog = exerciseCustombuilder.create()
-            exerciseCustomalertDialog.show()
-
-            // 확인 버튼
-            exerciseCustompopupView.custom_btnCancel.setOnClickListener() {
-                // 프래그먼트 전환
-
-                // 팝업창 해제
-                exerciseCustomalertDialog.dismiss()
-
-            }
-            // 취소 버튼
-            exerciseCustompopupView.custom_btnOk.setOnClickListener() {
-                exerciseCustomalertDialog.dismiss()
-            }
+            val dialog = popup_customexercise(rootView.context)
+            dialog.saveData()
         }
 
         return rootView

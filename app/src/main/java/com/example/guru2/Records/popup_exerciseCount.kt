@@ -4,7 +4,6 @@ import android.app.Dialog
 import android.content.Context
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -37,11 +36,9 @@ class popup_exerciseCount(private val context: Context) {
 
             // 입력한 데이터 저장
             if(!::strExerciseDate.isInitialized || !::strSet.isInitialized
-                || !::strCount.isInitialized) {
+                || !::strCount.isInitialized || strExerciseDate == ""
+                || strSet == "" || strCount == "") {
                 Toast.makeText(context, "빈칸을 모두 채워주세요.", Toast.LENGTH_SHORT).show()
-                Log.d("Check 날짜", "${::strExerciseDate.isInitialized}")
-                Log.d("Check 세트", "${::strSet.isInitialized}")
-                Log.d("Check 횟수", "${::strCount.isInitialized}")
             }
             else{
                 val dataInput = ExerciseRecModel(
