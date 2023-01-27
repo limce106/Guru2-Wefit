@@ -1,4 +1,4 @@
-package com.example.guru2.Records
+package com.example.guru2.Recommend
 
 import android.os.Bundle
 import android.util.Log
@@ -6,24 +6,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.NonNull
-import androidx.annotation.Nullable
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.guru2.NaviActivity
 import com.example.guru2.R
-import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.example.guru2.Records.ExerciseRecModel
+import com.example.guru2.Records.RecyclerAdapterExercise2
 import com.google.firebase.database.*
 
 
-class ExerciseRecordFragment : Fragment() {
+class Recommend_Fragment : Fragment() {
     lateinit var recyclerView: RecyclerView
     private var adapter: RecyclerView.Adapter<*>? = null
     private var layoutManager: RecyclerView.LayoutManager? = null
     private var arrayList: ArrayList<ExerciseRecModel>? = null
     private var database: FirebaseDatabase? = null
     private var databaseReference: DatabaseReference? = null
-    var buttonClick:Boolean =false //운동 기록 추가 버튼을 클릭했는지 확인하는 변수
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,23 +30,21 @@ class ExerciseRecordFragment : Fragment() {
         }
     }
 
-    @Nullable
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?,
     ): View? {
-        val rootView = inflater.inflate(R.layout.fragment_exercise_record, container, false)
+        val rootView = inflater.inflate(R.layout.fragment_trainer_recommend_, container, false)
 
         val list = ArrayList<ExerciseRecModel>()
 
-        recyclerView = rootView.findViewById(R.id.rv_exerciseRecord)
+        recyclerView = rootView.findViewById(R.id.rv_recommendList)
         recyclerView!!.setHasFixedSize(true) // 리사이클러뷰 기존성능 강화
         layoutManager = LinearLayoutManager(context)
         recyclerView!!.layoutManager = layoutManager
         arrayList = ArrayList() // User 객체를 담을 어레이 리스트 (어댑터쪽으로)
         database = FirebaseDatabase.getInstance() // 파이어베이스 데이터베이스 연동
-        databaseReference = database!!.getReference("exerciserecord") // DB 테이블 연결
+        databaseReference = database!!.getReference("exerciserecommend") // DB 테이블 연결
         databaseReference!!.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(@NonNull dataSnapshot: DataSnapshot) {
                 // 파이어베이스 데이터베이스의 데이터를 받아오는 곳
@@ -63,21 +59,24 @@ class ExerciseRecordFragment : Fragment() {
 
             override fun onCancelled(@NonNull databaseError: DatabaseError) {
                 // 디비를 가져오던중 에러 발생 시
-                Log.e("ExerciseRecord", databaseError.toException().toString()) // 에러문 출력
+                Log.e("Recommend", databaseError.toException().toString()) // 에러문 출력
             }
         })
 
         adapter = RecyclerAdapterExercise2(arrayList!!, context)
         recyclerView!!.adapter = adapter // 리사이클러뷰에 어댑터 연결
 
-        val fab_add: FloatingActionButton = rootView.findViewById(R.id.fab_add)
-        val mActivity = activity as NaviActivity
-        fab_add.setOnClickListener() {
-            buttonClick = true
-            mActivity.ExerciseCheck(buttonClick) //운동 기록 추가 버튼 클릭했다는 데이터 넘기기
-            Log.d("test", "화면 전환")
-        }
 
         return rootView
+    }
+
+    companion object {
+        @JvmStatic
+        fun newInstance(param1: String, param2: String) =
+            Recommend_Fragment().apply {
+                arguments = Bundle().apply {
+
+                }
+            }
     }
 }
