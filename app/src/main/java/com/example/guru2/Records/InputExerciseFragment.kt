@@ -15,10 +15,6 @@ import kotlinx.android.synthetic.main.fragment_input_exercise.view.*
 
 class InputExerciseFragment : Fragment() {
 
-    lateinit var strExerciseDate: String
-    lateinit var strSet: String
-    lateinit var strCount: String
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -193,7 +189,7 @@ class InputExerciseFragment : Fragment() {
 
                 // 횟수 세트/입력 팝업창 띄우기
                 val dialog = popup_exerciseCount(v.context)
-                dialog.saveData(clickedExerciseName)
+                dialog.saveData(clickedExerciseName, "exerciserecord", "Swuni")
             }
         })
 
@@ -202,7 +198,7 @@ class InputExerciseFragment : Fragment() {
         btnCustom.setOnClickListener() {
             // 커스텀 운동 팝업 창 띄우기
             val dialog = popup_customexercise(rootView.context)
-            dialog.saveData()
+            dialog.saveData("exerciserecord", "Swuni")
         }
 
         return rootView

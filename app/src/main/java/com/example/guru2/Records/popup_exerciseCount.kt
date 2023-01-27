@@ -16,7 +16,7 @@ class popup_exerciseCount(private val context: Context) {
     lateinit var strSet: String
     lateinit var strCount: String
 
-    fun saveData(clickedExerciseName: String){
+    fun saveData(clickedExerciseName: String, dataName: String, userName: String){
         dialog.setContentView(R.layout.popup_exercisecount)
         dialog.setCanceledOnTouchOutside(true)
         dialog.setCancelable(true)
@@ -45,7 +45,7 @@ class popup_exerciseCount(private val context: Context) {
                     clickedExerciseName, strExerciseDate, strSet, strCount
                 )
 
-                myRef.child("exerciserecord").push().setValue(dataInput)
+                myRef.child(dataName).child(userName).setValue(dataInput)
             }
         }
 

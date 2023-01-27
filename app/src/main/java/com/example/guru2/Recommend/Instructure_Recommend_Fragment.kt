@@ -1,25 +1,25 @@
 package com.example.guru2.Recommend
 
-import android.app.AlertDialog
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.EditText
 import android.widget.SearchView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.example.guru2.R
-import com.example.guru2.Records.ExerciseNameModel
-import com.example.guru2.Records.InputExerciseFragment
-import com.example.guru2.Records.RecyclerAdapterExerName
+import com.example.guru2.Records.*
 import kotlinx.android.synthetic.main.fragment_input_exercise.view.*
-import kotlinx.android.synthetic.main.popup_customexercise.view.*
-import kotlinx.android.synthetic.main.popup_exercisecount.view.*
 
 class Instructure_Recommend_Fragment : Fragment() {
+
+    lateinit var strNickname: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,7 +31,7 @@ class Instructure_Recommend_Fragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        val rootView = inflater.inflate(R.layout.fragment_input_exercise, container, false)
+        val rootView = inflater.inflate(R.layout.fragment_instructure_recommend_, container, false)
         val list = ArrayList<ExerciseNameModel>()
 
         //가슴
@@ -183,36 +183,26 @@ class Instructure_Recommend_Fragment : Fragment() {
             }
         rootView.searchView.setOnQueryTextListener(searchViewTextListener)
 
+        // 닉네임 입력 변화 확인
+        val edtNickName = rootView.findViewById<EditText>(R.id.edtNickName)
+        checkChanges(edtNickName)
+
         // 운동 항목 클릭 이벤트
-        RVExerNameadapter.setItemClickListener(object: RecyclerAdapterExerName.OnItemClickListener{
+        RVExerNameadapter.setItemClickListener(object: RecyclerAdapterExerName.OnItemClickListener {
             override fun onClick(v: View, position: Int) {
                 // 클릭 시 이벤트 작성
 
-                // 토스트 메시지: 운동 이름
-                Toast.makeText(
-                    v.context,
-                    "${list[position].exerciseName}",
-                    Toast.LENGTH_SHORT).show()
+                if(!::strNickname.isInitialized || strNickname == "") {
+                    Toast.makeText(context, "닉네임을 입력하세요.", Toast.LENGTH_SHORT).show()
+                } else{
+                    var clickedExerciseName: String = "${list[position].exerciseName}"
 
-                // 횟수 세트/입력 팝업창 띄우기
-                val exerciseCountpopupView: View = layoutInflater.inflate(R.layout.popup_exercisecount, null)
-                val exerciseCountbuilder: AlertDialog.Builder = AlertDialog.Builder(context)
-                exerciseCountbuilder.setView(exerciseCountpopupView)
+                    // 토스트 메시지: 운동 이름
+                    Toast.makeText(v.context, "${list[position].exerciseName}", Toast.LENGTH_SHORT).show()
 
-                val exerciseCountalertDialog: AlertDialog = exerciseCountbuilder.create()
-                exerciseCountalertDialog.show()
-
-                // 확인 버튼
-                exerciseCountpopupView.btnOk2.setOnClickListener() {
-                    // 프래그먼트 전환
-
-                    // 팝업창 해제
-                    exerciseCountalertDialog.dismiss()
-
-                }
-                // 취소 버튼
-                exerciseCountpopupView.btnCancel2.setOnClickListener() {
-                    exerciseCountalertDialog.dismiss()
+                    // 횟수 세트/입력 팝업창 띄우기
+                    val dialog = popup_exerciseCount(v.context)
+                    dialog.saveData(clickedExerciseName, "exerciserecommend", strNickname)
                 }
             }
         })
@@ -220,29 +210,31 @@ class Instructure_Recommend_Fragment : Fragment() {
         // 커스텀 운동 추가
         val btnCustom: Button = rootView.findViewById(R.id.btnCustom)
         btnCustom.setOnClickListener() {
-            // 커스텀 운동 팝업 창 띄우기
-            val exerciseCustompopupView: View = layoutInflater.inflate(R.layout.popup_customexercise, null)
-            val exerciseCustombuilder: AlertDialog.Builder = AlertDialog.Builder(context)
-            exerciseCustombuilder.setView(exerciseCustompopupView)
-
-            val exerciseCustomalertDialog: AlertDialog = exerciseCustombuilder.create()
-            exerciseCustomalertDialog.show()
-
-            // 확인 버튼
-            exerciseCustompopupView.custom_btnCancel.setOnClickListener() {
-                // 프래그먼트 전환
-
-                // 팝업창 해제
-                exerciseCustomalertDialog.dismiss()
-
-            }
-            // 취소 버튼
-            exerciseCustompopupView.custom_btnOk.setOnClickListener() {
-                exerciseCustomalertDialog.dismiss()
+            if(!::strNickname.isInitialized || strNickname == "") {
+                Toast.makeText(context, "닉네임을 입력하세요.", Toast.LENGTH_SHORT).show()
+            } else {
+                // 커스텀 운동 팝업 창 띄우기
+                val dialog = popup_customexercise(rootView.context)
+                dialog.saveData("exerciserecommend", strNickname)
             }
         }
 
         return rootView
+    }
+
+    fun checkChanges(edtNickname: EditText) {
+
+        edtNickname.addTextChangedListener(object : TextWatcher {
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                strNickname = s.toString()
+            }
+
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int,
+                                           after: Int, ) {}
+
+            override fun afterTextChanged(s: Editable) {
+            }
+        })
     }
 
     companion object {

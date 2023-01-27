@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.guru2.NaviActivity
 import com.example.guru2.R
-import com.example.guru2.containerActivity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.database.*
 
@@ -55,7 +54,7 @@ class ExerciseRecordFragment : Fragment() {
                 // 파이어베이스 데이터베이스의 데이터를 받아오는 곳
                 arrayList!!.clear() // 기존 배열리스트가 존재하지않게 초기화
                 for (snapshot in dataSnapshot.children) { // 반복문으로 데이터 List를 추출해냄
-                    val exerciseRecModel: ExerciseRecModel? =
+                    val exerciseRecModel =
                         snapshot.getValue(ExerciseRecModel::class.java) // 만들어뒀던 User 객체에 데이터를 담는다.
                     arrayList!!.add(exerciseRecModel!!) // 담은 데이터들을 배열리스트에 넣고 리사이클러뷰로 보낼 준비
                 }
