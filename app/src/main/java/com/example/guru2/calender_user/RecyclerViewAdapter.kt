@@ -4,10 +4,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.guru2.R
-import com.google.firebase.firestore.core.ActivityScope.bind
 
 
 class RecyclerViewAdapter(val itemList: ArrayList<Schedule>):RecyclerView.Adapter<RecyclerViewAdapter.RecyclerViewHolder>(){
@@ -21,8 +19,7 @@ class RecyclerViewAdapter(val itemList: ArrayList<Schedule>):RecyclerView.Adapte
 
     //view에 내용 입력
     override fun onBindViewHolder(holder: RecyclerViewHolder, position: Int) {
-        holder.hour.text = itemList[position].hour
-        holder.minute.text = itemList[position].minute
+        holder.time.text = itemList[position].time
     }
 
     //리스트 내 아이템 개수
@@ -33,8 +30,7 @@ class RecyclerViewAdapter(val itemList: ArrayList<Schedule>):RecyclerView.Adapte
 
     //레이아웃 내 View 연결
     inner class RecyclerViewHolder(itemView: View):RecyclerView.ViewHolder(itemView){
-        val hour = itemView.findViewById<TextView>(R.id.hour)
-        val minute = itemView.findViewById<TextView>(R.id.minute)
+        val time = itemView.findViewById<TextView>(R.id.time)
     }
 
 

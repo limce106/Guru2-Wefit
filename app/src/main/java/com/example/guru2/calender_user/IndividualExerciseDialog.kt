@@ -61,8 +61,7 @@ class IndividualExerciseDialog : DialogFragment() {
             val minute:Int=edit_minute
 
             //db에 저장
-            databaseReference.child("individual-schedule").child("hour").push().setValue("$hour")
-            databaseReference.child("individual-schedule").child("minute").push().setValue("$minute")
+            databaseReference.child("individual-schedule").child("time").push().setValue("$hour:$minute")
 
             //다이얼 로그 종료하기
             try{this.dismiss()}

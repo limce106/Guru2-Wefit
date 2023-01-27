@@ -27,7 +27,7 @@ class Calender : Fragment() {
     ): View? {
 
         val view = inflater.inflate(R.layout.fragment_calender, container, false)
-        val recyclerview=view.findViewById<RecyclerView>(R.id.recyclerview)
+        val recyclerview=view.findViewById<RecyclerView>(R.id.recyclerview) //리사이클러 뷰 객체
         firestore =  FirebaseFirestore.getInstance() //파이어스토어 인스턴스 초기화
         val itemList = arrayListOf<Schedule>() //아이템 배열
         val ListAdapter = RecyclerViewAdapter(itemList) //어댑터
@@ -36,18 +36,15 @@ class Calender : Fragment() {
         recyclerview.layoutManager=LinearLayoutManager(activity)
 
         //아이템 추가
-        itemList.add(Schedule("12","13"))
-        itemList.add(Schedule("13","14"))
-        itemList.add(Schedule("13","14"))
-        itemList.add(Schedule("13","14"))
+        itemList.add(Schedule("12:00"))
+        itemList.add(Schedule("15:00"))
+        itemList.add(Schedule("16:00"))
 
         //리스트가 변경됨을 어댑터에 알림
         ListAdapter.notifyDataSetChanged()
 
         return view
     }
-
-
 
 
 
@@ -65,8 +62,8 @@ class Calender : Fragment() {
         val dialog2: IndividualExerciseDialog = IndividualExerciseDialog().getInstance() //개인 운동 팝업창
 
 
-        textClass.bringToFront()
-        textIndi.bringToFront()
+        textClass.bringToFront() //텍스트 맨 앞으로
+        textIndi.bringToFront() //텍스트 맨 앞으로
 
         //일정 추가하기 버튼 클릭시
         btnAdd.setOnClickListener{
