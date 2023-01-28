@@ -1,4 +1,4 @@
-package com.example.guru2
+package com.example.guru2.aboutUser
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -7,6 +7,8 @@ import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import com.example.guru2.MainActivity
+import com.example.guru2.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -21,7 +23,7 @@ class activity_login : AppCompatActivity() {
     lateinit var edit_pw:EditText
 
 
-    private val TAG:String=activity_login::class.java.simpleName
+    private val TAG:String= activity_login::class.java.simpleName
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

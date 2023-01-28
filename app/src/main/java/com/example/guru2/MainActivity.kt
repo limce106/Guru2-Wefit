@@ -15,6 +15,7 @@ import com.example.guru2.Records.ExerciseRecordFragment
 import com.example.guru2.Records.InputExerciseFragment
 import com.example.guru2.Records.InputMealFragment
 import com.example.guru2.Records.MealRecordFragment
+import com.example.guru2.aboutUser.RegisterActivity
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.fragment_input_meal.*
 
@@ -35,12 +36,12 @@ class MainActivity : AppCompatActivity() {
 
 
         loginTest.setOnClickListener {
-            val intent = Intent(this,RegisterActivity::class.java)
+            val intent = Intent(this, RegisterActivity::class.java)
             startActivity(intent)
         }
 
         chatTest.setOnClickListener {
-            val intent = Intent(this,userList::class.java)
+            val intent = Intent(this, userList::class.java)
             startActivity(intent)
         }
 
