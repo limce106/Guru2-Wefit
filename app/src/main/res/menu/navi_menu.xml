@@ -24,7 +24,7 @@
         android:id="@+id/graphFragment"
         app:showAsAction="always"
         android:title="변화"
-        android:icon="@drawable/ic_navi_graph"/>
+        android:icon="@drawable/ic_navi_graph" />
     <item
         android:id="@+id/messageFragment"
         app:showAsAction="always"

@@ -1,6 +1,7 @@
 package com.example.guru2.calender_user
 
 import android.animation.ObjectAnimator
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.CalendarView
 import android.widget.TextView
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.guru2.R
@@ -20,25 +22,27 @@ class Calender : Fragment() {
 
     var isFabOpen : Boolean = false //fab 버튼 클릭 확인용 변수
     var firestore : FirebaseFirestore? = null
+    val itemList = arrayListOf<Schedule>() //아이템 배열
+    val ListAdapter = RecyclerViewAdapter(itemList) //어댑터
 
+    @SuppressLint("MissingInflatedId")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
         val view = inflater.inflate(R.layout.fragment_calender, container, false)
-        val recyclerview=view.findViewById<RecyclerView>(R.id.recyclerview) //리사이클러 뷰 객체
+        val recyclerview=view.findViewById<RecyclerView>(R.id.recyclerview_calender) //리사이클러 뷰 객체
         firestore =  FirebaseFirestore.getInstance() //파이어스토어 인스턴스 초기화
-        val itemList = arrayListOf<Schedule>() //아이템 배열
-        val ListAdapter = RecyclerViewAdapter(itemList) //어댑터
 
         recyclerview.adapter= ListAdapter //어댑터 연결
         recyclerview.layoutManager=LinearLayoutManager(activity)
 
         //아이템 추가
-        itemList.add(Schedule("12:00"))
-        itemList.add(Schedule("15:00"))
-        itemList.add(Schedule("16:00"))
+        itemList.add(Schedule("개인 운동","12:00"))
+        itemList.add(Schedule("개인 운동","15:00"))
+        itemList.add(Schedule("PT 수업","16:00"))
+        itemList.add(Schedule("PT 수업","18:00"))
 
         //리스트가 변경됨을 어댑터에 알림
         ListAdapter.notifyDataSetChanged()
@@ -111,8 +115,31 @@ class Calender : Fragment() {
             }
         }
 
+        itemTouch()
 
 
     }
+
+    //아이템 삭제를 위한 함수
+    fun itemTouch(){
+        val itemTouchCallback = object : ItemTouchHelper.SimpleCallback(
+            ItemTouchHelper.UP or ItemTouchHelper.DOWN, ItemTouchHelper.LEFT
+        ){
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean {
+                TODO("Not yet implemented")
+            }
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                ListAdapter.removeData(viewHolder.layoutPosition)
+            }
+
+        }
+        ItemTouchHelper(itemTouchCallback).attachToRecyclerView(view?.findViewById<RecyclerView>(R.id.recyclerview_calender))
+    }
+
 
 }

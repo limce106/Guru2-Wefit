@@ -10,6 +10,7 @@ import com.example.guru2.Records.InputMealFragment
 import com.example.guru2.Records.MealRecordFragment
 import com.example.guru2.calender_user.Calender
 import com.example.guru2.databinding.ActivityNaviBinding
+import com.example.guru2.graph_user.Graph
 import kotlinx.android.synthetic.main.activity_navi.*
 
 
@@ -44,7 +45,7 @@ class NaviActivity : AppCompatActivity() {
                 R.id.recommendFragment -> setFragment(TAG_RECOMMEND, Instructure_Recommend_Fragment())
                 R.id.recordFragment-> setFragment(TAG_RECORD, MealRecordFragment())
                 R.id.calendarFragment -> setFragment(TAG_CALENDAR, Calender())
-                R.id.graphFragment -> setFragment(TAG_GRAPH,Graph())
+                R.id.graphFragment -> setFragment(TAG_GRAPH, Graph())
                 R.id.messageFragment -> setFragment(TAG_MESSAGE,Graph())
             }
             true
