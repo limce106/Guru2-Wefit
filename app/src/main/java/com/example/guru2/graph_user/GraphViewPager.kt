@@ -34,9 +34,9 @@ class GraphViewPager : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        text_weight.text = weight
-        text_muscle.text = muscle
-        text_bodyfat.text = bodyfat
+        //text_weight.text = weight
+        //text_muscle.text = muscle
+       // text_bodyfat.text = bodyfat
     }
 
     companion object{

@@ -103,7 +103,7 @@ class chatActivity : AppCompatActivity() {
             }
 
         })
-}
+  }
 }
 
 

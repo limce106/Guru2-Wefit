@@ -17,82 +17,43 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
         android:layout_marginBottom="40dp"
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/button"
-            android:layout_width="120dp"
+            android:id="@+id/btn_weight"
+            android:layout_width="100dp"
             android:layout_height="90dp"
-            android:layout_marginLeft="30dp"
-            android:text="체중\n(kg)"
+            android:text="체중\n00kg"
             android:textAppearance="@style/TextAppearance.AppCompat.Body2"
             android:textSize="18dp" />
 
-        <TextView
-            android:id="@+id/text_weight"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_weight="1"
-            android:text="00.0"
-            android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textSize="35dp" />
+        <Button
+            android:id="@+id/btn_muscle"
+            android:layout_width="100dp"
+            android:layout_height="90dp"
+            android:layout_marginLeft="30dp"
+            android:text="골격근량 \n00kg"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:textSize="18dp" />
+
+        <Button
+            android:id="@+id/btn_bodyfat"
+            android:layout_width="100dp"
+            android:layout_height="90dp"
+            android:layout_marginLeft="30dp"
+            android:text="체지방률\n00%"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:textSize="18dp" />
+
     </LinearLayout>
 
-    <LinearLayout
+    <com.github.mikephil.charting.charts.LineChart
+        android:id="@+id/lineChart"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="40dp"
-        android:orientation="horizontal">
+        android:layout_height="match_parent" />
 
-        <Button
-            android:id="@+id/button3"
-            android:layout_width="120dp"
-            android:layout_height="90dp"
-            android:layout_marginLeft="30dp"
-            android:text="골격근량 (kg)"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-            android:textSize="18dp" />
-
-        <TextView
-            android:id="@+id/text_muscle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_weight="1"
-            android:text="00.0"
-            android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textSize="35dp" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="40dp"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/button2"
-            android:layout_width="120dp"
-            android:layout_height="90dp"
-            android:layout_marginLeft="30dp"
-            android:text="체지방률 (%)"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-            android:textSize="18dp" />
-
-        <TextView
-            android:id="@+id/text_bodyfat"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_weight="1"
-            android:text="00.0"
-            android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textSize="35dp" />
-    </LinearLayout>
 
 </LinearLayout>
