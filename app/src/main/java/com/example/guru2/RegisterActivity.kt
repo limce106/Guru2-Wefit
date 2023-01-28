@@ -1,17 +1,16 @@
-package com.example.guru2.aboutUser
+package com.example.guru2
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.*
-import com.example.guru2.MainActivity
-import com.example.guru2.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import kotlinx.android.synthetic.main.activity_register.*
 
 class RegisterActivity : AppCompatActivity() {
 
@@ -72,27 +71,27 @@ class RegisterActivity : AppCompatActivity() {
             var str_gender:String=""
             var str_purpose:String=""
 
-            if(rb_gender.checkedRadioButtonId== R.id.male){
+            if(rb_gender.checkedRadioButtonId==R.id.male){
                 str_gender=male.text.toString()
             }
-            if(rb_gender.checkedRadioButtonId== R.id.female){
+            if(rb_gender.checkedRadioButtonId==R.id.female){
                 str_gender=female.text.toString()
             }
 
 
-            if(rb_purpose.checkedRadioButtonId== R.id.rb_P1){
+            if(rb_purpose.checkedRadioButtonId==R.id.rb_P1){
                 str_purpose=rb_P1.text.toString()
 
             }
-            if(rb_purpose.checkedRadioButtonId== R.id.rb_P2){
+            if(rb_purpose.checkedRadioButtonId==R.id.rb_P2){
                 str_purpose=rb_P2.text.toString()
 
             }
-            if(rb_purpose.checkedRadioButtonId== R.id.rb_P3){
+            if(rb_purpose.checkedRadioButtonId==R.id.rb_P3){
                 str_purpose=rb_P3.text.toString()
 
             }
-            if(rb_purpose.checkedRadioButtonId== R.id.rb_P4){
+            if(rb_purpose.checkedRadioButtonId==R.id.rb_P4){
                 str_purpose=rb_P4.text.toString()
 
             }
@@ -117,7 +116,7 @@ class RegisterActivity : AppCompatActivity() {
                 if(task.isSuccessful){
                     //성공 시 실행
                     Toast.makeText(this, "회원가입 성공", Toast.LENGTH_SHORT).show()
-                    val intent = Intent(this, MainActivity::class.java)
+                    val intent = Intent(this,MainActivity::class.java)
                     startActivity(intent)
                     addUserToDatabase(reg_id, reg_pw, reg_name, reg_tel,
                         str_gender, str_purpose, mAuth.currentUser?.uid!!)

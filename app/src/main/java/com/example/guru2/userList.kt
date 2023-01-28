@@ -1,14 +1,11 @@
 package com.example.guru2
 
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import android.widget.Toast
+import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.guru2.aboutUser.User
-import com.example.guru2.aboutUser.UserAdapter
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
@@ -17,63 +14,63 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import java.util.*
+import kotlin.collections.ArrayList
 
-
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [userList.newInstance] factory method to
- * create an instance of this fragment.
- */
-class userList : Fragment() {
-    // TODO: Rename and change types of parameters
-
-
-    private var param1: String? = null
-    private var param2: String? = null
+class userList : AppCompatActivity() {
+    lateinit var adapter: UserAdapter
+    private lateinit var mAuth: FirebaseAuth
+    private lateinit var mDbRef:DatabaseReference
+    private lateinit var list:ArrayList<User>
+    lateinit var userRecyclerView: RecyclerView
+    lateinit var user_searchView:SearchView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_user_list)
 
-
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
-
-
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        lateinit var adapter: UserAdapter
-        lateinit var mAuth: FirebaseAuth
-        lateinit var mDbRef: DatabaseReference
-        lateinit var list:ArrayList<User>
-        lateinit var user_recyclerView: RecyclerView
-
-
-        val view = inflater.inflate(R.layout.fragment_class_dialog, container, false)
-
-
+        userRecyclerView = findViewById(R.id.user_recyclerView)
+        user_searchView = findViewById(R.id.user_searchView)
 
         mAuth = Firebase.auth
         mDbRef = Firebase.database.reference
         list = ArrayList()
         adapter = UserAdapter(this, list)
 
-        user_recyclerView.layoutManager = LinearLayoutManager(activity)
-        user_recyclerView.adapter = adapter
-        return inflater.inflate(R.layout.fragment_user_list, container, false)
+        userRecyclerView.layoutManager = LinearLayoutManager(this)
+        userRecyclerView.adapter = adapter
+        user_searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
 
-        mDbRef.child("user").addValueEventListener(object: ValueEventListener {
+            override fun onQueryTextChange(newText: String?): Boolean {
+                filterList(newText)
+                return true
+            }
+
+        })
+    }
+
+
+    private fun filterList(query:String?){
+        if(query!=null){
+            val filteredList=ArrayList<User>()
+            for(i in list){
+                if(i.reg_name.lowercase(Locale.ROOT).contains(query)){
+                    filteredList.add(i)
+                }
+            }
+            if(filteredList.isEmpty()){
+                Toast.makeText(this, "No Data found", Toast.LENGTH_SHORT).show()
+            }else{
+                adapter.setFilteredList(filteredList)
+            }
+        }
+
+
+        //사용자 정보 가져오기
+        mDbRef.child("user").addValueEventListener(object:ValueEventListener{
 
             override fun onDataChange(snapshot: DataSnapshot) {
                 for(postSnapshot in snapshot.children){
@@ -95,25 +92,13 @@ class userList : Fragment() {
 
         })
 
-    }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment userList.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            userList().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+
+
+
+
+
+
+
     }
 }

@@ -1,4 +1,4 @@
-package com.example.guru2.aboutUser
+package com.example.guru2
 
 data class User(
     var reg_id :String,

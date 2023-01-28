@@ -1,4 +1,4 @@
-package com.example.guru2.aboutUser
+package com.example.guru2
 
 import android.content.Context
 import android.content.Intent
@@ -7,27 +7,27 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.guru2.R
-import com.example.guru2.chatActivity
-import com.example.guru2.userList
 
-class UserAdapter(private val context : Context, private var userList:ArrayList<User>):
+class UserAdapter (val context: Context, var userList:ArrayList<User>):
     RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
 
+
+    class UserViewHolder(itemView: View):RecyclerView.ViewHolder(itemView){
+        val nameText: TextView =itemView.findViewById(R.id.chat_textview_title)
+    }
+
+    fun setFilteredList(userList:ArrayList<User>){
+        this.userList=userList
+        notifyDataSetChanged()
+    }
+
+
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
-        val view:View=LayoutInflater.from(context).inflate(R.layout.user_layout, parent, false)
+        val view:View=LayoutInflater.from(context).inflate(R.layout.activity_user_list, parent, false)
         return UserViewHolder(view)
 
     }
-
-    class UserViewHolder(itemView: View):RecyclerView.ViewHolder(itemView){
-        val nameText: TextView =itemView.findViewById(R.id.name_text)
-    }
-
-
-
-
-
 
     override fun getItemCount(): Int {
         return userList.size
