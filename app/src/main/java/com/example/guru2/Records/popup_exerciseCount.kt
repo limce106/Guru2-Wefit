@@ -45,7 +45,7 @@ class popup_exerciseCount(private val context: Context) {
                     clickedExerciseName, strExerciseDate, strSet, strCount
                 )
 
-                myRef.child(dataName).child(userName).setValue(dataInput)
+                myRef.child(dataName).child(userName).push().setValue(dataInput)
             }
         }
 

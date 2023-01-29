@@ -7,28 +7,20 @@ import androidx.annotation.NonNull
 import androidx.recyclerview.widget.RecyclerView
 import com.example.guru2.R
 import com.example.guru2.Records.ExerciseRecModel
-import com.google.firebase.database.core.Context
 import kotlinx.android.synthetic.main.trainer_recommend_form.view.*
 
-class RecyclerAdapterTrainerRecommend(arrayList: ArrayList<ExerciseRecModel>?, context: android.content.Context?):
+class RecyclerAdapterTrainerRecommend():
     RecyclerView.Adapter<RecyclerAdapterTrainerRecommend.ViewHolder>() {
-    private var arrayList: ArrayList<ExerciseRecModel>? = null
-    private var context: Context? = null
-    //어댑터에서 액티비티 액션을 가져올 때 context가 필요한데 어댑터에는 context가 없다.
-    //선택한 액티비티에 대한 context를 가져올 때 필요하다.
+    private var arrayList = ArrayList<ExerciseRecModel>()
 
-//    //어댑터에서 액티비티 액션을 가져올 때 context가 필요한데 어댑터에는 context가 없다.
-//    //선택한 액티비티에 대한 context를 가져올 때 필요하다.
-//    fun RecyclerAdapterTrainerRecommend(arrayList: ArrayList<ExerciseRecModel>?, context: Context?) {
-//        this.arrayList = arrayList
-//        this.context = context
-//    }
+    constructor(arrayList: ArrayList<ExerciseRecModel>, context: android.content.Context) : this() {
+        this.arrayList = arrayList
+        val ct: android.content.Context = context
+    }
 
     @NonNull
     //실제 리스트뷰가 어댑터에 연결된 다음에 뷰 홀더를 최초로 만들어낸다.
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        this.arrayList = arrayList
-        this.context = context
         val inflatedView=
             LayoutInflater.from(parent.context)
                 .inflate(R.layout.trainer_recommend_form, parent, false)
@@ -54,7 +46,7 @@ class RecyclerAdapterTrainerRecommend(arrayList: ArrayList<ExerciseRecModel>?, c
 
     override fun getItemCount(): Int {
         // 삼항 연산자
-        return if (arrayList != null) arrayList!!.size else 0
+        return if (arrayList != null) arrayList.size else 0
     }
 
     class ViewHolder(v: View) : RecyclerView.ViewHolder(v) {

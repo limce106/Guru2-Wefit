@@ -68,7 +68,7 @@ class InputMealFragment : Fragment() {
                     strMealDate, strTimeSlot, strEatTime, strMealName
                 )
 
-                myRef.child("mealrecord").push().setValue(dataInput)
+                myRef.child("mealrecord").child("Swuni").push().setValue(dataInput)
             }
         }
 

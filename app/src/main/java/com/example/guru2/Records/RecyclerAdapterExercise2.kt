@@ -6,28 +6,20 @@ import android.view.ViewGroup
 import androidx.annotation.NonNull
 import androidx.recyclerview.widget.RecyclerView
 import com.example.guru2.R
-import com.google.firebase.database.core.Context
 import kotlinx.android.synthetic.main.exercise_record_form.view.*
 
-class RecyclerAdapterExercise2(arrayList: ArrayList<ExerciseRecModel>?, context: android.content.Context?):
+class RecyclerAdapterExercise2():
     RecyclerView.Adapter<RecyclerAdapterExercise2.ViewHolder>() {
-    private var arrayList: ArrayList<ExerciseRecModel>? = null
-    private var context: Context? = null
-    //어댑터에서 액티비티 액션을 가져올 때 context가 필요한데 어댑터에는 context가 없다.
-    //선택한 액티비티에 대한 context를 가져올 때 필요하다.
+    private var arrayList = ArrayList<ExerciseRecModel>()
 
-//    //어댑터에서 액티비티 액션을 가져올 때 context가 필요한데 어댑터에는 context가 없다.
-//    //선택한 액티비티에 대한 context를 가져올 때 필요하다.
-//    fun RecyclerAdapterExercise2(arrayList: ArrayList<ExerciseRecModel>?, context: Context?) {
-//        this.arrayList = arrayList
-//        this.context = context
-//    }
+    constructor(arrayList: ArrayList<ExerciseRecModel>, context: android.content.Context) : this() {
+        this.arrayList = arrayList
+        val ct: android.content.Context = context
+    }
 
     @NonNull
     //실제 리스트뷰가 어댑터에 연결된 다음에 뷰 홀더를 최초로 만들어낸다.
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        this.arrayList = arrayList
-        this.context = context
         val inflatedView=
             LayoutInflater.from(parent.context)
                 .inflate(R.layout.exercise_record_form, parent, false)
@@ -47,13 +39,32 @@ class RecyclerAdapterExercise2(arrayList: ArrayList<ExerciseRecModel>?, context:
 
     override fun onBindViewHolder(@NonNull holder: ViewHolder, position: Int) {
 
-        holder.bind(arrayList!![position])
+        holder.bind(arrayList[position])
 
+        //val context: android.content.Context = this
+//        holder.iv_delete.setOnClickListener(view: View) {
+//            val builder = AlertDialog.Builder(v.Context)
+//            builder.setTitle("삭제")
+//                .setMessage("해당 항목을 삭제하시겠습니까?")
+//                .setPositiveButton("확인",
+//                    DialogInterface.OnClickListener{dialog, id ->
+//                        arrayList!!.removeAt(position)
+//                        notifyItemRemoved(position)
+//                        notifyItemRangeChanged(position, arrayList!!.size);
+//                    })
+//                .setNegativeButton("취소",
+//                    DialogInterface.OnClickListener{dialog, id ->
+//                        dialog.cancel()
+//                    })
+//
+//            // 다이얼로그 띄우기
+//            builder.show();
+//        }
     }
 
     override fun getItemCount(): Int {
         // 삼항 연산자
-        return if (arrayList != null) arrayList!!.size else 0
+        return if (arrayList != null) arrayList.size else 0
     }
 
     class ViewHolder(v: View) : RecyclerView.ViewHolder(v) {

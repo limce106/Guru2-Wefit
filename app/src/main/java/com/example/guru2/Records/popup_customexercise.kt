@@ -48,7 +48,7 @@ class popup_customexercise(private val context: Context) {
                     strCustomExerciseName, strCustomExerciseDate, strCustomSet, strCustomCount
                 )
 
-                myRef.child(dataName).child(userName).setValue(dataInput)
+                myRef.child(dataName).child(userName).push().setValue(dataInput)
             }
         }
 
