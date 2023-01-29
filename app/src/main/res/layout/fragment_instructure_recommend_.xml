@@ -26,12 +26,12 @@
         android:ems="10"
         android:hint="회원 ID를 입력하세요."
         android:inputType="textPersonName"
-        app:layout_constraintEnd_toStartOf="@+id/btnNicknameOk"
+        app:layout_constraintEnd_toStartOf="@+id/btnIDOk"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/btnNicknameOk"
+        android:id="@+id/btnIDOk"
         android:layout_width="117dp"
         android:layout_height="56dp"
         android:layout_marginStart="3dp"

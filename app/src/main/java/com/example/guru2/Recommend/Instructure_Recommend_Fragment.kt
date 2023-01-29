@@ -11,15 +11,20 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.SearchView
 import android.widget.Toast
+import androidx.annotation.NonNull
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.example.guru2.R
 import com.example.guru2.Records.*
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.fragment_input_exercise.view.*
 
 class Instructure_Recommend_Fragment : Fragment() {
-
     lateinit var strNickname: String
+    var isTrainerExist: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -184,16 +189,43 @@ class Instructure_Recommend_Fragment : Fragment() {
         rootView.searchView.setOnQueryTextListener(searchViewTextListener)
 
         // 닉네임 입력 변화 확인
-        val edtNickName = rootView.findViewById<EditText>(R.id.edtNickName)
+        var edtNickName = rootView.findViewById<EditText>(R.id.edtNickName)
         checkChanges(edtNickName)
+
+        val database = FirebaseDatabase.getInstance()
+        val databaseReference = database.getReference("user") // DB 테이블 연결
+        val btnOk = rootView.findViewById<Button>(R.id.btnIDOk)
+        btnOk.setOnClickListener() {
+            databaseReference.orderByChild("reg_id").equalTo(strNickname)
+            .addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    if(!::strNickname.isInitialized || strNickname == "") {
+                        Toast.makeText(context, "닉네임을 입력하세요.", Toast.LENGTH_SHORT).show()
+                    }else{
+                        if(dataSnapshot.exists()){
+                            Toast.makeText(context, "확인되었습니다.", Toast.LENGTH_SHORT).show()
+                            isTrainerExist = true
+                        } else {
+                            Toast.makeText(context, "존재하지 않는 회원입니다." +
+                                    " 다시 입력하세요.", Toast.LENGTH_SHORT).show()
+                            isTrainerExist = false
+                        }
+                    }
+                }
+
+                override fun onCancelled(@NonNull databaseError: DatabaseError) {
+                    Log.e("UserID", databaseError.toException().toString()) // 에러문 출력
+                }
+            })
+        }
 
         // 운동 항목 클릭 이벤트
         RVExerNameadapter.setItemClickListener(object: RecyclerAdapterExerName.OnItemClickListener {
             override fun onClick(v: View, position: Int) {
                 // 클릭 시 이벤트 작성
 
-                if(!::strNickname.isInitialized || strNickname == "") {
-                    Toast.makeText(context, "닉네임을 입력하세요.", Toast.LENGTH_SHORT).show()
+                if(!isTrainerExist) {
+                    Toast.makeText(context, "회원 ID를 확인해주세요..", Toast.LENGTH_SHORT).show()
                 } else{
                     var clickedExerciseName: String = "${list[position].exerciseName}"
 
