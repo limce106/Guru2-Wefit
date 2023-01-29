@@ -107,7 +107,7 @@ class RegisterActivity : AppCompatActivity() {
 
 
     //회원가입
-    private fun signUp (reg_id:String, reg_pw:String, reg_name:String,
+    fun signUp (reg_id:String, reg_pw:String, reg_name:String,
                         reg_tel:String, str_gender:String, str_purpose:String){
 
 
@@ -129,13 +129,17 @@ class RegisterActivity : AppCompatActivity() {
     }
 
 
-    private fun addUserToDatabase(reg_id:String, reg_pw:String, reg_name:String,
+    fun addUserToDatabase(reg_id:String, reg_pw:String, reg_name:String,
                                   reg_tel:String, str_gender:String, str_purpose:String, uId:String)
     {
         mDbRef.child("user").child(uId).setValue(User(reg_id, reg_pw, reg_name, reg_tel, str_gender, str_purpose,uId))
 
     }
-}
+
+
+
+    }
+
 
 
 
