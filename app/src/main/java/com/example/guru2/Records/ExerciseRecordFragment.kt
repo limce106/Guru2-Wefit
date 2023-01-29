@@ -24,8 +24,8 @@ class ExerciseRecordFragment : Fragment() {
     lateinit var arrayList: ArrayList<ExerciseRecModel>
     lateinit var database: FirebaseDatabase
     lateinit var databaseReference: DatabaseReference
-    var buttonClick:Boolean =false //운동 기록 추가 버튼을 클릭했는지 확인하는 변수
     lateinit var uidList: ArrayList<String>
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -77,9 +77,10 @@ class ExerciseRecordFragment : Fragment() {
 
         val fab_add: FloatingActionButton = rootView.findViewById(R.id.fab_add)
         val mActivity = activity as NaviActivity
+
+        //기록 추가 버튼 클릭 이벤트
         fab_add.setOnClickListener() {
-            buttonClick = true
-            mActivity.ExerciseCheck(buttonClick) //운동 기록 추가 버튼 클릭했다는 데이터 넘기기
+            mActivity.replaceRecord(InputExerciseFragment()) //운동 기록하기 프래그먼트로 전환 함수
             Log.d("test", "화면 전환")
         }
 
