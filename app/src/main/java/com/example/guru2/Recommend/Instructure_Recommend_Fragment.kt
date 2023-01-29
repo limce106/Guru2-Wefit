@@ -14,6 +14,7 @@ import android.widget.Toast
 import androidx.annotation.NonNull
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
+import com.example.guru2.NaviActivity
 import com.example.guru2.R
 import com.example.guru2.Records.*
 import com.google.firebase.database.DataSnapshot
@@ -233,7 +234,7 @@ class Instructure_Recommend_Fragment : Fragment() {
                     Toast.makeText(v.context, "${list[position].exerciseName}", Toast.LENGTH_SHORT).show()
 
                     // 횟수 세트/입력 팝업창 띄우기
-                    val dialog = popup_exerciseCount(v.context)
+                    val dialog = popup_exerciseCount(v.context, activity as NaviActivity)
                     dialog.saveData(clickedExerciseName, "exerciserecommend")
                 }
             }
@@ -246,7 +247,7 @@ class Instructure_Recommend_Fragment : Fragment() {
                 Toast.makeText(context, "닉네임을 입력하세요.", Toast.LENGTH_SHORT).show()
             } else {
                 // 커스텀 운동 팝업 창 띄우기
-                val dialog = popup_customexercise(rootView.context)
+                val dialog = popup_customexercise(rootView.context, activity as NaviActivity)
                 dialog.saveData("exerciserecommend")
             }
         }

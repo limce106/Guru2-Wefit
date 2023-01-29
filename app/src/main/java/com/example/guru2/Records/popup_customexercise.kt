@@ -7,10 +7,11 @@ import android.text.TextWatcher
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import com.example.guru2.NaviActivity
 import com.example.guru2.R
 import com.google.firebase.database.FirebaseDatabase
 
-class popup_customexercise(private val context: Context) {
+class popup_customexercise(private val context: Context, private val activity: NaviActivity) {
     private val dialog = Dialog(context)
     lateinit var strCustomExerciseDate: String
     lateinit var strCustomExerciseName: String
@@ -47,8 +48,10 @@ class popup_customexercise(private val context: Context) {
                 val dataInput = ExerciseRecModel(
                     strCustomExerciseName, strCustomExerciseDate, strCustomSet, strCustomCount
                 )
-
                 myRef.child(dataName).push().setValue(dataInput)
+
+                val mActivity = activity as NaviActivity
+                mActivity.replaceRecord(ExerciseRecordFragment())
             }
         }
 
@@ -87,8 +90,10 @@ class popup_customexercise(private val context: Context) {
                 val dataInput = ExerciseRecModel(
                     strCustomExerciseName, strCustomExerciseDate, strCustomSet, strCustomCount
                 )
-
                 myRef.child(dataName).child(uid).push().setValue(dataInput)
+
+                val mActivity = activity as NaviActivity
+                mActivity.replaceRecord(ExerciseRecordFragment())
             }
         }
 
