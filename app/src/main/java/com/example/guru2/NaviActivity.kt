@@ -8,7 +8,7 @@ import com.example.guru2.Records.InputExerciseFragment
 import com.example.guru2.Records.InputMealFragment
 import com.example.guru2.Records.MealRecordFragment
 import com.example.guru2.calender_user.Calender
-import com.example.guru2.calender_user.Recommend.Trainer_Recommend_Fragment
+import com.example.guru2.Recommend.Trainer_Recommend_Fragment
 import com.example.guru2.databinding.ActivityNaviBinding
 import com.example.guru2.graph_user.Graph
 import kotlinx.android.synthetic.main.activity_navi.*

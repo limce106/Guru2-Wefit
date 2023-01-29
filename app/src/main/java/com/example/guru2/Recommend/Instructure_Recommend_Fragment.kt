@@ -1,4 +1,4 @@
-package com.example.guru2.calender_user.Recommend
+package com.example.guru2.Recommend
 
 import android.os.Bundle
 import android.text.Editable

@@ -1,4 +1,4 @@
-package com.example.guru2.calender_user.Recommend
+package com.example.guru2.Recommend
 
 import android.content.Context
 import android.os.Bundle
