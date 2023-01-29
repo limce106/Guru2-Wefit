@@ -23,7 +23,6 @@ class MealRecordFragment : Fragment() {
     lateinit var arrayList: ArrayList<MealRecModel>
     lateinit var database: FirebaseDatabase
     lateinit var databaseReference: DatabaseReference
-    var buttonClick:Boolean =false //식단 기록 추가 버튼을 클릭했는지 확인하는 변수
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -70,9 +69,9 @@ class MealRecordFragment : Fragment() {
         adapter = RecyclerAdapterMeal2(arrayList, ct)
         recyclerView.adapter = adapter // 리사이클러뷰에 어댑터 연결
 
+        //기록 추가 버튼 클릭 이벤트
         fab_add2.setOnClickListener(){
-            buttonClick = true
-            mActivity.MealCheck(buttonClick) //운동 기록 추가 버튼 클릭했다는 데이터 넘기기
+            mActivity.replaceRecord(InputMealFragment()) //식단 기록하기 프래그먼트로 전환 함수
             Log.d("test", "화면 전환")
         }
 

@@ -10,6 +10,7 @@ import com.example.guru2.Records.MealRecordFragment
 import com.example.guru2.calender_user.Calender
 import com.example.guru2.calender_trainer.CalenderTrainer
 import com.example.guru2.Recommend.Trainer_Recommend_Fragment
+import com.example.guru2.Records.ExerciseRecordFragment
 import com.example.guru2.databinding.ActivityNaviBinding
 import com.example.guru2.graph_user.Graph
 import kotlinx.android.synthetic.main.activity_navi.*
@@ -26,8 +27,7 @@ private const val TAG_MESSAGE = "message_fragment" //메세지 프래그먼트
 class NaviActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityNaviBinding
-    var ExerciseInputButtonClick:Boolean=false //운동 기록 추가 버튼 클릭 확인 변수
-    var MealInputButtonClick:Boolean=false //식단 기록 추가 버튼 클릭 확인 변수
+    lateinit var recordfragment: Fragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,6 +50,7 @@ class NaviActivity : AppCompatActivity() {
             true
         }
 
+
     }
 
 
@@ -71,11 +72,9 @@ class NaviActivity : AppCompatActivity() {
 
         if (recommend != null) {
             fragTransition.hide(recommend)
-            fragTransition.hide(InputExerciseFragment())
         }
         if (record != null) {
             fragTransition.hide(record)
-            fragTransition.hide(InputMealFragment())
         }
         if (calender != null) {
             fragTransition.hide(calender)
@@ -90,23 +89,11 @@ class NaviActivity : AppCompatActivity() {
 
         if (tag == TAG_RECOMMEND) {
             if (recommend != null) {
-                if (ExerciseInputButtonClick) {
-                    fragTransition.add(R.id.main_frame, InputExerciseFragment(), TAG_RECOMMEND)
-                    fragTransition.hide(recommend)
-                } else {
-                    fragTransition.hide(InputExerciseFragment())
-                    fragTransition.show(recommend)
-                }
+                fragTransition.show(recommend)
             }
         } else if (tag == TAG_RECORD) {
             if (record != null) {
-                if(MealInputButtonClick){
-                    fragTransition.add(R.id.main_frame,InputMealFragment(), TAG_RECORD)
-                    fragTransition.hide(record)
-                }else {
-                    fragTransition.hide(InputExerciseFragment())
                     fragTransition.show(record)
-                }
             }
         } else if (tag == TAG_CALENDAR) {
             if (calender != null) {
@@ -122,21 +109,17 @@ class NaviActivity : AppCompatActivity() {
             }
         }
 
-
             fragTransition.commitAllowingStateLoss()
 
         }
 
-        //운동 기록 추가 버튼 클릭 확인 함수
-        fun ExerciseCheck(click: Boolean) {
-            ExerciseInputButtonClick = click
-        }
 
-        //운동 기록 추가 버튼 클릭 확인 함수
-        fun MealCheck(click: Boolean) {
-            MealInputButtonClick = click
-        }
+    //프래그먼트 교체 함수
+    fun replaceRecord(fragment: Fragment){
 
+        //기록 프래그먼트 새로 불러오기
+        supportFragmentManager.beginTransaction().replace(R.id.main_frame,fragment, TAG_RECORD).commit()
 
+    }
 
     }
