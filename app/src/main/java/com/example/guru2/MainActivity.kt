@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         chatTest.setOnClickListener {
-            val intent = Intent(this,userList::class.java)
+            val intent = Intent(this,UserListFrag::class.java)
             startActivity(intent)
         }
 
