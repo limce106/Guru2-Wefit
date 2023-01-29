@@ -1,4 +1,4 @@
-package com.example.guru2.calender_user
+package com.example.guru2.calender_trainer
 
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -8,7 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.CalendarView
 import android.widget.TimePicker
 import androidx.fragment.app.DialogFragment
 import com.example.guru2.R
@@ -16,18 +15,16 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 
 
-class IndividualExerciseDialog : DialogFragment() {
-
+class TrainerCalenderDialog : DialogFragment() {
 
     private val firebaseDatabase: FirebaseDatabase = FirebaseDatabase.getInstance()
     private val databaseReference: DatabaseReference = firebaseDatabase.getReference()
     var date:String = ""
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            date = arguments?.getString("key1").toString()
+            dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT)) //다이얼로그 배경 투명하게
         }
     }
 
@@ -35,19 +32,18 @@ class IndividualExerciseDialog : DialogFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT)) //다이얼로그 배경 투명하게
-        return inflater.inflate(R.layout.fragment_individual_exercise_dialog, container, false)
 
+        return inflater.inflate(R.layout.fragment_trainer_calender_dialog, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         //객체 생성
-        val btn_indi_add = view.findViewById<Button>(R.id.btn_indi_add) //개인 운동 일정 추가하기 버튼
-        val timePicker = view.findViewById<TimePicker>(R.id.time_individual)
-        var edit_hour :Int = 0 //개인 운동 일정 시간
-        var edit_minute:Int= 0 //개인 운동 일정 분
+        val btn_indi_add = view.findViewById<Button>(R.id.btn_trainer_add) //수업 일정 추가하기 버튼
+        val timePicker = view.findViewById<TimePicker>(R.id.time_trainer) //트레이너 수업 시간 피커
+        var edit_hour :Int = 0 //수업 일정 시간
+        var edit_minute:Int= 0 //수업 일정 분
 
 
         timePicker.setOnTimeChangedListener{ timePicker, hourOfDay, minute ->
@@ -63,10 +59,11 @@ class IndividualExerciseDialog : DialogFragment() {
 
             val hour:Int = edit_hour
             val minute:Int=edit_minute
-            val dataInput=IndividualItem("$date","$hour:$minute") //db에 저장할 데이터
+            date = arguments?.getString("key2").toString()
+            val dataInput= TrainerItem("$date","$hour:$minute") //db에 저장할 데이터
 
             //db에 저장
-            databaseReference.child("individual-schedule").push().setValue(dataInput)
+            databaseReference.child("trainer-schedule").push().setValue(dataInput)
 
 
             //다이얼 로그 종료하기
@@ -77,10 +74,10 @@ class IndividualExerciseDialog : DialogFragment() {
 
     }
 
-    fun getInstance(): IndividualExerciseDialog {
-        return IndividualExerciseDialog()
+    fun getInstance(): TrainerCalenderDialog {
+        return TrainerCalenderDialog()
     }
 
 
-
 }
+

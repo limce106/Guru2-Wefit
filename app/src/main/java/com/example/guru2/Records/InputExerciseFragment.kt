@@ -189,7 +189,7 @@ class InputExerciseFragment : Fragment() {
 
                 // 횟수 세트/입력 팝업창 띄우기
                 val dialog = popup_exerciseCount(v.context)
-                dialog.saveData(clickedExerciseName, "exerciserecord", "Swuni")
+                dialog.saveData(clickedExerciseName, "exerciserecord")
             }
         })
 
@@ -198,7 +198,7 @@ class InputExerciseFragment : Fragment() {
         btnCustom.setOnClickListener() {
             // 커스텀 운동 팝업 창 띄우기
             val dialog = popup_customexercise(rootView.context)
-            dialog.saveData("exerciserecord", "Swuni")
+            dialog.saveData("exerciserecord")
         }
 
         return rootView

@@ -16,7 +16,7 @@ class popup_exerciseCount(private val context: Context) {
     lateinit var strSet: String
     lateinit var strCount: String
 
-    fun saveData(clickedExerciseName: String, dataName: String, userName: String){
+    fun saveData(clickedExerciseName: String, dataName: String){
         dialog.setContentView(R.layout.popup_exercisecount)
         dialog.setCanceledOnTouchOutside(true)
         dialog.setCancelable(true)
@@ -45,7 +45,45 @@ class popup_exerciseCount(private val context: Context) {
                     clickedExerciseName, strExerciseDate, strSet, strCount
                 )
 
-                myRef.child(dataName).child(userName).setValue(dataInput)
+                myRef.child(dataName).push().setValue(dataInput)
+            }
+        }
+
+        btnCancel2.setOnClickListener {
+            dialog.dismiss()
+        }
+    }
+
+    fun saveData2(clickedExerciseName: String, dataName: String, uid: String){
+        dialog.setContentView(R.layout.popup_exercisecount)
+        dialog.setCanceledOnTouchOutside(true)
+        dialog.setCancelable(true)
+        dialog.show()
+
+        val edtExerciseDate = dialog.findViewById<EditText>(R.id.edtExerciseDate)
+        val edt_set = dialog.findViewById<EditText>(R.id.edt_set)
+        val edt_count = dialog.findViewById<EditText>(R.id.edt_count)
+        val btnCancel2 = dialog.findViewById<Button>(R.id.btnCancel2)
+        val btnOk2 = dialog.findViewById<Button>(R.id.btnOk2)
+
+        checkChanges(edtExerciseDate, edt_set, edt_count)
+
+        btnOk2.setOnClickListener {
+            val database = FirebaseDatabase.getInstance()
+            val myRef = database.getReference()
+
+            // 입력한 데이터 저장
+            if(!::strExerciseDate.isInitialized || !::strSet.isInitialized
+                || !::strCount.isInitialized || strExerciseDate == ""
+                || strSet == "" || strCount == "") {
+                Toast.makeText(context, "빈칸을 모두 채워주세요.", Toast.LENGTH_SHORT).show()
+            }
+            else{
+                val dataInput = ExerciseRecModel(
+                    clickedExerciseName, strExerciseDate, strSet, strCount
+                )
+
+                myRef.child(dataName).child(uid).push().setValue(dataInput)
             }
         }
 
