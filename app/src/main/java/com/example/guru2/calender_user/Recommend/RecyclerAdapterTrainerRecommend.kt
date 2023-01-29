@@ -1,4 +1,4 @@
-package com.example.guru2.Recommend
+package com.example.guru2.calender_user.Recommend
 
 import android.view.LayoutInflater
 import android.view.View

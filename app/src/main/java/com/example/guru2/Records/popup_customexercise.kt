@@ -17,7 +17,7 @@ class popup_customexercise(private val context: Context) {
     lateinit var strCustomSet: String
     lateinit var strCustomCount: String
 
-    fun saveData(dataName: String, userName: String){
+    fun saveData(dataName: String){
         dialog.setContentView(R.layout.popup_customexercise)
         dialog.setCanceledOnTouchOutside(true)
         dialog.setCancelable(true)
@@ -48,7 +48,47 @@ class popup_customexercise(private val context: Context) {
                     strCustomExerciseName, strCustomExerciseDate, strCustomSet, strCustomCount
                 )
 
-                myRef.child(dataName).child(userName).push().setValue(dataInput)
+                myRef.child(dataName).push().setValue(dataInput)
+            }
+        }
+
+        btnCancel.setOnClickListener {
+            dialog.dismiss()
+        }
+    }
+
+    fun saveData2(dataName: String, uid: String){
+        dialog.setContentView(R.layout.popup_customexercise)
+        dialog.setCanceledOnTouchOutside(true)
+        dialog.setCancelable(true)
+        dialog.show()
+
+        val edtExerciseDate2 = dialog.findViewById<EditText>(R.id.edtExerciseDate2)
+        val edt_custom_exercise_name = dialog.findViewById<EditText>(R.id.edt_custom_exercise_name)
+        val edt_custom_set = dialog.findViewById<EditText>(R.id.edt_custom_set)
+        val edt_custom_count = dialog.findViewById<EditText>(R.id.edt_custom_count)
+        val btnCancel = dialog.findViewById<Button>(R.id.custom_btnCancel)
+        val btnOk = dialog.findViewById<Button>(R.id.custom_btnOk)
+
+        checkChanges(edtExerciseDate2, edt_custom_exercise_name, edt_custom_set, edt_custom_count)
+
+        btnOk.setOnClickListener {
+            val database = FirebaseDatabase.getInstance()
+            val myRef = database.getReference()
+
+            // 입력한 데이터 저장
+            if(!::strCustomExerciseDate.isInitialized || !::strCustomExerciseName.isInitialized
+                || !::strCustomSet.isInitialized || !::strCustomCount.isInitialized
+                || strCustomExerciseDate == "" || strCustomExerciseName == ""
+                || strCustomSet == "" || strCustomCount == "") {
+                Toast.makeText(context, "빈칸을 모두 채워주세요.", Toast.LENGTH_SHORT).show()
+            }
+            else{
+                val dataInput = ExerciseRecModel(
+                    strCustomExerciseName, strCustomExerciseDate, strCustomSet, strCustomCount
+                )
+
+                myRef.child(dataName).child(uid).push().setValue(dataInput)
             }
         }
 

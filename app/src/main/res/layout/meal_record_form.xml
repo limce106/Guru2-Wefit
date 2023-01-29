@@ -51,7 +51,7 @@
                     android:paddingTop="10dp"
                     android:text="메뉴명"
                     android:textAlignment="textStart"
-                    android:textSize="20sp" />
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/tv_eatDate"

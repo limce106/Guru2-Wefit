@@ -1,8 +1,12 @@
 package com.example.guru2.Records
 
+import android.app.AlertDialog
+import android.content.Context
+import android.content.DialogInterface
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.annotation.NonNull
 import androidx.recyclerview.widget.RecyclerView
 import com.example.guru2.R
@@ -11,10 +15,11 @@ import kotlinx.android.synthetic.main.exercise_record_form.view.*
 class RecyclerAdapterExercise2():
     RecyclerView.Adapter<RecyclerAdapterExercise2.ViewHolder>() {
     private var arrayList = ArrayList<ExerciseRecModel>()
+    lateinit var ct: Context
 
     constructor(arrayList: ArrayList<ExerciseRecModel>, context: android.content.Context) : this() {
         this.arrayList = arrayList
-        val ct: android.content.Context = context
+        ct = context
     }
 
     @NonNull
@@ -41,25 +46,9 @@ class RecyclerAdapterExercise2():
 
         holder.bind(arrayList[position])
 
-        //val context: android.content.Context = this
-//        holder.iv_delete.setOnClickListener(view: View) {
-//            val builder = AlertDialog.Builder(v.Context)
-//            builder.setTitle("삭제")
-//                .setMessage("해당 항목을 삭제하시겠습니까?")
-//                .setPositiveButton("확인",
-//                    DialogInterface.OnClickListener{dialog, id ->
-//                        arrayList!!.removeAt(position)
-//                        notifyItemRemoved(position)
-//                        notifyItemRangeChanged(position, arrayList!!.size);
-//                    })
-//                .setNegativeButton("취소",
-//                    DialogInterface.OnClickListener{dialog, id ->
-//                        dialog.cancel()
-//                    })
-//
-//            // 다이얼로그 띄우기
-//            builder.show();
-//        }
+        holder.iv_delete.setOnClickListener(){
+            removeData(position)
+        }
     }
 
     override fun getItemCount(): Int {
@@ -69,6 +58,7 @@ class RecyclerAdapterExercise2():
 
     class ViewHolder(v: View) : RecyclerView.ViewHolder(v) {
         private var view: View = v
+        val iv_delete: ImageView = view.findViewById(R.id.iv_delete)
         fun bind(item: ExerciseRecModel) {
             view.tv_exerciseDate.text = item.exerDate
             view.tv_exerciseName2.text = item.exerName2
@@ -86,4 +76,24 @@ class RecyclerAdapterExercise2():
     }
     // setItemClickListener로 설정한 함수 실행
     private lateinit var exerciseRecClickListener : OnItemClickListener
+
+    //데이터 삭제 함수
+    fun removeData(position: Int){
+        val builder = AlertDialog.Builder(ct)
+        builder.setTitle("삭제")
+            .setMessage("해당 항목을 삭제하시겠습니까?")
+            .setPositiveButton("확인",
+                DialogInterface.OnClickListener{ dialog, id ->
+                    arrayList.removeAt(position)
+                    notifyItemRemoved(position)
+                    notifyItemRangeChanged(position, arrayList.size);
+                })
+            .setNegativeButton("취소",
+                DialogInterface.OnClickListener{dialog, id ->
+                    dialog.cancel()
+                })
+
+        // 다이얼로그 띄우기
+        builder.show();
+    }
 }

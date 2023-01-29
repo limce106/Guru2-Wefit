@@ -1,6 +1,5 @@
 package com.example.guru2.Records
 
-import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -11,7 +10,6 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.TimePicker.OnTimeChangedListener
 import android.widget.Toast
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import com.example.guru2.MainActivity
 import com.example.guru2.R
@@ -27,6 +25,7 @@ class InputMealFragment : Fragment() {
     lateinit var strTimeSlot: String
     lateinit var strEatTime: String
     lateinit var strMealName: String
+    lateinit var strKcal: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,10 +40,6 @@ class InputMealFragment : Fragment() {
     ): View? {
         val rootView = inflater.inflate(R.layout.fragment_input_meal, container, false)
 
-        // 사진 불러오기 클릭 시 권한 승인 요청
-        rootView.btnLoadImg.setOnClickListener(){
-            requestPermissionLauncher.launch(android.Manifest.permission.READ_EXTERNAL_STORAGE)
-        }
         // 저장하기 클릭 시 입력한 데이터 저장
         rootView.btnSaveMealrecord.setOnClickListener() {
 
@@ -52,46 +47,30 @@ class InputMealFragment : Fragment() {
             val myRef = database.getReference()
 
             val view: View = inflater.inflate(R.layout.fragment_input_meal, container, false)
-            // val mealImg: ImageView = view.findViewById(R.id.mealImg)
             val edtMealDate: EditText = view.findViewById(R.id.edtMealDate)
             val edtTimeSlot: EditText = view.findViewById(R.id.edtTimeSlot)
             val tv_eatTime: TextView = view.findViewById(R.id.tv_eatTime)
             val edtMealName: EditText = view.findViewById(R.id.edtMealName)
+            val edtEatAmount: EditText = view.findViewById(R.id.edtEatAmount)
 
             // 입력 안 된 항목이 있다면
             if(!this::strMealDate.isInitialized || !this::strTimeSlot.isInitialized
-                || !this::strEatTime.isInitialized || !this::strMealName.isInitialized) {
+                || !this::strEatTime.isInitialized || !this::strMealName.isInitialized
+                || !this::strKcal.isInitialized || strMealDate == "" || strTimeSlot == ""
+                || strEatTime == "" || strMealName == "" || strKcal == "") {
                 Toast.makeText(context, "빈칸을 모두 채워주세요.", Toast.LENGTH_SHORT).show()
             } else{ // 모두 입력 되었다면
                 val dataInput = MealRecModel(
                     // mealImg.drawable,
-                    strMealDate, strTimeSlot, strEatTime, strMealName
+                    strMealDate, strTimeSlot, strEatTime, strMealName, strKcal
                 )
 
-                myRef.child("mealrecord").child("Swuni").push().setValue(dataInput)
+                myRef.child("mealrecord").push().setValue(dataInput)
             }
         }
 
         return rootView
     }
-
-    private val requestPermissionLauncher =
-        registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted->
-            // 갤러지 이미지 권한이 허가되었다면
-            if(isGranted){
-                Toast.makeText(context, "권한이 승인되었습니다.", Toast.LENGTH_SHORT).show()
-                // 이미지 불러오기
-                val intent = Intent(Intent.ACTION_PICK)
-                intent.type="image/*"
-                //intent.action = Intent.ACTION_GET_CONTENT
-                // startActivity(intent)
-                mActivity?.activityResult
-            }
-            // 갤러지 이미지 권한이 거부되었다면
-            else{
-                Toast.makeText(context, "권한이 거부되었습니다.", Toast.LENGTH_SHORT).show()
-            }
-        }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -136,6 +115,18 @@ class InputMealFragment : Fragment() {
         edtMealName.addTextChangedListener(object : TextWatcher {
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
                 strMealName = s.toString()
+            }
+
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int,
+                                           after: Int, ) {}
+
+            override fun afterTextChanged(s: Editable) {
+            }
+        })
+
+        edtEatAmount.addTextChangedListener(object : TextWatcher {
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                strKcal = s.toString()
             }
 
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int,

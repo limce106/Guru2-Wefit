@@ -1,4 +1,4 @@
-package com.example.guru2.Recommend
+package com.example.guru2.calender_user.Recommend
 
 import android.content.Context
 import android.os.Bundle
@@ -15,7 +15,7 @@ import com.example.guru2.Records.RecyclerAdapterExercise2
 import com.google.firebase.database.*
 
 
-class Recommend_Fragment : Fragment() {
+class Trainer_Recommend_Fragment : Fragment() {
     lateinit var recyclerView: RecyclerView
     lateinit var adapter: RecyclerView.Adapter<*>
     lateinit var layoutManager: RecyclerView.LayoutManager
@@ -73,7 +73,7 @@ class Recommend_Fragment : Fragment() {
     companion object {
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            Recommend_Fragment().apply {
+            Trainer_Recommend_Fragment().apply {
                 arguments = Bundle().apply {
 
                 }

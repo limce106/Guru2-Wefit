@@ -44,7 +44,7 @@ class RecyclerAdapterMeal2():
         fun bind(item: MealRecModel) {
             view.tv_eatDate.text = item.eatDate + "  " + item.eatTime
             view.tv_timeSlot.text = item.timeSlot
-            view.tv_menuName.text = item.mealName
+            view.tv_menuName.text = item.mealName + "  " + item.eatAmount
         }
     }
 
