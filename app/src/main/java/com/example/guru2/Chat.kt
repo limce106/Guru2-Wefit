@@ -104,10 +104,8 @@ class Chat : Fragment() {
             })
 
 
-
         return view
     }
-
 
 
 
