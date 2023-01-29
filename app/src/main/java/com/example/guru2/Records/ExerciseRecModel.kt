@@ -5,7 +5,7 @@ import androidx.room.Entity
 @Entity(tableName = "exercise")
 data class ExerciseRecModel(
     val exerName2: String = "",
-    val exerDate: String = "",
+    var exerDate: String = "",
     val count: String = "",
     val set: String = ""
 )

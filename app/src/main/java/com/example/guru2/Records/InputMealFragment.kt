@@ -11,7 +11,7 @@ import android.widget.TextView
 import android.widget.TimePicker.OnTimeChangedListener
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.example.guru2.MainActivity
+import com.example.guru2.NaviActivity
 import com.example.guru2.R
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.fragment_input_meal.*
@@ -20,7 +20,6 @@ import kotlinx.android.synthetic.main.fragment_input_meal.view.*
 
 class InputMealFragment : Fragment() {
     private var uri:String?=null
-    val mActivity = MainActivity.getInstance()
     lateinit var strMealDate: String
     lateinit var strTimeSlot: String
     lateinit var strEatTime: String
@@ -64,9 +63,11 @@ class InputMealFragment : Fragment() {
                     // mealImg.drawable,
                     strMealDate, strTimeSlot, strEatTime, strMealName, strKcal
                 )
-
                 myRef.child("mealrecord").push().setValue(dataInput)
             }
+
+            val mActivity = activity as NaviActivity
+            mActivity.replaceRecord(MealRecordFragment())
         }
 
         return rootView
@@ -82,7 +83,10 @@ class InputMealFragment : Fragment() {
             if (hour > 12) {
                 hour -= 12
                 tv_eatTime.setText("오후 " + hour + "시 " + minute + "분")
-            } else {
+            } else if(hour == 12){
+                tv_eatTime.setText("오후 " + hour + "시 " + minute + "분")
+            }
+            else {
                 tv_eatTime.setText("오전 " + hour + "시 " + minute + "분")
             }
             strEatTime = tv_eatTime.text.toString()

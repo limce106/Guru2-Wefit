@@ -10,6 +10,7 @@ import android.widget.SearchView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
+import com.example.guru2.NaviActivity
 import com.example.guru2.R
 import kotlinx.android.synthetic.main.fragment_input_exercise.view.*
 
@@ -188,7 +189,7 @@ class InputExerciseFragment : Fragment() {
                 Toast.makeText(v.context, "${list[position].exerciseName}", Toast.LENGTH_SHORT).show()
 
                 // 횟수 세트/입력 팝업창 띄우기
-                val dialog = popup_exerciseCount(v.context)
+                val dialog = popup_exerciseCount(v.context, activity as NaviActivity)
                 dialog.saveData(clickedExerciseName, "exerciserecord")
             }
         })
@@ -197,7 +198,7 @@ class InputExerciseFragment : Fragment() {
         val btnCustom: Button = rootView.findViewById(R.id.btnCustom)
         btnCustom.setOnClickListener() {
             // 커스텀 운동 팝업 창 띄우기
-            val dialog = popup_customexercise(rootView.context)
+            val dialog = popup_customexercise(rootView.context, activity as NaviActivity)
             dialog.saveData("exerciserecord")
         }
 

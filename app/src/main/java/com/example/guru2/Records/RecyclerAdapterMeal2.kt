@@ -1,21 +1,30 @@
 package com.example.guru2.Records
 
+import android.app.AlertDialog
+import android.content.Context
+import android.content.DialogInterface
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.Toast
 import androidx.annotation.NonNull
 import androidx.recyclerview.widget.RecyclerView
 import com.example.guru2.R
+import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.meal_record_form.view.*
 
 
 class RecyclerAdapterMeal2():
     RecyclerView.Adapter<RecyclerAdapterMeal2.ViewHolder>() {
     private var arrayList = ArrayList<MealRecModel>()
+    lateinit var ct: Context
+    private lateinit var uidList: ArrayList<String>
 
-    constructor(arrayList: ArrayList<MealRecModel>, context: android.content.Context) : this() {
+    constructor(arrayList: ArrayList<MealRecModel>, context: android.content.Context, uidList: ArrayList<String>) : this() {
         this.arrayList = arrayList
-        val ct: android.content.Context = context
+        ct = context
+        this.uidList = uidList
     }
 
     @NonNull
@@ -31,6 +40,10 @@ class RecyclerAdapterMeal2():
 
     override fun onBindViewHolder(@NonNull holder: ViewHolder, position: Int) {
         holder.bind(arrayList[position])
+
+        holder.iv_delete.setOnClickListener(){
+            removeData(position)
+        }
     }
 
     override fun getItemCount(): Int {
@@ -40,6 +53,7 @@ class RecyclerAdapterMeal2():
 
     class ViewHolder(v: View) : RecyclerView.ViewHolder(v) {
         val view: View = v
+        val iv_delete: ImageView = view.findViewById(R.id.iv_delete)
 
         fun bind(item: MealRecModel) {
             view.tv_eatDate.text = item.eatDate + "  " + item.eatTime
@@ -58,4 +72,29 @@ class RecyclerAdapterMeal2():
     }
     // setItemClickListener로 설정한 함수 실행
     private lateinit var mealRecClickListener : OnItemClickListener
+
+    //데이터 삭제 함수
+    fun removeData(position: Int){
+        val database = FirebaseDatabase.getInstance()
+        val myRef = database.getReference("mealrecord")
+
+        val builder = AlertDialog.Builder(ct)
+        builder.setTitle("삭제")
+            .setMessage("해당 항목을 삭제하시겠습니까?")
+            .setPositiveButton("확인",
+                DialogInterface.OnClickListener{ dialog, id ->
+                    myRef.child(uidList[position]).removeValue().addOnSuccessListener {
+                        Toast.makeText(ct, "삭제 완료", Toast.LENGTH_SHORT).show() }
+                    arrayList.removeAt(position)
+                    notifyItemRemoved(position)
+                    notifyItemRangeChanged(position, arrayList.size)
+                })
+            .setNegativeButton("취소",
+                DialogInterface.OnClickListener{ dialog, id ->
+                    dialog.cancel()
+                })
+
+        // 다이얼로그 띄우기
+        builder.show()
+    }
 }

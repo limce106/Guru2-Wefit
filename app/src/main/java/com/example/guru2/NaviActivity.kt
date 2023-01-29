@@ -4,12 +4,9 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import com.example.guru2.Records.InputExerciseFragment
-import com.example.guru2.Records.InputMealFragment
-import com.example.guru2.Records.MealRecordFragment
-import com.example.guru2.calender_user.Calender
-import com.example.guru2.calender_trainer.CalenderTrainer
 import com.example.guru2.Recommend.Trainer_Recommend_Fragment
+import com.example.guru2.Records.RecordMain
+import com.example.guru2.calender_user.Calender
 import com.example.guru2.databinding.ActivityNaviBinding
 import com.example.guru2.graph_user.Graph
 import kotlinx.android.synthetic.main.activity_navi.*
@@ -26,8 +23,7 @@ private const val TAG_MESSAGE = "message_fragment" //메세지 프래그먼트
 class NaviActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityNaviBinding
-    var ExerciseInputButtonClick:Boolean=false //운동 기록 추가 버튼 클릭 확인 변수
-    var MealInputButtonClick:Boolean=false //식단 기록 추가 버튼 클릭 확인 변수
+    lateinit var recordfragment: Fragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,17 +38,21 @@ class NaviActivity : AppCompatActivity() {
             when(item.itemId){
                 //각 프래그먼트 연결하기
                 R.id.recommendFragment -> setFragment(TAG_RECOMMEND, Trainer_Recommend_Fragment())
-                R.id.recordFragment-> setFragment(TAG_RECORD, MealRecordFragment())
+                R.id.recordFragment-> setFragment(TAG_RECORD, RecordMain())
                 R.id.calendarFragment -> setFragment(TAG_CALENDAR, Calender())
                 R.id.graphFragment -> setFragment(TAG_GRAPH, Graph())
                 R.id.messageFragment -> setFragment(TAG_MESSAGE,Chat())
             }
             true
         }
-
     }
 
-
+    companion object{
+        private var instance:NaviActivity = NaviActivity()
+        fun getInstance(): NaviActivity {
+            return instance
+        }
+    }
 
     //프래그먼트 세팅
     fun setFragment(tag:String, fragment: Fragment) {
@@ -71,11 +71,9 @@ class NaviActivity : AppCompatActivity() {
 
         if (recommend != null) {
             fragTransition.hide(recommend)
-            fragTransition.hide(InputExerciseFragment())
         }
         if (record != null) {
             fragTransition.hide(record)
-            fragTransition.hide(InputMealFragment())
         }
         if (calender != null) {
             fragTransition.hide(calender)
@@ -90,23 +88,11 @@ class NaviActivity : AppCompatActivity() {
 
         if (tag == TAG_RECOMMEND) {
             if (recommend != null) {
-                if (ExerciseInputButtonClick) {
-                    fragTransition.add(R.id.main_frame, InputExerciseFragment(), TAG_RECOMMEND)
-                    fragTransition.hide(recommend)
-                } else {
-                    fragTransition.hide(InputExerciseFragment())
-                    fragTransition.show(recommend)
-                }
+                fragTransition.show(recommend)
             }
         } else if (tag == TAG_RECORD) {
             if (record != null) {
-                if(MealInputButtonClick){
-                    fragTransition.add(R.id.main_frame,InputMealFragment(), TAG_RECORD)
-                    fragTransition.hide(record)
-                }else {
-                    fragTransition.hide(InputExerciseFragment())
                     fragTransition.show(record)
-                }
             }
         } else if (tag == TAG_CALENDAR) {
             if (calender != null) {
@@ -122,21 +108,24 @@ class NaviActivity : AppCompatActivity() {
             }
         }
 
-
             fragTransition.commitAllowingStateLoss()
 
         }
 
-        //운동 기록 추가 버튼 클릭 확인 함수
-        fun ExerciseCheck(click: Boolean) {
-            ExerciseInputButtonClick = click
-        }
 
-        //운동 기록 추가 버튼 클릭 확인 함수
-        fun MealCheck(click: Boolean) {
-            MealInputButtonClick = click
-        }
+    //프래그먼트 교체 함수
+    fun replaceRecord(fragment: Fragment){
 
+        //기록 프래그먼트 새로 불러오기
+        supportFragmentManager.beginTransaction().replace(R.id.main_frame,fragment, TAG_RECORD).commit()
 
+    }
+
+    fun changeTab(fragment: Fragment){
+
+        //기록 프래그먼트 새로 불러오기
+        supportFragmentManager.beginTransaction().replace(R.id.recordFrame,fragment).commit()
+
+    }
 
     }
