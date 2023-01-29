@@ -4,11 +4,10 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import com.example.guru2.Records.ExerciseRecordFragment
 import com.example.guru2.Records.InputExerciseFragment
 import com.example.guru2.Records.InputMealFragment
-import com.example.guru2.Records.MealRecordFragment
 import com.example.guru2.calender_user.Calender
-import com.example.guru2.Recommend.Trainer_Recommend_Fragment
 import com.example.guru2.databinding.ActivityNaviBinding
 import com.example.guru2.graph_user.Graph
 import kotlinx.android.synthetic.main.activity_navi.*
@@ -40,8 +39,8 @@ class NaviActivity : AppCompatActivity() {
         binding.bottomNavigationView.setOnItemSelectedListener { item ->
             when(item.itemId){
                 //각 프래그먼트 연결하기
-                R.id.recommendFragment -> setFragment(TAG_RECOMMEND, Trainer_Recommend_Fragment())
-                R.id.recordFragment-> setFragment(TAG_RECORD, MealRecordFragment())
+                R.id.recommendFragment -> setFragment(TAG_RECOMMEND, InputExerciseFragment())
+                R.id.recordFragment-> setFragment(TAG_RECORD, ExerciseRecordFragment())
                 R.id.calendarFragment -> setFragment(TAG_CALENDAR, Calender())
                 R.id.graphFragment -> setFragment(TAG_GRAPH, Graph())
                 R.id.messageFragment -> setFragment(TAG_MESSAGE,Chat())

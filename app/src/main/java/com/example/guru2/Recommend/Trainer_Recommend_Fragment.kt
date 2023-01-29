@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.guru2.R
 import com.example.guru2.Records.ExerciseRecModel
-import com.example.guru2.Records.RecyclerAdapterExercise2
 import com.google.firebase.database.*
 
 
@@ -64,8 +63,8 @@ class Trainer_Recommend_Fragment : Fragment() {
         })
 
         val ct: Context = container!!.context
-        adapter = RecyclerAdapterExercise2(arrayList, ct)
-        recyclerView.adapter = adapter // 리사이클러뷰에 어댑터 연결
+        //adapter = RecyclerAdapterExercise2(arrayList, ct)
+        //recyclerView.adapter = adapter // 리사이클러뷰에 어댑터 연결
 
         return rootView
     }

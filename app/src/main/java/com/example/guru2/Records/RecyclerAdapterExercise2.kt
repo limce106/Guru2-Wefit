@@ -7,19 +7,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.annotation.NonNull
 import androidx.recyclerview.widget.RecyclerView
 import com.example.guru2.R
+import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.exercise_record_form.view.*
 
 class RecyclerAdapterExercise2():
     RecyclerView.Adapter<RecyclerAdapterExercise2.ViewHolder>() {
     private var arrayList = ArrayList<ExerciseRecModel>()
     lateinit var ct: Context
+    private lateinit var uidList: ArrayList<String>
 
-    constructor(arrayList: ArrayList<ExerciseRecModel>, context: android.content.Context) : this() {
+    constructor(arrayList: ArrayList<ExerciseRecModel>, context: android.content.Context, uidList: ArrayList<String>) : this() {
         this.arrayList = arrayList
         ct = context
+        this.uidList = uidList
     }
 
     @NonNull
@@ -79,14 +83,19 @@ class RecyclerAdapterExercise2():
 
     //데이터 삭제 함수
     fun removeData(position: Int){
+        val database = FirebaseDatabase.getInstance()
+        val myRef = database.getReference("exerciserecord")
+
         val builder = AlertDialog.Builder(ct)
         builder.setTitle("삭제")
             .setMessage("해당 항목을 삭제하시겠습니까?")
             .setPositiveButton("확인",
                 DialogInterface.OnClickListener{ dialog, id ->
+                    myRef.child(uidList[position]).removeValue().addOnSuccessListener {
+                        Toast.makeText(ct, "삭제 완료", Toast.LENGTH_SHORT).show() }
                     arrayList.removeAt(position)
                     notifyItemRemoved(position)
-                    notifyItemRangeChanged(position, arrayList.size);
+                    notifyItemRangeChanged(position, arrayList.size)
                 })
             .setNegativeButton("취소",
                 DialogInterface.OnClickListener{dialog, id ->
@@ -94,6 +103,6 @@ class RecyclerAdapterExercise2():
                 })
 
         // 다이얼로그 띄우기
-        builder.show();
+        builder.show()
     }
 }
