@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.example.guru2.Recommend.Instructure_Recommend_Fragment
-import com.example.guru2.Recommend.Trainer_Recommend_Fragment
+import com.example.guru2.Records.ExerciseRecordFragment
 import com.example.guru2.Records.InputExerciseFragment
 import com.example.guru2.Records.InputMealFragment
 import com.example.guru2.calender_user.Calender
@@ -41,7 +41,7 @@ class NaviActivity : AppCompatActivity() {
             when(item.itemId){
                 //각 프래그먼트 연결하기
                 R.id.recommendFragment -> setFragment(TAG_RECOMMEND, Instructure_Recommend_Fragment())
-                R.id.recordFragment-> setFragment(TAG_RECORD, Trainer_Recommend_Fragment())
+                R.id.recordFragment-> setFragment(TAG_RECORD, ExerciseRecordFragment())
                 R.id.calendarFragment -> setFragment(TAG_CALENDAR, Calender())
                 R.id.graphFragment -> setFragment(TAG_GRAPH, Graph())
                 R.id.messageFragment -> setFragment(TAG_MESSAGE,Chat())

@@ -91,8 +91,9 @@ class RecyclerAdapterTrainerRecommend():
             .setMessage("해당 운동을 완료하셨습니까?")
             .setPositiveButton("확인",
                 DialogInterface.OnClickListener{ dialog, id ->
+                    arrayList[position].exerDate = Strnow
                     val dataInput = ExerciseRecModel(
-                        arrayList[position].exerName2, Strnow, arrayList[position].set, arrayList[position].count
+                        arrayList[position].exerName2, arrayList[position].exerDate, arrayList[position].set, arrayList[position].count
                     )
                     myRef2.push().setValue(arrayList[position])
                     myRef.child(uidList[position]).removeValue().addOnSuccessListener {
