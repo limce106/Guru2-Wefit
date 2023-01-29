@@ -1,21 +1,34 @@
 package com.example.guru2.Recommend
 
+import android.app.AlertDialog
+import android.content.Context
+import android.content.DialogInterface
+import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.Toast
 import androidx.annotation.NonNull
+import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import com.example.guru2.R
 import com.example.guru2.Records.ExerciseRecModel
+import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.trainer_recommend_form.view.*
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 class RecyclerAdapterTrainerRecommend():
     RecyclerView.Adapter<RecyclerAdapterTrainerRecommend.ViewHolder>() {
     private var arrayList = ArrayList<ExerciseRecModel>()
+    lateinit var ct: Context
+    private lateinit var uidList: ArrayList<String>
 
-    constructor(arrayList: ArrayList<ExerciseRecModel>, context: android.content.Context) : this() {
+    constructor(arrayList: ArrayList<ExerciseRecModel>, context: android.content.Context, uidList: ArrayList<String>) : this() {
         this.arrayList = arrayList
-        val ct: android.content.Context = context
+        ct = context
+        this.uidList = uidList
     }
 
     @NonNull
@@ -27,21 +40,15 @@ class RecyclerAdapterTrainerRecommend():
         return ViewHolder(inflatedView)
     }
 
-//    override fun onBindViewHolder(@NonNull holder: RecyclerAdapterTrainerRecommend.ViewHolder, position: Int) {
-//        holder.itemView.setOnClickListener {
-//            exerciseRecClickListener.onClick(it, position)
-//        }
-//        holder.apply {
-//            itemView.tag = arrayList!![position]
-//        }
-//        holder.bind(arrayList!![position])
-//    }
 
-
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onBindViewHolder(@NonNull holder: ViewHolder, position: Int) {
 
         holder.bind(arrayList!![position])
 
+        holder.iv_check.setOnClickListener(){
+            checkExercise(position)
+        }
     }
 
     override fun getItemCount(): Int {
@@ -51,6 +58,7 @@ class RecyclerAdapterTrainerRecommend():
 
     class ViewHolder(v: View) : RecyclerView.ViewHolder(v) {
         private var view: View = v
+        val iv_check: ImageView = view.findViewById(R.id.iv_check)
         fun bind(item: ExerciseRecModel) {
             view.tv_recommendExerName.text = item.exerName2
             view.tv_recommendSetCount.text = item.count + "회" + item.set + "세트"
@@ -67,4 +75,38 @@ class RecyclerAdapterTrainerRecommend():
     }
     // setItemClickListener로 설정한 함수 실행
     private lateinit var exerciseRecClickListener : OnItemClickListener
+
+    //데이터 삭제 함수
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun checkExercise(position: Int){
+        val database = FirebaseDatabase.getInstance()
+        val myRef = database.getReference("exerciserecommend")
+        val myRef2 = database.getReference("exerciserecord")
+        var now = LocalDate.now()
+
+        var Strnow = now.format(DateTimeFormatter.ofPattern("yyyyMMdd"))
+
+        val builder = AlertDialog.Builder(ct)
+        builder.setTitle("운동 완료")
+            .setMessage("해당 운동을 완료하셨습니까?")
+            .setPositiveButton("확인",
+                DialogInterface.OnClickListener{ dialog, id ->
+                    val dataInput = ExerciseRecModel(
+                        arrayList[position].exerName2, Strnow, arrayList[position].set, arrayList[position].count
+                    )
+                    myRef2.push().setValue(arrayList[position])
+                    myRef.child(uidList[position]).removeValue().addOnSuccessListener {
+                        Toast.makeText(ct, "기록 완료", Toast.LENGTH_SHORT).show() }
+                    arrayList.removeAt(position)
+                    notifyItemRemoved(position)
+                    notifyItemRangeChanged(position, arrayList.size)
+                })
+            .setNegativeButton("취소",
+                DialogInterface.OnClickListener{ dialog, id ->
+                    dialog.cancel()
+                })
+
+        // 다이얼로그 띄우기
+        builder.show()
+    }
 }

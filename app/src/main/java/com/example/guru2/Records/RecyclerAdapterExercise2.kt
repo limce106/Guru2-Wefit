@@ -35,16 +35,6 @@ class RecyclerAdapterExercise2():
         return ViewHolder(inflatedView)
     }
 
-//    override fun onBindViewHolder(@NonNull holder: RecyclerAdapterExercise2.ViewHolder, position: Int) {
-//        holder.itemView.setOnClickListener {
-//            exerciseRecClickListener.onClick(it, position)
-//        }
-//        holder.apply {
-//            itemView.tag = arrayList!![position]
-//        }
-//        holder.bind(arrayList!![position])
-//    }
-
 
     override fun onBindViewHolder(@NonNull holder: ViewHolder, position: Int) {
 

@@ -202,7 +202,7 @@ class Instructure_Recommend_Fragment : Fragment() {
 
                     // 횟수 세트/입력 팝업창 띄우기
                     val dialog = popup_exerciseCount(v.context)
-                    dialog.saveData2(clickedExerciseName, "exerciserecommend", strNickname)
+                    dialog.saveData(clickedExerciseName, "exerciserecommend")
                 }
             }
         })
@@ -215,7 +215,7 @@ class Instructure_Recommend_Fragment : Fragment() {
             } else {
                 // 커스텀 운동 팝업 창 띄우기
                 val dialog = popup_customexercise(rootView.context)
-                dialog.saveData2("exerciserecommend", strNickname)
+                dialog.saveData("exerciserecommend")
             }
         }
 
