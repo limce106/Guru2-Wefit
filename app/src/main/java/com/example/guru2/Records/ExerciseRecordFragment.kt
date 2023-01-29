@@ -42,8 +42,6 @@ class ExerciseRecordFragment : Fragment() {
     ): View? {
         val rootView = inflater.inflate(R.layout.fragment_exercise_record, container, false)
 
-        val list = ArrayList<ExerciseRecModel>()
-
         recyclerView = rootView.findViewById(R.id.rv_exerciseRecord)
         recyclerView.setHasFixedSize(true) // 리사이클러뷰 기존성능 강화
         layoutManager = LinearLayoutManager(context)
