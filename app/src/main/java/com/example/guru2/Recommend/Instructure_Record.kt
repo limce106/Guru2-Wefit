@@ -41,7 +41,7 @@ class Instructure_Record : Fragment() {
 
         val database = FirebaseDatabase.getInstance()
         val databaseReference = database.getReference("user") // DB 테이블 연결
-        val btnOk = rootView.findViewById<Button>(R.id.btnIDOk)
+        val btnOk = rootView.findViewById<Button>(R.id.btnNicknameOk)
         btnOk.setOnClickListener() {
             databaseReference.orderByChild("reg_id").equalTo(strNickname)
                 .addListenerForSingleValueEvent(object : ValueEventListener {
