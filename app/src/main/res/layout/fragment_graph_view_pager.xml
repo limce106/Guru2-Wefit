@@ -7,19 +7,23 @@
     android:orientation="vertical"
     tools:context=".graph_user.GraphViewPager">
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/text_graph_date"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:orientation="vertical">
-
-    </LinearLayout>
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="25dp"
+        android:text="00.00.00"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textSize="25dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="25dp"
         android:layout_marginRight="25dp"
-        android:layout_marginBottom="40dp"
+        android:layout_marginBottom="20dp"
         android:orientation="horizontal">
 
         <Button
@@ -53,7 +57,8 @@
     <com.github.mikephil.charting.charts.LineChart
         android:id="@+id/lineChart"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_marginBottom="30dp" />
 
 
 </LinearLayout>
