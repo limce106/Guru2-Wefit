@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.guru2.NaviActivity
 import com.example.guru2.R
 import com.example.guru2.Records.ExerciseRecModel
 import com.google.firebase.database.*
@@ -35,8 +36,7 @@ class Trainer_Recommend_Fragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View? {
         val rootView = inflater.inflate(R.layout.fragment_trainer_recommend_, container, false)
-
-        val list = ArrayList<ExerciseRecModel>()
+        val mActivity = activity as NaviActivity
 
         recyclerView = rootView.findViewById(R.id.rv_recommendList)
         recyclerView.setHasFixedSize(true) // 리사이클러뷰 기존성능 강화
@@ -45,7 +45,7 @@ class Trainer_Recommend_Fragment : Fragment() {
         arrayList = ArrayList() // User 객체를 담을 어레이 리스트 (어댑터쪽으로)
         uidList = ArrayList()
         database = FirebaseDatabase.getInstance() // 파이어베이스 데이터베이스 연동
-        databaseReference = database.getReference("exerciserecommend") // DB 테이블 연결
+        databaseReference = database.getReference("exerciserecommend").child(mActivity.loginUser()!!) // DB 테이블 연결
         databaseReference.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 // 파이어베이스 데이터베이스의 데이터를 받아오는 곳

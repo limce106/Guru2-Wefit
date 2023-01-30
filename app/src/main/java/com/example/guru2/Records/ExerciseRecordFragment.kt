@@ -41,6 +41,7 @@ class ExerciseRecordFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View? {
         val rootView = inflater.inflate(R.layout.fragment_exercise_record, container, false)
+        val mActivity = activity as NaviActivity
 
         recyclerView = rootView.findViewById(R.id.rv_exerciseRecord)
         recyclerView.setHasFixedSize(true) // 리사이클러뷰 기존성능 강화
@@ -49,7 +50,7 @@ class ExerciseRecordFragment : Fragment() {
         arrayList = ArrayList() // User 객체를 담을 어레이 리스트 (어댑터쪽으로)
         uidList = ArrayList()
         database = FirebaseDatabase.getInstance() // 파이어베이스 데이터베이스 연동
-        databaseReference = database.getReference("exerciserecord") // DB 테이블 연결
+        databaseReference = database.getReference("exerciserecord").child(mActivity.loginUser()!!) // DB 테이블 연결
         databaseReference.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(@NonNull dataSnapshot: DataSnapshot) {
                 // 파이어베이스 데이터베이스의 데이터를 받아오는 곳
@@ -76,7 +77,6 @@ class ExerciseRecordFragment : Fragment() {
         recyclerView.adapter = adapter // 리사이클러뷰에 어댑터 연결
 
         val fab_add: FloatingActionButton = rootView.findViewById(R.id.fab_add)
-        val mActivity = activity as NaviActivity
 
         //기록 추가 버튼 클릭 이벤트
         fab_add.setOnClickListener() {

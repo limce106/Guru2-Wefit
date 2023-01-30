@@ -47,7 +47,7 @@ class MealRecordFragment : Fragment() {
         arrayList = ArrayList() // User 객체를 담을 어레이 리스트 (어댑터쪽으로)
         uidList = ArrayList()
         database = FirebaseDatabase.getInstance() // 파이어베이스 데이터베이스 연동
-        databaseReference = database.getReference("mealrecord")// DB 테이블 연결
+        databaseReference = database.getReference("mealrecord").child(mActivity.loginUser()!!)// DB 테이블 연결
         databaseReference.addListenerForSingleValueEvent(object : ValueEventListener {
             @SuppressLint("NotifyDataSetChanged")
             override fun onDataChange(dataSnapshot: DataSnapshot) {
