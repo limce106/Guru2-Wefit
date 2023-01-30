@@ -4,19 +4,19 @@ import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CalendarView
 import android.widget.TextView
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.guru2.R
+import com.example.guru2.Records.ExerciseRecModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.*
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.fragment_calender.*
 
@@ -27,9 +27,10 @@ class Calender : Fragment() {
     var firestore: FirebaseFirestore? = null
     val itemList = arrayListOf<Schedule>() //아이템 배열
     val ListAdapter = RecyclerViewAdapter(itemList) //어댑터
-    var date: String = "" //캘린더에서 선택한 날짜
+    var date: String = ""//캘린더에서 선택한 날짜
     private val firebaseDatabase: FirebaseDatabase = FirebaseDatabase.getInstance()
-    private val databaseReference: DatabaseReference = firebaseDatabase.getReference()
+    val indiDialog: IndividualExerciseDialog = IndividualExerciseDialog() //개인운동 팝업창
+
 
     @SuppressLint("MissingInflatedId")
     override fun onCreateView(
@@ -42,31 +43,43 @@ class Calender : Fragment() {
         val calenderview = view.findViewById<CalendarView>(R.id.cal) //캘린더
         firestore = FirebaseFirestore.getInstance() //파이어스토어 인스턴스 초기화
 
-        val indiDialog: IndividualExerciseDialog = IndividualExerciseDialog()
 
-        val bundle = Bundle() //번들 생성
-        bundle.putString("key1", date) //번들에 값 담기
-        indiDialog.arguments = bundle //값이 담긴 번들을 argunments에 담기
+
+        //새로운 데이터 저장할 때 마다 데이터 불러오기
+        val databaseReference: DatabaseReference = firebaseDatabase.getReference("schedule") //db 연결
+        databaseReference.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                itemList.clear()
+                //db에서 데이터 불러오기
+                dataSnapshot.children.forEach{
+                    val schedule = it.getValue(Schedule::class.java)
+                    schedule ?:return
+
+                    itemList.add(schedule) //리사이클러뷰에 리스트 추가
+                }
+                //리스트가 변경됨을 어댑터에 알림
+                ListAdapter.notifyDataSetChanged()
+            }
+            override fun onCancelled(databaseError: DatabaseError) {
+                // 디비를 가져오던중 에러 발생 시
+                Log.e("ExerciseRecord", databaseError.toException().toString()) // 에러문 출력
+            }
+
+        })
 
         recyclerview.adapter = ListAdapter //어댑터 연결
         recyclerview.layoutManager = LinearLayoutManager(activity)
 
-        //아이템 추가
-        itemList.add(Schedule("2023/01/02", "개인 운동", "12:00"))
-        itemList.add(Schedule("2023/01/02", "개인 운동", "15:00"))
-        itemList.add(Schedule("2023/01/02", "PT 수업", "16:00"))
-        itemList.add(Schedule("2023/01/02", "PT 수업", "18:00"))
 
-        //리스트가 변경됨을 어댑터에 알림
-        ListAdapter.notifyDataSetChanged()
-
+        //날짜별로 클릭 시
         calenderview.setOnDateChangeListener(object : CalendarView.OnDateChangeListener {
             override fun onSelectedDayChange(p0: CalendarView, p1: Int, p2: Int, p3: Int) {
                 //ListAdapter.setList()
-                date = p1.toString() + "/" + p2 + 1.toString() + "/" + p3.toString()
-                Log.d("hhh", date)
-                Log.d("kkk", bundle.toString())
-                Log.d("kkt", indiDialog.arguments.toString())
+                date = p1.toString() + "-" + p2 + 1.toString() + "-" + p3.toString()
+                var bundle = Bundle() //번들 생성
+                bundle.putString("key1", date) //번들에 값
+                Log.d("ddd",date)
+
             }
         })
 
@@ -85,9 +98,6 @@ class Calender : Fragment() {
         val textClass = view.findViewById<TextView>(R.id.text_class)//수업 예약 글씨
         val textIndi = view.findViewById<TextView>(R.id.text_indi)//개인 운동 글씨
         val dialog: ClassDialog = ClassDialog().getInstance() //수업 예약 팝업창
-        val dialog2: IndividualExerciseDialog = IndividualExerciseDialog().getInstance() //개인 운동 팝업창
-
-
 
 
         textClass.bringToFront() //텍스트 맨 앞으로
@@ -126,15 +136,16 @@ class Calender : Fragment() {
         btnClass.setOnClickListener {
             //다이얼로그 띄우기
             activity?.supportFragmentManager?.let { fragmentManager ->
-                dialog.show(fragmentManager, "TAG_DIALOG_EVENT")
+                dialog.showNow(fragmentManager, "TAG_DIALOG_EVENT")
             }
         }
 
         //개인 운동 버튼 클릭시
         btnIndi.setOnClickListener {
+
             //다이얼로그 띄우기
             activity?.supportFragmentManager?.let { fragmentManager ->
-                dialog2.show(fragmentManager, "TAG_DIALOG_EVENT")
+                indiDialog.showNow(fragmentManager, "TAG_DIALOG_EVENT")
             }
 
         }
@@ -158,7 +169,7 @@ class Calender : Fragment() {
             }
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                ListAdapter.removeData(viewHolder.layoutPosition)
+                ListAdapter.removeData(viewHolder.layoutPosition) //RecyclerViewAdapter의 removeData 함수
             }
 
         }
@@ -166,3 +177,6 @@ class Calender : Fragment() {
     }
 
 }
+
+
+
