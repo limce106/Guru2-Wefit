@@ -28,6 +28,7 @@ class popup_exerciseCount(private val context: Context, private val activity: Na
         val edt_count = dialog.findViewById<EditText>(R.id.edt_count)
         val btnCancel2 = dialog.findViewById<Button>(R.id.btnCancel2)
         val btnOk2 = dialog.findViewById<Button>(R.id.btnOk2)
+        val mActivity = activity as NaviActivity
 
         checkChanges(edtExerciseDate, edt_set, edt_count)
 
@@ -45,11 +46,9 @@ class popup_exerciseCount(private val context: Context, private val activity: Na
                 val dataInput = ExerciseRecModel(
                     clickedExerciseName, strExerciseDate, strSet, strCount
                 )
-                myRef.child(dataName).push().setValue(dataInput)
+                myRef.child(dataName).child(mActivity.loginUser()!!).setValue(dataInput)
 
                 dialog.dismiss()
-
-                val mActivity = activity as NaviActivity
                 mActivity.replaceRecord(ExerciseRecordFragment())
             }
         }
@@ -87,7 +86,7 @@ class popup_exerciseCount(private val context: Context, private val activity: Na
                 val dataInput = ExerciseRecModel(
                     clickedExerciseName, strExerciseDate, strSet, strCount
                 )
-                myRef.child(dataName).child(uid).push().setValue(dataInput)
+                myRef.child(dataName).child(uid).setValue(dataInput)
 
                 val mActivity = activity as NaviActivity
                 mActivity.replaceRecord(ExerciseRecordFragment())

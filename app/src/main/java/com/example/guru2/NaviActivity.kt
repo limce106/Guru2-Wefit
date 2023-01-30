@@ -1,21 +1,19 @@
 package com.example.guru2
 
-import android.content.Context
 import android.os.Bundle
-import android.util.AttributeSet
 import android.view.MenuItem
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.example.guru2.Recommend.Trainer_Recommend_Fragment
 import com.example.guru2.Records.RecordMain
 import com.example.guru2.calender_trainer.CalenderTrainer
+import com.example.guru2.Records.InputMealFragment
+import com.example.guru2.Records.MealRecordFragment
 import com.example.guru2.calender_user.Calender
 import com.example.guru2.databinding.ActivityNaviBinding
 import com.example.guru2.graph_user.Graph
-import com.google.android.material.internal.ContextUtils.getActivity
-import kotlinx.android.synthetic.main.activity_main.*
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_navi.*
 
 
@@ -46,11 +44,11 @@ class NaviActivity : AppCompatActivity() {
         binding.bottomNavigationView.setOnItemSelectedListener { item ->
             when(item.itemId){
                 //각 프래그먼트 연결하기
-                R.id.recommendFragment -> setFragment(TAG_RECOMMEND, Trainer_Recommend_Fragment())
-                R.id.recordFragment-> setFragment(TAG_RECORD, RecordMain())
+                R.id.recommendFragment -> setFragment(TAG_RECOMMEND, MealRecordFragment())
+                R.id.recordFragment-> setFragment(TAG_RECORD, InputMealFragment())
                 R.id.calendarFragment -> setFragment(TAG_CALENDAR, Calender())
                 R.id.graphFragment -> setFragment(TAG_GRAPH, Graph())
-                R.id.messageFragment -> setFragment(TAG_MESSAGE,Chat())
+                R.id.messageFragment -> setFragment(TAG_MESSAGE,UserListFrag())
             }
             true
         }
@@ -149,12 +147,23 @@ class NaviActivity : AppCompatActivity() {
     }
 
     fun changeTab(fragment: Fragment){
-
         //기록 프래그먼트 새로 불러오기
         supportFragmentManager.beginTransaction().replace(R.id.recordFrame,fragment).commit()
-
-
     }
+
+    fun changeinstTab(fragment: Fragment){
+        //기록 프래그먼트 새로 불러오기
+        supportFragmentManager.beginTransaction().replace(R.id.recordframe,fragment).commit()
+    }
+
+    fun loginUser(): String? {
+
+        var user= FirebaseAuth.getInstance().currentUser
+        var userId= user?.uid
+
+        return userId;
+    }
+
 
 
 

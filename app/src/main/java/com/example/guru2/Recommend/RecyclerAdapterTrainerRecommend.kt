@@ -14,6 +14,7 @@ import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import com.example.guru2.R
 import com.example.guru2.Records.ExerciseRecModel
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.trainer_recommend_form.view.*
 import java.time.LocalDate
@@ -44,7 +45,7 @@ class RecyclerAdapterTrainerRecommend():
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onBindViewHolder(@NonNull holder: ViewHolder, position: Int) {
 
-        holder.bind(arrayList!![position])
+        holder.bind(arrayList[position])
 
         holder.iv_check.setOnClickListener(){
             checkExercise(position)
@@ -76,13 +77,15 @@ class RecyclerAdapterTrainerRecommend():
     // setItemClickListener로 설정한 함수 실행
     private lateinit var exerciseRecClickListener : OnItemClickListener
 
-    //데이터 삭제 함수
+    //데이터 삭제, 추가 함수
     @RequiresApi(Build.VERSION_CODES.O)
     fun checkExercise(position: Int){
         val database = FirebaseDatabase.getInstance()
         val myRef = database.getReference("exerciserecommend")
         val myRef2 = database.getReference("exerciserecord")
         var now = LocalDate.now()
+        var user= FirebaseAuth.getInstance().currentUser
+        var userId= user?.uid
 
         var Strnow = now.format(DateTimeFormatter.ofPattern("yyyyMMdd"))
 
@@ -95,7 +98,7 @@ class RecyclerAdapterTrainerRecommend():
                     val dataInput = ExerciseRecModel(
                         arrayList[position].exerName2, arrayList[position].exerDate, arrayList[position].set, arrayList[position].count
                     )
-                    myRef2.push().setValue(arrayList[position])
+                    myRef2.child(userId!!).setValue(arrayList[position])
                     myRef.child(uidList[position]).removeValue().addOnSuccessListener {
                         Toast.makeText(ct, "기록 완료", Toast.LENGTH_SHORT).show() }
                     arrayList.removeAt(position)

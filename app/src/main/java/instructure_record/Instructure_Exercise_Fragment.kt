@@ -1,4 +1,4 @@
-package com.example.guru2.Records
+package instructure_record
 
 import android.content.Context
 import android.os.Bundle
@@ -11,13 +11,12 @@ import androidx.annotation.Nullable
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.guru2.NaviActivity
 import com.example.guru2.R
-import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.example.guru2.Records.ExerciseRecModel
 import com.google.firebase.database.*
 
+class Instructure_Exercise_Fragment : Fragment() {
 
-class ExerciseRecordFragment : Fragment() {
     lateinit var recyclerView: RecyclerView
     lateinit var adapter: RecyclerView.Adapter<*>
     lateinit var layoutManager: RecyclerView.LayoutManager
@@ -40,10 +39,9 @@ class ExerciseRecordFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-        val rootView = inflater.inflate(R.layout.fragment_exercise_record, container, false)
-        val mActivity = activity as NaviActivity
+        val rootView = inflater.inflate(R.layout.fragment_instructure_exercise, container, false)
 
-        recyclerView = rootView.findViewById(R.id.rv_exerciseRecord)
+        recyclerView = rootView.findViewById(R.id.rv_inst_exerciseRecord)
         recyclerView.setHasFixedSize(true) // 리사이클러뷰 기존성능 강화
         layoutManager = LinearLayoutManager(context)
         recyclerView.layoutManager = layoutManager
@@ -57,13 +55,11 @@ class ExerciseRecordFragment : Fragment() {
                 arrayList.clear() // 기존 배열리스트가 존재하지않게 초기화
                 uidList.clear()
                 for (snapshot in dataSnapshot.children) { // 반복문으로 데이터 List를 추출해냄
-                    if(snapshot.key.toString() == mActivity.loginUser()!!){
-                        val exerciseRecModel: ExerciseRecModel =
-                            snapshot.getValue(ExerciseRecModel::class.java)!! // 만들어뒀던 User 객체에 데이터를 담는다.
-                        val uidKey: String = snapshot.key.toString()
-                        arrayList.add(exerciseRecModel) // 담은 데이터들을 배열리스트에 넣고 리사이클러뷰로 보낼 준비
-                        uidList.add(uidKey)
-                    }
+                    val exerciseRecModel: ExerciseRecModel =
+                        snapshot.getValue(ExerciseRecModel::class.java)!! // 만들어뒀던 User 객체에 데이터를 담는다.
+                    val uidKey: String = snapshot.key.toString()
+                    arrayList.add(exerciseRecModel) // 담은 데이터들을 배열리스트에 넣고 리사이클러뷰로 보낼 준비
+                    uidList.add(uidKey)
                 }
                 adapter.notifyDataSetChanged() // 리스트 저장 및 새로고침해야 반영이 됨
             }
@@ -75,15 +71,8 @@ class ExerciseRecordFragment : Fragment() {
         })
 
         val ct: Context = container!!.context
-        adapter = RecyclerAdapterExercise2(arrayList, ct, uidList)
+        adapter = RecyclerInstExerAdapter(arrayList, ct, uidList)
         recyclerView.adapter = adapter // 리사이클러뷰에 어댑터 연결
-
-        val fab_add: FloatingActionButton = rootView.findViewById(R.id.fab_add)
-
-        //기록 추가 버튼 클릭 이벤트
-        fab_add.setOnClickListener() {
-            mActivity.replaceRecord(InputExerciseFragment()) //운동 기록하기 프래그먼트로 전환 함수
-        }
 
         return rootView
     }
