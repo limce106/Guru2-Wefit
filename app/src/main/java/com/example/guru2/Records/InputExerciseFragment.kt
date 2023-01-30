@@ -19,7 +19,6 @@ class InputExerciseFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-
     }
 
     override fun onCreateView(
@@ -29,8 +28,6 @@ class InputExerciseFragment : Fragment() {
 
         val rootView = inflater.inflate(R.layout.fragment_input_exercise, container, false)
         val list = ArrayList<ExerciseNameModel>()
-
-
 
         //가슴
         list.add(ExerciseNameModel("니 푸시업"))
