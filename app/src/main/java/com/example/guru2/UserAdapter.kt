@@ -1,5 +1,6 @@
 package com.example.guru2
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -16,16 +17,12 @@ class UserAdapter(private val context: UserListFrag, private val userList:ArrayL
     RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
 
 
-    class UserViewHolder(itemView: View):RecyclerView.ViewHolder(itemView){
-        val nameText: TextView =itemView.findViewById(R.id.chat_textview_title)
-    }
-
 
 
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
-        val view:View=LayoutInflater.from(parent.context).inflate(R.layout.fragment_user_list, parent, false)
+        val view:View=LayoutInflater.from(parent.context).inflate(R.layout.user_layout, parent, false)
         return UserViewHolder(view)
 
     }
@@ -35,22 +32,28 @@ class UserAdapter(private val context: UserListFrag, private val userList:ArrayL
     }
 
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
+        //데이터 설정
         val currentUser=userList[position]
         holder.nameText.text=currentUser.reg_name
+        val userChat : Chat = Chat()
 
         val bundle = Bundle()
         holder.itemView.setOnClickListener{
 
+            bundle.putString("name", currentUser.reg_name)
+            bundle.putString("uid", currentUser.uId)
 
-            bundle.putString("name",currentUser.reg_name)
-            bundle.putString("name",currentUser.uId)
+            userChat.arguments = bundle
 
-//            intent.putExtra("name", currentUser.reg_name)
-//            intent.putExtra("name", currentUser.uId)
+            context.activity?.supportFragmentManager?.let { fragmentManager -> userChat}
 
-   //         context.startActivity(intent)
         }
     }
+    class UserViewHolder(itemView: View):RecyclerView.ViewHolder(itemView){
+        val nameText: TextView =itemView.findViewById(R.id.name_text)
+    }
+
+
 
     fun findUID(id: String, position: Int){
         val database = FirebaseDatabase.getInstance()
