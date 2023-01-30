@@ -7,7 +7,8 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import com.example.guru2.Recommend.Trainer_Recommend_Fragment
+import com.example.guru2.Records.InputMealFragment
+import com.example.guru2.Records.RecordMain
 import com.example.guru2.calender_user.Calender
 import com.example.guru2.databinding.ActivityNaviBinding
 import com.example.guru2.graph_user.Graph
@@ -16,7 +17,6 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import instructure_record.Instructure_Record_Main
 import kotlinx.android.synthetic.main.activity_navi.*
 
 
@@ -51,8 +51,8 @@ class NaviActivity : AppCompatActivity() {
         binding.bottomNavigationView.setOnItemSelectedListener { item ->
             when(item.itemId){
                 //각 프래그먼트 연결하기
-                R.id.recommendFragment -> setFragment(TAG_RECOMMEND, Trainer_Recommend_Fragment())
-                R.id.recordFragment-> setFragment(TAG_RECORD, Instructure_Record_Main())
+                R.id.recommendFragment -> setFragment(TAG_RECOMMEND, InputMealFragment())
+                R.id.recordFragment-> setFragment(TAG_RECORD, RecordMain())
                 R.id.calendarFragment -> setFragment(TAG_CALENDAR, Calender())
                 R.id.graphFragment -> setFragment(TAG_GRAPH, Graph())
                 R.id.messageFragment -> setFragment(TAG_MESSAGE,UserListFrag())
@@ -180,7 +180,6 @@ class NaviActivity : AppCompatActivity() {
             @SuppressLint("NotifyDataSetChanged")
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 for (snapshot in dataSnapshot.children) { // 반복문으로 데이터 List를 추출해냄
-                    Log.e("uiD", snapshot.child("reg_id").value.toString())
                     if(snapshot.child("reg_id").value.toString() == id){
                         uid = snapshot.child("uid").value.toString()
                         uidByID = uid
