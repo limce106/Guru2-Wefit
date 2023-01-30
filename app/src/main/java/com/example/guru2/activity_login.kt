@@ -41,8 +41,8 @@ class activity_login : AppCompatActivity() {
         }
 
         btn_login.setOnClickListener {
-            val loginID = edtID.text.toString()
-            val loginPW = edtPW.text.toString()
+            val loginID = edit_id.text.toString()
+            val loginPW = edit_pw.text.toString()
 
             login(loginID, loginPW)
 
@@ -60,7 +60,7 @@ class activity_login : AppCompatActivity() {
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
-                    val intent=Intent(this, MainActivity::class.java)
+                    val intent = Intent(this,NaviActivity::class.java)
                     startActivity(intent)
                     Toast.makeText(this, "로그인 성공", Toast.LENGTH_SHORT).show()
                     finish()

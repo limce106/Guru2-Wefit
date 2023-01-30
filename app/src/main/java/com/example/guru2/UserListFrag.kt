@@ -6,8 +6,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
@@ -24,10 +22,10 @@ import kotlin.collections.ArrayList
 
 class UserListFrag : Fragment() {
 
-    var list:ArrayList<User> = ArrayList()
+    var userList:ArrayList<User> = ArrayList()
     var mAuth: FirebaseAuth = Firebase.auth
     var mDbRef: DatabaseReference = Firebase.database.reference
-    var adapter: UserAdapter = UserAdapter(requireActivity(), list)
+    var adapter: UserAdapter = UserAdapter(this, userList)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,7 +58,7 @@ class UserListFrag : Fragment() {
                     val currentUser=postSnapshot.getValue(User::class.java)
                     //내 아이디와 사용자 정보가 다를 때만
                     if(mAuth.currentUser?.uid!=currentUser?.uId){
-                        list.add(currentUser!!)
+                        userList.add(currentUser!!)
                     }
                 }
                 adapter.notifyDataSetChanged()
