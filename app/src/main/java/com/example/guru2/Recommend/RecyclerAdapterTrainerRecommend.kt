@@ -12,15 +12,15 @@ import android.widget.Toast
 import androidx.annotation.NonNull
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
-import com.example.guru2.NaviActivity
 import com.example.guru2.R
 import com.example.guru2.Records.ExerciseRecModel
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.trainer_recommend_form.view.*
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
-class RecyclerAdapterTrainerRecommend(private val activity: NaviActivity):
+class RecyclerAdapterTrainerRecommend():
     RecyclerView.Adapter<RecyclerAdapterTrainerRecommend.ViewHolder>() {
     private var arrayList = ArrayList<ExerciseRecModel>()
     lateinit var ct: Context
@@ -84,7 +84,8 @@ class RecyclerAdapterTrainerRecommend(private val activity: NaviActivity):
         val myRef = database.getReference("exerciserecommend")
         val myRef2 = database.getReference("exerciserecord")
         var now = LocalDate.now()
-        val mActivity = activity as NaviActivity
+        var user= FirebaseAuth.getInstance().currentUser
+        var userId= user?.uid
 
         var Strnow = now.format(DateTimeFormatter.ofPattern("yyyyMMdd"))
 
@@ -97,7 +98,7 @@ class RecyclerAdapterTrainerRecommend(private val activity: NaviActivity):
                     val dataInput = ExerciseRecModel(
                         arrayList[position].exerName2, arrayList[position].exerDate, arrayList[position].set, arrayList[position].count
                     )
-                    myRef2.child(mActivity.loginUser()!!).setValue(arrayList[position])
+                    myRef2.child(userId!!).setValue(arrayList[position])
                     myRef.child(uidList[position]).removeValue().addOnSuccessListener {
                         Toast.makeText(ct, "기록 완료", Toast.LENGTH_SHORT).show() }
                     arrayList.removeAt(position)
