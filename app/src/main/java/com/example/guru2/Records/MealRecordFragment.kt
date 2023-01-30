@@ -56,7 +56,6 @@ class MealRecordFragment : Fragment() {
                 arrayList.clear() // 기존 배열리스트가 존재하지않게 초기화
                 uidList.clear()
                 for (snapshot in dataSnapshot.children) { // 반복문으로 데이터 List를 추출해냄
-                    Log.e("메뉴", snapshot.child("eatAmount").value.toString())
                     val mealRecModel: MealRecModel =
                         snapshot.getValue(MealRecModel::class.java)!! // 만들어뒀던 객체에 데이터를 담는다.
                     val uidKey: String = snapshot.key.toString()
@@ -79,7 +78,6 @@ class MealRecordFragment : Fragment() {
         //기록 추가 버튼 클릭 이벤트
         fab_add2.setOnClickListener(){
             mActivity.replaceRecord(InputMealFragment()) //식단 기록하기 프래그먼트로 전환 함수
-            Log.d("test", "화면 전환")
         }
 
 

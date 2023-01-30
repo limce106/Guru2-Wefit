@@ -194,7 +194,8 @@ class Instructure_Recommend_Fragment : Fragment() {
         checkChanges(edtNickName)
 
         val database = FirebaseDatabase.getInstance()
-        val databaseReference = database.getReference("user") // DB 테이블 연결
+        val databaseReference = database.getReference("user")
+
         val btnOk = rootView.findViewById<Button>(R.id.btnNicknameOk)
         btnOk.setOnClickListener() {
             databaseReference.orderByChild("reg_id").equalTo(strNickname)
@@ -221,7 +222,8 @@ class Instructure_Recommend_Fragment : Fragment() {
         }
 
         // 입력한 id 사용자의 uid 찾기
-
+        val mActivity = activity as NaviActivity
+        mActivity.findUidByID(mActivity.strID)
 
         // 운동 항목 클릭 이벤트
         RVExerNameadapter.setItemClickListener(object: RecyclerAdapterExerName.OnItemClickListener {
@@ -229,7 +231,7 @@ class Instructure_Recommend_Fragment : Fragment() {
                 // 클릭 시 이벤트 작성
 
                 if(!isTrainerExist) {
-                    Toast.makeText(context, "회원 ID를 확인해주세요..", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "회원 ID를 확인해주세요.", Toast.LENGTH_SHORT).show()
                 } else{
                     var clickedExerciseName: String = "${list[position].exerciseName}"
 
@@ -238,7 +240,7 @@ class Instructure_Recommend_Fragment : Fragment() {
 
                     // 횟수 세트/입력 팝업창 띄우기
                     val dialog = popup_exerciseCount(v.context, activity as NaviActivity)
-                    dialog.saveData(clickedExerciseName, "exerciserecommend")
+                    dialog.saveData2(clickedExerciseName, "exerciserecommend", mActivity.uidByID)
                 }
             }
         })
@@ -251,7 +253,7 @@ class Instructure_Recommend_Fragment : Fragment() {
             } else {
                 // 커스텀 운동 팝업 창 띄우기
                 val dialog = popup_customexercise(rootView.context, activity as NaviActivity)
-                dialog.saveData("exerciserecommend")
+                dialog.saveData2("exerciserecommend", mActivity.uidByID)
             }
         }
 

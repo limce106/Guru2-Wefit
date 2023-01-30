@@ -6,10 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
 
 
 class UserAdapter(private val context: UserListFrag, private val userList:ArrayList<User>):
@@ -50,28 +46,5 @@ class UserAdapter(private val context: UserListFrag, private val userList:ArrayL
 
    //         context.startActivity(intent)
         }
-    }
-
-    fun findUID(id: String, position: Int){
-        val database = FirebaseDatabase.getInstance()
-        val databaseReference = database.getReference("user")
-
-//        databaseReference.orderByChild("reg_id").equalTo(id).on("value", function(snapshot) {
-//            console.log(snapshot.val());
-//            snapshot.forEach(function(data) {
-//                console.log(data.key);
-//            });
-//        });
-
-        databaseReference.orderByChild("reg_id").equalTo(id)
-            .addListenerForSingleValueEvent(object : ValueEventListener {
-
-                override fun onDataChange(dataSnapshot: DataSnapshot) {
-
-                }
-
-                override fun onCancelled(error: DatabaseError) {
-                }
-            })
     }
 }

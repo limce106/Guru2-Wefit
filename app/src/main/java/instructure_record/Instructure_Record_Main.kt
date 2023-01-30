@@ -89,6 +89,8 @@ class Instructure_Record_Main : Fragment() {
                         Log.e("UserID", databaseError.toException().toString()) // 에러문 출력
                     }
                 })
+            mActivity.strID = strNickname
+            mActivity.isCheckID = isTrainerExist.toString()
         }
 
         return view

@@ -100,7 +100,7 @@ class RecyclerAdapterTrainerRecommend():
                     )
                     myRef2.push().setValue(arrayList[position])
                     myRef.child(uidList[position]).removeValue().addOnSuccessListener {
-                        Toast.makeText(ct, "기록 완료", Toast.LENGTH_SHORT).show() }
+                        Toast.makeText(ct, "해당 운동을 기록했습니다.", Toast.LENGTH_SHORT).show() }
                     arrayList.removeAt(position)
                     notifyItemRemoved(position)
                     notifyItemRangeChanged(position, arrayList.size)

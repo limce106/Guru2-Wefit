@@ -93,8 +93,7 @@ class popup_customexercise(private val context: Context, private val activity: N
                 myRef.child(dataName).child(uid).push().setValue(dataInput)
 
                 dialog.dismiss()
-                val mActivity = activity as NaviActivity
-                mActivity.replaceRecord(RecordMain())
+                Toast.makeText(context, "해당 회원 운동 추천에 추가하였습니다.", Toast.LENGTH_SHORT).show()
             }
         }
 

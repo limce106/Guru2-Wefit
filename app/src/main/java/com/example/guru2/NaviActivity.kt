@@ -1,16 +1,22 @@
 package com.example.guru2
 
+import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import com.example.guru2.Records.MealRecordFragment
-import com.example.guru2.Records.RecordMain
+import com.example.guru2.Recommend.Trainer_Recommend_Fragment
 import com.example.guru2.calender_user.Calender
 import com.example.guru2.databinding.ActivityNaviBinding
 import com.example.guru2.graph_user.Graph
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
+import instructure_record.Instructure_Record_Main
 import kotlinx.android.synthetic.main.activity_navi.*
 
 
@@ -28,6 +34,10 @@ class NaviActivity : AppCompatActivity() {
     private lateinit var binding: ActivityNaviBinding
     lateinit var recordfragment: Fragment
     var isInputRecord:Boolean=false
+    var strID: String = ""
+    var isCheckID: String = ""
+    var uidByID: String = ""
+    var strTabPosition: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,8 +51,8 @@ class NaviActivity : AppCompatActivity() {
         binding.bottomNavigationView.setOnItemSelectedListener { item ->
             when(item.itemId){
                 //각 프래그먼트 연결하기
-                R.id.recommendFragment -> setFragment(TAG_RECOMMEND, MealRecordFragment())
-                R.id.recordFragment-> setFragment(TAG_RECORD, RecordMain())
+                R.id.recommendFragment -> setFragment(TAG_RECOMMEND, Trainer_Recommend_Fragment())
+                R.id.recordFragment-> setFragment(TAG_RECORD, Instructure_Record_Main())
                 R.id.calendarFragment -> setFragment(TAG_CALENDAR, Calender())
                 R.id.graphFragment -> setFragment(TAG_GRAPH, Graph())
                 R.id.messageFragment -> setFragment(TAG_MESSAGE,UserListFrag())
@@ -161,7 +171,32 @@ class NaviActivity : AppCompatActivity() {
         return userId;
     }
 
+    fun findUidByID(id: String){
+        val database = FirebaseDatabase.getInstance()
+        val databaseRef = database.getReference("user")
+        var uid: String = String()
 
+        databaseRef.addListenerForSingleValueEvent(object : ValueEventListener {
+            @SuppressLint("NotifyDataSetChanged")
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                for (snapshot in dataSnapshot.children) { // 반복문으로 데이터 List를 추출해냄
+                    Log.e("uiD", snapshot.child("reg_id").value.toString())
+                    if(snapshot.child("reg_id").value.toString() == id){
+                        uid = snapshot.child("uid").value.toString()
+                        uidByID = uid
+                    }
+                }
+            }
 
+            override fun onCancelled(databaseError: DatabaseError) {
+                // 디비를 가져오던중 에러 발생 시
+                Log.e("User", databaseError.toException().toString()) // 에러문 출력
+            }
+        })
+    }
 
+    fun refreshFrag(fragment: Fragment){
+        //기록 프래그먼트 새로 불러오기
+        supportFragmentManager.beginTransaction().detach(fragment).attach(fragment).commit()
+    }
 }
