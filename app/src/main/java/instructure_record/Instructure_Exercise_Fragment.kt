@@ -55,11 +55,13 @@ class Instructure_Exercise_Fragment : Fragment() {
                 arrayList.clear() // 기존 배열리스트가 존재하지않게 초기화
                 uidList.clear()
                 for (snapshot in dataSnapshot.children) { // 반복문으로 데이터 List를 추출해냄
-                    val exerciseRecModel: ExerciseRecModel =
-                        snapshot.getValue(ExerciseRecModel::class.java)!! // 만들어뒀던 User 객체에 데이터를 담는다.
-                    val uidKey: String = snapshot.key.toString()
-                    arrayList.add(exerciseRecModel) // 담은 데이터들을 배열리스트에 넣고 리사이클러뷰로 보낼 준비
-                    uidList.add(uidKey)
+                    if(snapshot.key.toString() == "입력한 회원의 uid"){
+                        val exerciseRecModel: ExerciseRecModel =
+                            snapshot.getValue(ExerciseRecModel::class.java)!! // 만들어뒀던 User 객체에 데이터를 담는다.
+                        val uidKey: String = snapshot.key.toString()
+                        arrayList.add(exerciseRecModel) // 담은 데이터들을 배열리스트에 넣고 리사이클러뷰로 보낼 준비
+                        uidList.add(uidKey)
+                    }
                 }
                 adapter.notifyDataSetChanged() // 리스트 저장 및 새로고침해야 반영이 됨
             }
