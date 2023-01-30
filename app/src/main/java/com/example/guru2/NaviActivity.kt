@@ -45,7 +45,7 @@ class NaviActivity : AppCompatActivity() {
                 R.id.recordFragment-> setFragment(TAG_RECORD, Instructure_Meal_Fragment())
                 R.id.calendarFragment -> setFragment(TAG_CALENDAR, Calender())
                 R.id.graphFragment -> setFragment(TAG_GRAPH, Graph())
-                R.id.messageFragment -> setFragment(TAG_MESSAGE,Chat())
+                R.id.messageFragment -> setFragment(TAG_MESSAGE,UserListFrag())
             }
             true
         }

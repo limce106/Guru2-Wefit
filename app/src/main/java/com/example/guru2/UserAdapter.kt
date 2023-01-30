@@ -1,14 +1,14 @@
 package com.example.guru2
 
-import android.content.Context
-import android.content.Intent
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class UserAdapter (val context: Context, var userList:ArrayList<User>):
+
+class UserAdapter(private val context: UserListFrag, private val userList:ArrayList<User>):
     RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
 
 
@@ -16,15 +16,12 @@ class UserAdapter (val context: Context, var userList:ArrayList<User>):
         val nameText: TextView =itemView.findViewById(R.id.chat_textview_title)
     }
 
-    fun setFilteredList(userList:ArrayList<User>){
-        this.userList=userList
-        notifyDataSetChanged()
-    }
+
 
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
-        val view:View=LayoutInflater.from(context).inflate(R.layout.activity_user_list, parent, false)
+        val view:View=LayoutInflater.from(parent.context).inflate(R.layout.fragment_user_list, parent, false)
         return UserViewHolder(view)
 
     }
@@ -37,11 +34,16 @@ class UserAdapter (val context: Context, var userList:ArrayList<User>):
         val currentUser=userList[position]
         holder.nameText.text=currentUser.reg_name
 
+        val bundle = Bundle()
         holder.itemView.setOnClickListener{
-            val intent = Intent(context, Chat::class.java)
-            intent.putExtra("name", currentUser.reg_name)
-            intent.putExtra("name", currentUser.uId)
 
-            context.startActivity(intent)
+
+            bundle.putString("name",currentUser.reg_name)
+            bundle.putString("name",currentUser.uId)
+
+//            intent.putExtra("name", currentUser.reg_name)
+//            intent.putExtra("name", currentUser.uId)
+
+   //         context.startActivity(intent)
     }
 }}
