@@ -1,4 +1,4 @@
-package com.example.guru2.Recommend
+package instructure_record
 
 import android.os.Bundle
 import android.text.Editable
@@ -18,7 +18,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
-class Instructure_Record : Fragment() {
+class Instructure_Record_Main : Fragment() {
     lateinit var strNickname: String
     var isTrainerExist: Boolean = false
 
@@ -33,7 +33,7 @@ class Instructure_Record : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val rootView = inflater.inflate(R.layout.fragment_instructure__record, container, false)
+        val rootView = inflater.inflate(R.layout.fragment_instructure__record_main, container, false)
 
         // 닉네임 입력 변화 확인
         var edtNickName = rootView.findViewById<EditText>(R.id.edtNickName)
@@ -87,7 +87,7 @@ class Instructure_Record : Fragment() {
     companion object {
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            Instructure_Record().apply {
+            Instructure_Record_Main().apply {
                 arguments = Bundle().apply {
 
                 }

@@ -51,6 +51,7 @@ class InputMealFragment : Fragment() {
             val tv_eatTime: TextView = view.findViewById(R.id.tv_eatTime)
             val edtMealName: EditText = view.findViewById(R.id.edtMealName)
             val edtEatAmount: EditText = view.findViewById(R.id.edtEatAmount)
+            val mActivity = activity as NaviActivity
 
             // 입력 안 된 항목이 있다면
             if(!this::strMealDate.isInitialized || !this::strTimeSlot.isInitialized
@@ -63,10 +64,10 @@ class InputMealFragment : Fragment() {
                     // mealImg.drawable,
                     strMealDate, strTimeSlot, strEatTime, strMealName, strKcal
                 )
-                myRef.child("mealrecord").push().setValue(dataInput)
+                myRef.child("mealrecord").child(mActivity.loginUser()!!).setValue(dataInput)
+                //myRef.child("mealrecord").child("abc").setValue(dataInput)
             }
 
-            val mActivity = activity as NaviActivity
             mActivity.replaceRecord(MealRecordFragment())
         }
 

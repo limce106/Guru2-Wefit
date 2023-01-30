@@ -30,6 +30,7 @@ class popup_customexercise(private val context: Context, private val activity: N
         val edt_custom_count = dialog.findViewById<EditText>(R.id.edt_custom_count)
         val btnCancel = dialog.findViewById<Button>(R.id.custom_btnCancel)
         val btnOk = dialog.findViewById<Button>(R.id.custom_btnOk)
+        val mActivity = activity as NaviActivity
 
         checkChanges(edtExerciseDate2, edt_custom_exercise_name, edt_custom_set, edt_custom_count)
 
@@ -48,9 +49,7 @@ class popup_customexercise(private val context: Context, private val activity: N
                 val dataInput = ExerciseRecModel(
                     strCustomExerciseName, strCustomExerciseDate, strCustomSet, strCustomCount
                 )
-                myRef.child(dataName).push().setValue(dataInput)
-
-                val mActivity = activity as NaviActivity
+                myRef.child(dataName).child(mActivity.loginUser()!!).setValue(dataInput)
                 mActivity.replaceRecord(ExerciseRecordFragment())
             }
         }
