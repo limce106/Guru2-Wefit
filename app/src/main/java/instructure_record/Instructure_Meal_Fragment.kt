@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.guru2.NaviActivity
 import com.example.guru2.R
 import com.example.guru2.Records.MealRecModel
-import com.example.guru2.Records.RecyclerAdapterMeal2
 import com.google.firebase.database.*
 
 class Instructure_Meal_Fragment : Fragment() {
@@ -24,8 +23,6 @@ class Instructure_Meal_Fragment : Fragment() {
     lateinit var database: FirebaseDatabase
     lateinit var databaseReference: DatabaseReference
     lateinit var uidList: ArrayList<String>
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -70,7 +67,7 @@ class Instructure_Meal_Fragment : Fragment() {
         })
 
         val ct: Context = container!!.context
-        adapter = RecyclerAdapterMeal2(arrayList, ct, uidList)
+        adapter = RecyclerInstMealAdapter(arrayList, ct, uidList)
         recyclerView.adapter = adapter // 리사이클러뷰에 어댑터 연결
 
         return rootView

@@ -81,7 +81,6 @@ class ExerciseRecordFragment : Fragment() {
         //기록 추가 버튼 클릭 이벤트
         fab_add.setOnClickListener() {
             mActivity.replaceRecord(InputExerciseFragment()) //운동 기록하기 프래그먼트로 전환 함수
-            Log.d("test", "화면 전환")
         }
 
         return rootView

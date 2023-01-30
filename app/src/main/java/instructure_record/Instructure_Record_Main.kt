@@ -47,9 +47,9 @@ class Instructure_Record_Main : Fragment() {
         tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 if(tab!!.position == 0){
-                    mActivity.changeTab(Instructure_Exercise_Fragment())
+                    mActivity.changeinstTab(Instructure_Exercise_Fragment())
                 } else if(tab.position == 1){
-                    mActivity.changeTab(Instructure_Meal_Fragment())
+                    mActivity.changeinstTab(Instructure_Meal_Fragment())
                 }
             }
 
