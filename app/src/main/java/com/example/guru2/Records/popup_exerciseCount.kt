@@ -86,7 +86,7 @@ class popup_exerciseCount(private val context: Context, private val activity: Na
                 val dataInput = ExerciseRecModel(
                     clickedExerciseName, strExerciseDate, strSet, strCount
                 )
-                myRef.child(dataName).child(uid).push().setValue(dataInput)
+                myRef.child(dataName).child(uid).setValue(dataInput)
 
                 val mActivity = activity as NaviActivity
                 mActivity.replaceRecord(ExerciseRecordFragment())

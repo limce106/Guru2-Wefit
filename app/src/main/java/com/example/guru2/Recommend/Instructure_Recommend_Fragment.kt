@@ -220,6 +220,9 @@ class Instructure_Recommend_Fragment : Fragment() {
             })
         }
 
+        // 입력한 id 사용자의 uid 찾기
+
+
         // 운동 항목 클릭 이벤트
         RVExerNameadapter.setItemClickListener(object: RecyclerAdapterExerName.OnItemClickListener {
             override fun onClick(v: View, position: Int) {

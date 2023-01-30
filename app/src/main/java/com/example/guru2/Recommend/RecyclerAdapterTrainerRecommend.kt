@@ -45,7 +45,7 @@ class RecyclerAdapterTrainerRecommend():
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onBindViewHolder(@NonNull holder: ViewHolder, position: Int) {
 
-        holder.bind(arrayList!![position])
+        holder.bind(arrayList[position])
 
         holder.iv_check.setOnClickListener(){
             checkExercise(position)
