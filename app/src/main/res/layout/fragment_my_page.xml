@@ -42,11 +42,11 @@
                 <TextView
                     android:layout_width="60sp"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="15dp"
                     android:text="아이디"
                     android:textSize="20dp"
-                    android:layout_marginBottom="15dp"
                     tools:layout_editor_absoluteX="78dp"
-                    tools:layout_editor_absoluteY="98dp"/>
+                    tools:layout_editor_absoluteY="98dp" />
                 <TextView
                     android:id="@+id/page_id"
                     android:layout_width="match_parent"

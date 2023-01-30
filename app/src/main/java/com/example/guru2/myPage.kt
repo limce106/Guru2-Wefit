@@ -1,11 +1,13 @@
 package com.example.guru2
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import com.example.guru2.calender_user.Schedule
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.*
@@ -28,6 +30,13 @@ class myPage : Fragment() {
 
     var mAuth = FirebaseAuth.getInstance()
     var mDbRef:DatabaseReference = FirebaseDatabase.getInstance().reference
+
+    //소현
+    private val firebaseDatabase: FirebaseDatabase = FirebaseDatabase.getInstance()
+    val databaseReference: DatabaseReference = firebaseDatabase.getReference("user") //db 연결
+
+    var user=FirebaseAuth.getInstance().currentUser
+    var userId= user?.uid
 
     // TODO: Rename and change types of parameters
     private var param1: String? = null
@@ -60,17 +69,23 @@ class myPage : Fragment() {
 
 
 
-        mDbRef.child("user")
+        databaseReference
             .addValueEventListener(object: ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
+                    snapshot.children.forEach{
+                        val user = it.getValue(User::class.java)
+                        user ?:return
 
+                        page_name.text=user.reg_name
+                        page_id.text=user.reg_id
+                        page_gender.text=user.str_gender
+                        page_purpose.text=user.str_purpose
 
-                      //  page_name=mAuth.getValue(User::class.java)
-
-
+                    }
                 }
-
                 override fun onCancelled(error: DatabaseError) {
+                    // 디비를 가져오던중 에러 발생 시
+                    Log.e("ExerciseRecord", error.toException().toString()) // 에러문 출력
                 }
 
             })
@@ -81,6 +96,10 @@ class myPage : Fragment() {
 
         return view
     }
+
+
+
+
 
 
     companion object {

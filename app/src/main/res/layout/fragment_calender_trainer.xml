@@ -11,14 +11,14 @@
         android:id="@+id/btn_add_class"
         android:layout_width="wrap_content"
         android:layout_height="300dp"
+        android:layout_marginTop="467dp"
         android:layout_marginEnd="15dp"
-        android:layout_marginBottom="80dp"
         android:clickable="true"
         android:contentDescription="추가하기"
         android:src="@drawable/ic_baseline_add_24"
         android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -46,7 +46,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerview_calender_trainer"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="200dp"
             android:layout_gravity="center"
             android:layout_marginTop="5dp"
             tools:listitem="@layout/calender_item" />
