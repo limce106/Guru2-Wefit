@@ -14,6 +14,7 @@ import com.example.guru2.calender_user.Calender
 import com.example.guru2.databinding.ActivityNaviBinding
 import com.example.guru2.graph_user.Graph
 import com.google.android.material.internal.ContextUtils.getActivity
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_navi.*
 
@@ -155,6 +156,15 @@ class NaviActivity : AppCompatActivity() {
 
 
     }
+
+    fun loginUser(): String? {
+
+        var user= FirebaseAuth.getInstance().currentUser
+        var userId= user?.uid
+
+        return userId;
+    }
+
 
 
 
