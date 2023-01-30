@@ -29,7 +29,7 @@
             android:paddingLeft="20dp"
             android:paddingTop="10dp"
             android:paddingBottom="5dp"
-            android:text="00월 00일 월요일"
+            android:text="0000-00-00"
             android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
 
         <LinearLayout

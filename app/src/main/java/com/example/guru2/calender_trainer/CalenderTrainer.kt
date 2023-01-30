@@ -1,6 +1,7 @@
 package com.example.guru2.calender_trainer
 
 import android.annotation.SuppressLint
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -8,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CalendarView
+import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -16,21 +18,26 @@ import com.example.guru2.calender_user.IndividualExerciseDialog
 import com.example.guru2.calender_user.RecyclerViewAdapter
 import com.example.guru2.calender_user.Schedule
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.*
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.fragment_calender.*
+import java.time.LocalDate
 
 
 class CalenderTrainer : Fragment() {
 
 
     var firestore: FirebaseFirestore? = null
-    val itemList = arrayListOf<Schedule>() //아이템 배열
-    val ListAdapter = RecyclerViewAdapter(itemList) //어댑터
-    var date: String = "" //캘린더에서 선택한 날짜
+    val itemList = arrayListOf<TrainerItem>() //아이템 배열
+    val ListAdapter = RecyclerViewAdapterTrainer(itemList) //어댑터
+    @RequiresApi(Build.VERSION_CODES.O)
+    val todayDate: LocalDate = LocalDate.now() //오늘 날짜
+    @RequiresApi(Build.VERSION_CODES.O)
+    var date: String = todayDate.toString()//캘린더에서 선택한 날짜
     private val firebaseDatabase: FirebaseDatabase = FirebaseDatabase.getInstance()
     private val databaseReference: DatabaseReference = firebaseDatabase.getReference()
+    val trainerDialog: TrainerCalenderDialog = TrainerCalenderDialog()
+    val dialog: TrainerCalenderDialog = TrainerCalenderDialog().getInstance() //수업 예약 팝업창
 
     @SuppressLint("MissingInflatedId")
     override fun onCreateView(
@@ -43,23 +50,49 @@ class CalenderTrainer : Fragment() {
         val calenderview = view.findViewById<CalendarView>(R.id.cal_trainer) //캘린더
         firestore = FirebaseFirestore.getInstance() //파이어스토어 인스턴스 초기화
 
+        //새로운 데이터 저장할 때 마다 데이터 불러오기
+        val databaseReference: DatabaseReference = firebaseDatabase.getReference("schedule-trainer") //db 연결
+        databaseReference.addValueEventListener(object : ValueEventListener {
+            @SuppressLint("SuspiciousIndentation")
+            @RequiresApi(Build.VERSION_CODES.O)
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                itemList.clear()
+                //db에서 데이터 불러오기
+                dataSnapshot.children.forEach{
+                    val schedule_trainer = it.getValue(TrainerItem::class.java)
+                    schedule_trainer ?:return
+
+                    if(schedule_trainer.date==date) //만약 선택한 날짜와 일정의 날짜가 같다면
+                        itemList.add(schedule_trainer) //리사이클러뷰에 리스트 추가
+                }
+                //리스트가 변경됨을 어댑터에 알림
+                ListAdapter.notifyDataSetChanged()
+            }
+            override fun onCancelled(databaseError: DatabaseError) {
+                // 디비를 가져오던중 에러 발생 시
+                Log.e("ExerciseRecord", databaseError.toException().toString()) // 에러문 출력
+            }
+
+        })
+
+
 
         recyclerview.adapter = ListAdapter //어댑터 연결
         recyclerview.layoutManager = LinearLayoutManager(activity)
 
-        //아이템 추가
-        itemList.add(Schedule("2023/01/02", "그룹 PT", "12:00"))
-        itemList.add(Schedule("2023/01/02", "개인 PT", "15:00"))
-        itemList.add(Schedule("2023/01/02", "그룹 PT", "16:00"))
-        itemList.add(Schedule("2023/01/02", "개인 PT", "18:00"))
 
         //리스트가 변경됨을 어댑터에 알림
         ListAdapter.notifyDataSetChanged()
 
         calenderview.setOnDateChangeListener(object : CalendarView.OnDateChangeListener {
+            @RequiresApi(Build.VERSION_CODES.O)
             override fun onSelectedDayChange(p0: CalendarView, p1: Int, p2: Int, p3: Int) {
-                //ListAdapter.setList()
-                date = p1.toString() + "/" + p2 + 1.toString() + "/" + p3.toString()
+
+                date = p1.toString() + "-" + p2 + 1.toString() + "-" + p3.toString()
+
+                val bundle = Bundle() //번들 생성
+                bundle.putString("key2", date) //번들에 값 담기
+                trainerDialog.arguments = bundle //값이 담긴 번들을 argunments에 담기
                 Log.d("hhh", date)
             }
         })
@@ -79,16 +112,9 @@ class CalenderTrainer : Fragment() {
         //일정 추가하기 버튼 클릭시
         btnAdd.setOnClickListener {
 
-            val trainerDialog: TrainerCalenderDialog = TrainerCalenderDialog()
-            val bundle = Bundle() //번들 생성
-            bundle.putString("key2", date) //번들에 값 담기
-            trainerDialog.arguments = bundle //값이 담긴 번들을 argunments에 담기
-
-            val dialog: TrainerCalenderDialog = TrainerCalenderDialog().getInstance() //수업 예약 팝업창
-
             //다이얼로그 띄우기
             activity?.supportFragmentManager?.let { fragmentManager ->
-                dialog.show(fragmentManager, "TAG_DIALOG_EVENT")
+                dialog.showNow(fragmentManager, "TAG_DIALOG_EVENT")
             }
 
         }

@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.example.guru2.Recommend.Trainer_Recommend_Fragment
 import com.example.guru2.Records.RecordMain
+import com.example.guru2.calender_trainer.CalenderTrainer
 import com.example.guru2.calender_user.Calender
 import com.example.guru2.databinding.ActivityNaviBinding
 import com.example.guru2.graph_user.Graph
@@ -141,7 +142,6 @@ class NaviActivity : AppCompatActivity() {
 
     //프래그먼트 교체 함수
     fun replaceRecord(fragment: Fragment){
-
         //기록 프래그먼트 새로 불러오기
         supportFragmentManager.beginTransaction().replace(R.id.main_frame,fragment, TAG_RECORD).addToBackStack(null).commit()
         recordfragment=fragment

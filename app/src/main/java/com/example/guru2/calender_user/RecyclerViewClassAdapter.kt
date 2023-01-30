@@ -1,8 +1,8 @@
 package com.example.guru2.calender_user
 
+
 import android.app.AlertDialog
 import android.app.ProgressDialog.show
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,7 +13,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.guru2.R
 import kotlinx.android.synthetic.main.calender_class_item.view.*
 
+
 class RecyclerViewClassAdapter(val itemList: ArrayList<ClassScheduleItem>):RecyclerView.Adapter<RecyclerViewClassAdapter.RecyclerViewHolder>() {
+
+    val classReservation :ClassReservationDialog = ClassReservationDialog() //수업 팝업창
 
 
 
@@ -28,12 +31,24 @@ class RecyclerViewClassAdapter(val itemList: ArrayList<ClassScheduleItem>):Recyc
     override fun onBindViewHolder(holder: RecyclerViewHolder, position: Int) {
         holder.class_start_time.text = itemList[position].StartTime
         holder.class_end_time.text = itemList[position].EndTime
-        holder.join_size.text = itemList[position].JoinSize
-        holder.join_max_size.text = itemList[position].JoinMaxSize
+       // holder.join_size.text = itemList[position].JoinSize
+        holder.join_max_size.text = itemList[position].JoinSize
         holder.itemView.btn_join.setOnClickListener{
+            var bundle = Bundle() //번들 생성
+            bundle.putString("key3",itemList[position].date) //번들에 값
+            bundle.putString("key4",itemList[position].StartTime) //번들에 값
+            bundle.putString("key4",itemList[position].EndTime) //번들에 값
+            classReservation.arguments = bundle //값이 담긴 번들을 argunments에 담기
+
+            //다이얼로그 띄우기
+           // activity?.supportFragmentManager?.let { fragmentManager ->
+                //classReservation.showNow(fragmentManager, "TAG_DIALOG_EVENT")}
+
 
         }
+
     }
+
 
     fun getstate(){
         return
@@ -51,6 +66,9 @@ class RecyclerViewClassAdapter(val itemList: ArrayList<ClassScheduleItem>):Recyc
         val class_end_time = itemView.findViewById<TextView>(R.id.class_end_time)
         val join_size = itemView.findViewById<TextView>(R.id.join_size)
         val join_max_size = itemView.findViewById<TextView>(R.id.join_max_size)
+        val btn_join = itemView.findViewById<Button>(R.id.btn_join)
+
+
     }
 
 }
