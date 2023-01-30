@@ -45,7 +45,7 @@ class NaviActivity : AppCompatActivity() {
             when(item.itemId){
                 //각 프래그먼트 연결하기
                 R.id.recommendFragment -> setFragment(TAG_RECOMMEND, MealRecordFragment())
-                R.id.recordFragment-> setFragment(TAG_RECORD, InputMealFragment())
+                R.id.recordFragment-> setFragment(TAG_RECORD, RecordMain())
                 R.id.calendarFragment -> setFragment(TAG_CALENDAR, Calender())
                 R.id.graphFragment -> setFragment(TAG_GRAPH, Graph())
                 R.id.messageFragment -> setFragment(TAG_MESSAGE,UserListFrag())

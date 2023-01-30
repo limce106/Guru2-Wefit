@@ -1,23 +1,33 @@
 package com.example.guru2.graph_user
 
 import android.annotation.SuppressLint
+import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentStatePagerAdapter
-import androidx.viewpager.widget.ViewPager
-import com.example.guru2.GraphInputInbody
 import com.example.guru2.R
-import com.example.guru2.calender_user.ClassDialog
+import com.github.mikephil.charting.charts.LineChart
+import com.github.mikephil.charting.components.XAxis
+import com.github.mikephil.charting.components.YAxis
+import com.github.mikephil.charting.data.Entry
+import com.github.mikephil.charting.data.LineData
+import com.github.mikephil.charting.data.LineDataSet
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
+import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.fragment_graph.*
 import kotlinx.android.synthetic.main.fragment_graph_input_inbody.*
 
 
 class Graph : Fragment() {
+
+    private val firebaseDatabase: FirebaseDatabase = FirebaseDatabase.getInstance()
+    val itemList = arrayListOf<InbodyItem>() //아이템 배열
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,13 +45,92 @@ class Graph : Fragment() {
 
         //객체 생성
         val view = inflater.inflate(R.layout.fragment_graph, container, false)
-        val viewpager= view.findViewById<ViewPager>(R.id.viewpager_graph) //뷰 페이지 불러오기
-        val adapter = GraphViewPagerAdapter(requireActivity().supportFragmentManager) //어댑터
         val btn_inbody_add = view.findViewById<FloatingActionButton>(R.id.btn_inbody_add) //인바디 기록 추가 버튼
         val dialog: GraphInputInbody = GraphInputInbody().getInstance() //인바디 입력 팝업창
+        val linechartWeight = view.findViewById<LineChart>(R.id.linchart_weight) //몸무게 그래프
+        val linechartMuscle = view.findViewById<LineChart>(R.id.linechart_muscle) //골격근량 그래프
+        val linechartBodyfat = view.findViewById<LineChart>(R.id.linechart_inbodyfat) //체지방량 그래프
+        var dateList = mutableListOf<String>() //날짜 데이터 배열
+        var weightList = mutableListOf<String>() //몸무게 데이터 배열
+        var muscleList = mutableListOf<String>() //골격근량 데이터 배열
+        var bodyfatList = mutableListOf<String>() //체지방량 데이터 배열
 
-        viewpager.adapter= adapter //어댑터 연결
-        viewpager.currentItem=4
+
+        //새로운 데이터 저장할 때 마다 데이터 불러오기
+        val databaseReference: DatabaseReference = firebaseDatabase.getReference("Inbody") //db 연결
+        databaseReference.addValueEventListener(object : ValueEventListener {
+            @SuppressLint("SuspiciousIndentation")
+            @RequiresApi(Build.VERSION_CODES.O)
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                itemList.clear()
+                dateList.clear()
+                weightList.clear()
+                muscleList.clear()
+                bodyfatList.clear()
+                //db에서 데이터 불러오기
+                dataSnapshot.children.forEach{
+                    val inbodyItem = it.getValue(InbodyItem::class.java)
+                    inbodyItem ?:return
+
+                    dateList.add(inbodyItem.date.toString()) //날짜 데이터 불러오기
+                    weightList.add(inbodyItem.weight.toString()) //몸무게 데이터 불러오기
+                    muscleList.add(inbodyItem.muscle.toString()) //골격근량 데이터 불러오기
+                    bodyfatList.add(inbodyItem.bodyfat.toString()) //체지방량 데이터 불러오기
+
+                }
+                val entries1 = ArrayList<Entry>()
+                val entries2 = ArrayList<Entry>()
+                val entries3 = ArrayList<Entry>()
+                for(i in 0 until weightList.size){
+                    entries1.add(Entry(i.toFloat(),weightList[i].toFloat()))
+                }
+                for(i in 0 until muscleList.size){
+                    entries2.add(Entry(i.toFloat(),muscleList[i].toFloat()))
+                }
+                for(i in 0 until bodyfatList.size){
+                    entries3.add(Entry(i.toFloat(),bodyfatList[i].toFloat()))
+                }
+                val labels = ArrayList<String>()
+                for(i in 0 until dateList.size){
+                    labels.add(dateList[i])
+                }
+                val dateset1 = LineDataSet(entries1,"")
+                val dateset2 = LineDataSet(entries2,"")
+                val dateset3 = LineDataSet(entries3,"")
+                //각 차트 x축 정보 지정
+                linechartWeight.xAxis.valueFormatter = IndexAxisValueFormatter(labels) //몸무게 차트 x축
+                linechartMuscle.xAxis.valueFormatter = IndexAxisValueFormatter(labels) //골격근량 차트 x축
+                linechartBodyfat.xAxis.valueFormatter = IndexAxisValueFormatter(labels) //체지방률 차트 x축
+
+                //각 차트 y축 정보 지정
+                linechartWeight.getTransformer((YAxis.AxisDependency.LEFT))
+                linechartWeight.xAxis.position = XAxis.XAxisPosition.BOTTOM
+                linechartMuscle.getTransformer((YAxis.AxisDependency.LEFT))
+                linechartMuscle.xAxis.position = XAxis.XAxisPosition.BOTTOM
+                linechartBodyfat.getTransformer((YAxis.AxisDependency.LEFT))
+                linechartBodyfat.xAxis.position = XAxis.XAxisPosition.BOTTOM
+
+                val data1 = LineData(dateset1)
+                val data2 = LineData(dateset2)
+                val data3 = LineData(dateset3)
+
+                //x축 y축 기준
+                linechartWeight.data = data1
+                linechartWeight.invalidate()
+                linechartMuscle.data = data2
+                linechartMuscle.invalidate()
+                linechartBodyfat.data = data3
+                linechartBodyfat.invalidate()
+
+
+            }
+            override fun onCancelled(databaseError: DatabaseError) {
+                // 디비를 가져오던중 에러 발생 시
+                Log.e("ExerciseRecord", databaseError.toException().toString()) // 에러문 출력
+            }
+
+        })
+
 
 
         //인바디 기록 추가 버튼 클릭 이벤트
@@ -55,25 +144,6 @@ class Graph : Fragment() {
 
     }
 
-
-    class GraphViewPagerAdapter(fm: FragmentManager):FragmentStatePagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT){
-        private val PAGENUMBER = 4 //뷰 페이저 수
-
-        override fun getCount(): Int{
-            return PAGENUMBER
-        }
-
-        override fun getItem(position: Int): Fragment {
-            return when(position){
-                0-> GraphViewPager.newInstance("22.10.02","51.3","15.9","36.4")
-                1-> GraphViewPager.newInstance("22.11.03","50.3","15.7","34.4")
-                2-> GraphViewPager.newInstance("22.12.06","47.3","15.7","33.4")
-                3-> GraphViewPager.newInstance("23.01.12","46.3","15.7","32.4")
-                else -> GraphViewPager.newInstance("기록없음","00","00","00")
-
-            }
-        }
-    }
 
 
 

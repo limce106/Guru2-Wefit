@@ -56,8 +56,7 @@ class ClassDialog : DialogFragment() {
         var text_date = view?.findViewById<TextView>(R.id.class_date)
         val recyclerviewclass= view?.findViewById<RecyclerView>(R.id.recyclerviewclass) //리사이클러 뷰 객체
         val itemList = arrayListOf<ClassScheduleItem>() //아이템 배열
-        val ListAdapter = RecyclerViewClassAdapter(itemList) //어댑터
-        val dialog: ClassReservationDialog = ClassReservationDialog().getInstance() //예약 확정 팝업창
+        val ListAdapter = RecyclerViewClassAdapter(itemList, this) //어댑터
 
         text_date?.text = "$date" //캘린더에서 선택한 날짜
 
