@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.annotation.NonNull
 import androidx.recyclerview.widget.RecyclerView
 import com.example.guru2.R
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.meal_record_form.view.*
 
@@ -76,7 +77,9 @@ class RecyclerAdapterMeal2():
     //데이터 삭제 함수
     fun removeData(position: Int){
         val database = FirebaseDatabase.getInstance()
-        val myRef = database.getReference("mealrecord")
+        var user= FirebaseAuth.getInstance().currentUser
+        var userId= user?.uid
+        val myRef = database.getReference("mealrecord").child(userId!!)
 
         val builder = AlertDialog.Builder(ct)
         builder.setTitle("삭제")

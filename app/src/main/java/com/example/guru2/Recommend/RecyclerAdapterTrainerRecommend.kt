@@ -81,11 +81,11 @@ class RecyclerAdapterTrainerRecommend():
     @RequiresApi(Build.VERSION_CODES.O)
     fun checkExercise(position: Int){
         val database = FirebaseDatabase.getInstance()
-        val myRef = database.getReference("exerciserecommend")
-        val myRef2 = database.getReference("exerciserecord")
-        var now = LocalDate.now()
         var user= FirebaseAuth.getInstance().currentUser
         var userId= user?.uid
+        val myRef = database.getReference("exerciserecommend").child(userId!!)
+        val myRef2 = database.getReference("exerciserecord").child(userId!!)
+        var now = LocalDate.now()
 
         var Strnow = now.format(DateTimeFormatter.ofPattern("yyyyMMdd"))
 
@@ -98,7 +98,7 @@ class RecyclerAdapterTrainerRecommend():
                     val dataInput = ExerciseRecModel(
                         arrayList[position].exerName2, arrayList[position].exerDate, arrayList[position].set, arrayList[position].count
                     )
-                    myRef2.child(userId!!).setValue(arrayList[position])
+                    myRef2.push().setValue(arrayList[position])
                     myRef.child(uidList[position]).removeValue().addOnSuccessListener {
                         Toast.makeText(ct, "기록 완료", Toast.LENGTH_SHORT).show() }
                     arrayList.removeAt(position)

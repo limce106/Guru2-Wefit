@@ -5,11 +5,8 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import com.example.guru2.Recommend.Trainer_Recommend_Fragment
-import com.example.guru2.Records.RecordMain
-import com.example.guru2.calender_trainer.CalenderTrainer
-import com.example.guru2.Records.InputMealFragment
 import com.example.guru2.Records.MealRecordFragment
+import com.example.guru2.Records.RecordMain
 import com.example.guru2.calender_user.Calender
 import com.example.guru2.databinding.ActivityNaviBinding
 import com.example.guru2.graph_user.Graph
@@ -45,7 +42,7 @@ class NaviActivity : AppCompatActivity() {
             when(item.itemId){
                 //각 프래그먼트 연결하기
                 R.id.recommendFragment -> setFragment(TAG_RECOMMEND, MealRecordFragment())
-                R.id.recordFragment-> setFragment(TAG_RECORD, InputMealFragment())
+                R.id.recordFragment-> setFragment(TAG_RECORD, RecordMain())
                 R.id.calendarFragment -> setFragment(TAG_CALENDAR, Calender())
                 R.id.graphFragment -> setFragment(TAG_GRAPH, Graph())
                 R.id.messageFragment -> setFragment(TAG_MESSAGE,UserListFrag())

@@ -64,11 +64,11 @@ class InputMealFragment : Fragment() {
                     // mealImg.drawable,
                     strMealDate, strTimeSlot, strEatTime, strMealName, strKcal
                 )
-                myRef.child("mealrecord").child(mActivity.loginUser()!!).setValue(dataInput)
+                myRef.child("mealrecord").child(mActivity.loginUser()!!).push().setValue(dataInput)
                 //myRef.child("mealrecord").child("abc").setValue(dataInput)
             }
 
-            mActivity.replaceRecord(MealRecordFragment())
+            mActivity.replaceRecord(RecordMain())
         }
 
         return rootView

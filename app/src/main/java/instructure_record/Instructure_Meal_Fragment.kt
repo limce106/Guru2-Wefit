@@ -14,6 +14,7 @@ import com.example.guru2.NaviActivity
 import com.example.guru2.R
 import com.example.guru2.Records.MealRecModel
 import com.google.firebase.database.*
+import kotlinx.android.synthetic.main.fragment_input_meal.*
 
 class Instructure_Meal_Fragment : Fragment() {
     lateinit var recyclerView: RecyclerView

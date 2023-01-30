@@ -49,8 +49,9 @@ class popup_customexercise(private val context: Context, private val activity: N
                 val dataInput = ExerciseRecModel(
                     strCustomExerciseName, strCustomExerciseDate, strCustomSet, strCustomCount
                 )
-                myRef.child(dataName).child(mActivity.loginUser()!!).setValue(dataInput)
-                mActivity.replaceRecord(ExerciseRecordFragment())
+                myRef.child(dataName).child(mActivity.loginUser()!!).push().setValue(dataInput)
+                dialog.dismiss()
+                mActivity.replaceRecord(RecordMain())
             }
         }
 
@@ -89,10 +90,11 @@ class popup_customexercise(private val context: Context, private val activity: N
                 val dataInput = ExerciseRecModel(
                     strCustomExerciseName, strCustomExerciseDate, strCustomSet, strCustomCount
                 )
-                myRef.child(dataName).child(uid).setValue(dataInput)
+                myRef.child(dataName).child(uid).push().setValue(dataInput)
 
+                dialog.dismiss()
                 val mActivity = activity as NaviActivity
-                mActivity.replaceRecord(ExerciseRecordFragment())
+                mActivity.replaceRecord(RecordMain())
             }
         }
 
