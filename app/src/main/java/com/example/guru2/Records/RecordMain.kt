@@ -54,6 +54,4 @@ class RecordMain : Fragment() {
 
         return view
     }
-
-
 }

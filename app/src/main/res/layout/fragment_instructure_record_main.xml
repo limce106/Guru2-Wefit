@@ -42,17 +42,30 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.tabs.TabItem
+            android:id="@+id/exerciseTab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="운동 기록" />
 
         <com.google.android.material.tabs.TabItem
+            android:id="@+id/mealTab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="식단 기록"
             tools:layout_editor_absoluteX="198dp"
             tools:layout_editor_absoluteY="-3dp" />
     </com.google.android.material.tabs.TabLayout>
+
+    <FrameLayout
+        android:id="@+id/recordframe"
+        android:layout_width="409dp"
+        android:layout_height="484dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tab_record">
+
+    </FrameLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
