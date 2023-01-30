@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.guru2.R
 import com.example.guru2.Records.ExerciseRecModel
+import com.example.guru2.UserListFrag
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.database.*
 import com.google.firebase.firestore.FirebaseFirestore
@@ -49,7 +50,6 @@ class Calender : Fragment() {
         val view = inflater.inflate(R.layout.fragment_calender, container, false)
         val recyclerview = view.findViewById<RecyclerView>(R.id.recyclerview_calender) //리사이클러 뷰 객체
         val calenderview = view.findViewById<CalendarView>(R.id.cal) //캘린더
-        firestore = FirebaseFirestore.getInstance() //파이어스토어 인스턴스 초기화
 
 
 
@@ -94,6 +94,8 @@ class Calender : Fragment() {
                 classDialog.arguments = bundle //값이 담긴 번들을 argunments에 담기
 
                 Log.d("ddd",date)
+
+
 
             }
         })

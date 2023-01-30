@@ -1,22 +1,24 @@
 package com.example.guru2.calender_user
 
 
-import android.app.AlertDialog
-import android.app.ProgressDialog.show
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.guru2.Chat
 import com.example.guru2.R
 import kotlinx.android.synthetic.main.calender_class_item.view.*
 
 
-class RecyclerViewClassAdapter(val itemList: ArrayList<ClassScheduleItem>):RecyclerView.Adapter<RecyclerViewClassAdapter.RecyclerViewHolder>() {
+class RecyclerViewClassAdapter(val itemList: ArrayList<ClassScheduleItem>, context: ClassDialog):RecyclerView.Adapter<RecyclerViewClassAdapter.RecyclerViewHolder>() {
 
     val classReservation :ClassReservationDialog = ClassReservationDialog() //수업 팝업창
+    val mcontext = context
+    val chat: Chat=Chat()
 
 
 
@@ -37,17 +39,23 @@ class RecyclerViewClassAdapter(val itemList: ArrayList<ClassScheduleItem>):Recyc
             var bundle = Bundle() //번들 생성
             bundle.putString("key3",itemList[position].date) //번들에 값
             bundle.putString("key4",itemList[position].StartTime) //번들에 값
-            bundle.putString("key4",itemList[position].EndTime) //번들에 값
+            bundle.putString("key5",itemList[position].EndTime) //번들에 값
             classReservation.arguments = bundle //값이 담긴 번들을 argunments에 담기
 
             //다이얼로그 띄우기
-           // activity?.supportFragmentManager?.let { fragmentManager ->
-                //classReservation.showNow(fragmentManager, "TAG_DIALOG_EVENT")}
+            mcontext.activity?.supportFragmentManager?.let { fragmentManager ->
+                classReservation.showNow(fragmentManager, "TAG_DIALOG_EVENT")}
 
+
+
+            //예약 목록 다이얼로그 종료하기
+            try{mcontext.dismiss()} catch (e: Exception){
+                Log.d("dissmiss errer","$e")}
 
         }
 
     }
+
 
 
     fun getstate(){

@@ -42,7 +42,6 @@ class UserListFrag : Fragment() {
 
         val view = inflater.inflate(R.layout.fragment_user_list, container, false)
         val userRecyclerView: RecyclerView = view.findViewById(R.id.user_recyclerView)
-        //val user_searchView: SearchView = view.findViewById(R.id.user_searchView)
 
 
 

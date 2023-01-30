@@ -35,12 +35,16 @@ class Chat : Fragment() {
         val view = inflater.inflate(R.layout.fragment_chat, container, false)
 
         //넘어온 데이터 변수에 담기
-        val intent = Intent(activity, NaviActivity::class.java)
-        var receiverName: String = intent.getStringExtra("reg_name").toString()
-        var receiverUid : String = intent.getStringExtra("uId").toString()
+        var receiverName = arguments?.getString("name").toString()
+        var receiverUid = arguments?.getString("uid").toString()
+
+     //   var receiverName: String = intent.getStringExtra("reg_name").toString()//대화상대 이름
+     //   var receiverUid : String = intent.getStringExtra("uId").toString()//대화상대 Uid
 
         var mAuth = FirebaseAuth.getInstance() //인증 객체
         var mDbRef:DatabaseReference = FirebaseDatabase.getInstance().reference //DB 객체
+
+
 
         //접속자 Uid
         val senderUid=mAuth.currentUser?.uid
@@ -56,6 +60,8 @@ class Chat : Fragment() {
 
         var chat_RecyclerView: RecyclerView = view.findViewById(R.id.chat_recyclerView)    //RecyclerView
 
+        var name = arguments?.getString("name").toString()
+        var uid = arguments?.getString("uid").toString()
 
         val messageAdapter: MessageAdapter= MessageAdapter(requireActivity(), messageList)
 
@@ -64,7 +70,9 @@ class Chat : Fragment() {
         chat_RecyclerView.adapter=messageAdapter
 
         //액션바에 상대방 이름 보여주기
-        //NaviActivity().supportActionBar?.title =receiverName
+        NaviActivity().supportActionBar?.title =receiverName
+
+
 
         //메시지 전송 버튼
         //입력한 메시지는 DB에 저장이 되고 DB에 저장된 메시지를 화면에 보여줌
