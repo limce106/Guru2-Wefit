@@ -1,11 +1,9 @@
 package com.example.guru2
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.widget.Button
+import androidx.appcompat.app.AppCompatActivity
 
 class firstPage : AppCompatActivity() {
     lateinit var btn_start:Button
@@ -16,11 +14,25 @@ class firstPage : AppCompatActivity() {
         btn_start=findViewById(R.id.btn_start)
 
         btn_start.setOnClickListener {
-                val intent = Intent(this,Choice::class.java)
-                startActivity(intent)
+
 
         }
 
+        moveMain(1);
+
+    }
+
+
+    fun moveMain(sec:Int){
+        try {
+            Thread.sleep(2000)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
+        val intent = Intent(this,Choice::class.java)
+        startActivity(intent)
+        finish()
 
     }
 }
