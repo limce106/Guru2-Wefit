@@ -88,10 +88,6 @@ class NaviActivity : AppCompatActivity() {
             finish()
         }
 
-        if(item.itemId==R.id.mypage){
-            val intent= Intent(this,activity_login::class.java)
-            startActivity(intent)
-        }
         return true
     }
 
