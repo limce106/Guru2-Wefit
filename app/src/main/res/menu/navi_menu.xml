@@ -27,9 +27,9 @@
         android:icon="@drawable/ic_navi_graph" />
     <item
         android:id="@+id/messageFragment"
-        app:showAsAction="always"
-        android:title="메세지"
-        android:icon="@drawable/ic_navi_message"/>
+        android:icon="@drawable/ic_navi_mypage"
+        android:title="마이 페이지"
+        app:showAsAction="always" />
 
 
 
