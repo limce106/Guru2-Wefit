@@ -28,11 +28,13 @@
         android:contentDescription="추가하기"
         android:focusable="auto"
         android:foregroundTint="#ECE8E8"
-        android:src="@drawable/ic_baseline_add_24"
+        android:src="@drawable/ic_add_record"
         app:backgroundTint="@color/main"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:rippleColor="#FFFFFF" />
+        app:rippleColor="#FFFFFF"
+        app:tint="@null"
+        app:maxImageSize="70.5dp"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_exerciseRecord"
