@@ -13,9 +13,11 @@ import android.widget.EditText
 import android.widget.TimePicker
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.DialogFragment
+import com.example.guru2.NaviActivity
 import com.example.guru2.R
 import com.example.guru2.calender_user.IndividualExerciseDialog
 import com.example.guru2.calender_user.Schedule
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import java.time.LocalDate
@@ -88,12 +90,16 @@ class TrainerCalenderDialog : DialogFragment() {
 
             val dataInput= TrainerItem("$hour:$minute","$end_hour:$minute","$joinsize","PT수업","$date") //db에 저장할 데이터
 
+            val mActivity = activity as NaviActivity
+
             //db에 저장
-            databaseReference.child("schedule-trainer").push().setValue(dataInput)
+            databaseReference.child("schedule-trainer").child(mActivity.loginUser()!!).push().setValue(dataInput)
 
             //다이얼 로그 종료하기
             try{this.dismiss()} catch (e: Exception){
                 Log.d("dissmiss errer","$e")}
+
+
         }
 
     }

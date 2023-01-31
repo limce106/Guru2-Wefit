@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.DatePicker
 import androidx.fragment.app.DialogFragment
+import com.example.guru2.NaviActivity
 import com.example.guru2.R
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
@@ -19,6 +20,7 @@ class GraphInputInbody : DialogFragment() {
 
     private val firebaseDatabase: FirebaseDatabase = FirebaseDatabase.getInstance()
     private val databaseReference: DatabaseReference = firebaseDatabase.getReference()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,8 +60,11 @@ class GraphInputInbody : DialogFragment() {
 
             val dataInput= InbodyItem("$date","$weight","$muscle","$bodyfat") //db에 저장할 데이터
 
+
+            val mActivity = activity as NaviActivity
+
             //db에 저장
-            databaseReference.child("Inbody").push().setValue(dataInput)
+            databaseReference.child("Inbody").child(mActivity.loginUser()!!).push().setValue(dataInput)
 
 
             //다이얼 로그 종료하기

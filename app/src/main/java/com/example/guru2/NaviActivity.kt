@@ -8,8 +8,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.example.guru2.Recommend.Trainer_Recommend_Fragment
+import com.example.guru2.calender_trainer.CalenderTrainer
 import com.example.guru2.calender_user.Calender
 import com.example.guru2.databinding.ActivityNaviBinding
+import com.example.guru2.graph_trainer.GraphTrainer
 import com.example.guru2.graph_user.Graph
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -152,6 +154,8 @@ class NaviActivity : AppCompatActivity() {
         recordfragment=fragment
         isInputRecord=true
     }
+
+
 
     fun changeTab(fragment: Fragment){
         //기록 프래그먼트 새로 불러오기

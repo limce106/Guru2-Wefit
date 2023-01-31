@@ -15,10 +15,13 @@
         android:layout_marginEnd="15dp"
         android:clickable="true"
         android:contentDescription="추가하기"
-        android:src="@drawable/ic_baseline_add_24"
+        android:src="@drawable/ic_add_calender_before"
         android:visibility="visible"
+        app:backgroundTint="@color/main"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:maxImageSize="70.5dp"
+        app:tint="@null" />
 
     <LinearLayout
         android:id="@+id/linearLayout"

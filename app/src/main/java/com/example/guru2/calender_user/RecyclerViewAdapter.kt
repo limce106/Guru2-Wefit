@@ -4,12 +4,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.example.guru2.NaviActivity
 import com.example.guru2.R
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 
 
-class RecyclerViewAdapter(val itemList: ArrayList<Schedule>):RecyclerView.Adapter<RecyclerViewAdapter.RecyclerViewHolder>(){
+class RecyclerViewAdapter(val itemList: ArrayList<Schedule>, context:android.content.Context,uidList: ArrayList<String>):RecyclerView.Adapter<RecyclerViewAdapter.RecyclerViewHolder>(){
 
+
+    private val firebaseDatabase: FirebaseDatabase = FirebaseDatabase.getInstance()
+    val mActivity = context as NaviActivity
+    val databaseReference: DatabaseReference = firebaseDatabase.getReference("schedule").child(mActivity.loginUser()!!) //db 연결
+    val ct = context
+    var uidList:ArrayList<String> = uidList
 
     //아이템 레이아웃과 결합
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerViewHolder {
@@ -39,11 +49,14 @@ class RecyclerViewAdapter(val itemList: ArrayList<Schedule>):RecyclerView.Adapte
 
     //데이터 삭제 함수
     fun removeData(position: Int){
-        itemList.removeAt(position)
-        notifyItemRemoved(position)//특정 아이템 1개 삭제
+
+        databaseReference.child(uidList[position]).removeValue().addOnSuccessListener {
+            Toast.makeText(ct, "삭제 완료", Toast.LENGTH_SHORT).show() }
+             itemList.removeAt(position)
+            notifyItemRemoved(position)//특정 아이템 1개 삭제
+            notifyItemRangeChanged(position, itemList.size)
+
     }
-
-
 
 
 

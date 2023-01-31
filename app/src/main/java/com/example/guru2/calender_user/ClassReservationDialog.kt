@@ -4,25 +4,23 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.DialogFragment
-import com.example.guru2.ClassReservationCheckDialog
+import com.example.guru2.NaviActivity
 import com.example.guru2.R
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
-import org.w3c.dom.Text
 
 
 class ClassReservationDialog : DialogFragment() {
 
     private val firebaseDatabase: FirebaseDatabase = FirebaseDatabase.getInstance()
     private val databaseReference: DatabaseReference = firebaseDatabase.getReference()
-    val classReservationCheck :ClassReservationCheckDialog = ClassReservationCheckDialog() //수업 예약 확정 확인 팝업창
+    val classReservationCheck : ClassReservationCheckDialog = ClassReservationCheckDialog() //수업 예약 확정 확인 팝업창
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,6 +45,8 @@ class ClassReservationDialog : DialogFragment() {
         val reservationDate = view?.findViewById<TextView>(R.id.reservation_date) //예약 날짜
         val reservationStartTime = view?.findViewById<TextView>(R.id.reservation_start_time) //수업 시작 시간
         val reservationEndTime = view?.findViewById<TextView>(R.id.reservation_end_time) //수업 끝나는 시간
+        val mActivity = activity as NaviActivity
+
 
 
         var date = arguments?.getString("key3").toString()
@@ -64,7 +64,7 @@ class ClassReservationDialog : DialogFragment() {
             val dataInput=Schedule("$date","PT 수업","$startTime ~ $endTime") //db에 저장할 데이터
 
             //db에 저장
-            databaseReference.child("schedule").push().setValue(dataInput)
+            databaseReference.child("schedule").child(mActivity.loginUser()!!).push().setValue(dataInput)
 
             //다이얼로그 띄우기
             activity?.supportFragmentManager?.let { fragmentManager ->

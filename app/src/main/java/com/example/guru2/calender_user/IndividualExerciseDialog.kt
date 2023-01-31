@@ -12,6 +12,7 @@ import android.widget.Button
 import android.widget.TimePicker
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.DialogFragment
+import com.example.guru2.NaviActivity
 import com.example.guru2.R
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
@@ -27,6 +28,7 @@ class IndividualExerciseDialog : DialogFragment() {
     val todayDate: LocalDate = LocalDate.now() //오늘 날짜
 
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -39,6 +41,7 @@ class IndividualExerciseDialog : DialogFragment() {
     ): View? {
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT)) //다이얼로그 배경 투명하게
         val view= inflater.inflate(R.layout.fragment_individual_exercise_dialog, container, false)
+
         return view
 
     }
@@ -82,8 +85,10 @@ class IndividualExerciseDialog : DialogFragment() {
 
             val dataInput=Schedule("$date","개인 운동","$hour:$minute") //db에 저장할 데이터
 
+            val mActivity = activity as NaviActivity
+
             //db에 저장
-            databaseReference.child("schedule").push().setValue(dataInput)
+            databaseReference.child("schedule").child(mActivity.loginUser()!!).push().setValue(dataInput)
 
             //다이얼 로그 종료하기
             try{this.dismiss()} catch (e: Exception){

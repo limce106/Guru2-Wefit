@@ -1,17 +1,18 @@
-package com.example.guru2.graph_user
+package com.example.guru2.graph_trainer
 
 import android.annotation.SuppressLint
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
-import androidx.fragment.app.Fragment
-import com.example.guru2.NaviActivity
 import com.example.guru2.R
+import com.example.guru2.graph_user.GraphInputInbody
+import com.example.guru2.graph_user.InbodyItem
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.components.YAxis
@@ -19,14 +20,11 @@ import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
-import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.database.*
-import kotlinx.android.synthetic.main.fragment_graph.*
-import kotlinx.android.synthetic.main.fragment_graph_input_inbody.*
 
 
-class Graph : Fragment() {
+class GraphTrainer : Fragment() {
 
     private val firebaseDatabase: FirebaseDatabase = FirebaseDatabase.getInstance()
     val itemList = arrayListOf<InbodyItem>() //아이템 배열
@@ -39,15 +37,13 @@ class Graph : Fragment() {
         }
     }
 
-    @SuppressLint("MissingInflatedId")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
         //객체 생성
-        val view = inflater.inflate(R.layout.fragment_graph, container, false)
-        val btn_inbody_add = view.findViewById<FloatingActionButton>(R.id.btn_inbody_add) //인바디 기록 추가 버튼
+        val view = inflater.inflate(R.layout.fragment_graph2, container, false)
         val dialog: GraphInputInbody = GraphInputInbody().getInstance() //인바디 입력 팝업창
         val linechartWeight = view.findViewById<LineChart>(R.id.linchart_weight) //몸무게 그래프
         val linechartMuscle = view.findViewById<LineChart>(R.id.linechart_muscle) //골격근량 그래프
@@ -56,11 +52,10 @@ class Graph : Fragment() {
         var weightList = mutableListOf<String>() //몸무게 데이터 배열
         var muscleList = mutableListOf<String>() //골격근량 데이터 배열
         var bodyfatList = mutableListOf<String>() //체지방량 데이터 배열
-        val mActivity = activity as NaviActivity
 
 
         //새로운 데이터 저장할 때 마다 데이터 불러오기
-        val databaseReference: DatabaseReference = firebaseDatabase.getReference("Inbody").child(mActivity.loginUser()!!) //db 연결
+        val databaseReference: DatabaseReference = firebaseDatabase.getReference("Inbody") //db 연결
         databaseReference.addValueEventListener(object : ValueEventListener {
             @SuppressLint("SuspiciousIndentation")
             @RequiresApi(Build.VERSION_CODES.O)
@@ -158,19 +153,10 @@ class Graph : Fragment() {
 
 
 
-        //인바디 기록 추가 버튼 클릭 이벤트
-        btn_inbody_add.setOnClickListener {
-            activity?.supportFragmentManager?.let { fragmentManager ->
-                dialog.show(fragmentManager, "TAG_DIALOG_EVENT")
-            }
-        }
 
         return view
 
     }
-
-
-
 
 
 }
