@@ -48,9 +48,11 @@
         android:layout_below="@id/edit_pw"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
+        android:backgroundTint="@color/main"
         android:fontFamily="@font/wefitfont"
         android:text="LogIn"
-        android:textSize="20sp"/>
+        android:textColor="#FFFFFF"
+        android:textSize="20sp" />
 
 
 
