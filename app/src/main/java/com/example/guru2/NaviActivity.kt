@@ -60,7 +60,7 @@ class NaviActivity : AppCompatActivity() {
         binding.bottomNavigationView.setOnItemSelectedListener { item ->
             when(item.itemId){
                 //각 프래그먼트 연결하기
-                R.id.recommendFragment -> setFragment(TAG_RECOMMEND, Trainer_Recommend_Fragment())
+                R.id.recommendFragment -> setFragment(TAG_RECOMMEND,Trainer_Recommend_Fragment())
                 R.id.recordFragment-> setFragment(TAG_RECORD, RecordMain())
                 R.id.calendarFragment -> setFragment(TAG_CALENDAR, Calender())
                 R.id.graphFragment -> setFragment(TAG_GRAPH, Graph())
