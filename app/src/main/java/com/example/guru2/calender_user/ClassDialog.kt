@@ -49,6 +49,7 @@ class ClassDialog : DialogFragment() {
         super.onStart()
 
         var date = arguments?.getString("key1").toString() //캘린더에서 선택한 날짜 불러오기
+        val dataList = arrayListOf<ClassScheduleItem>() //db 데이터 배열
 
         if(date=="null")//null일 경우 오늘 날짜 넣기
             date=todayDate.toString()
@@ -68,14 +69,23 @@ class ClassDialog : DialogFragment() {
             @RequiresApi(Build.VERSION_CODES.O)
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 itemList.clear()
+                dataList.clear()
                 //db에서 데이터 불러오기
                 dataSnapshot.children.forEach{
                     val class_schedule = it.getValue(ClassScheduleItem::class.java)
                     class_schedule ?:return
 
-                    itemList.add(class_schedule) //리사이클러뷰에 리스트 추가
-
+                    dataList.add(class_schedule)
                 }
+                //날짜별 데이터 넣기
+                for(i in 0 until dataList.size)
+                {
+                    if(dataList[i].date==date)
+                    {
+                        itemList.add(dataList[i]) //리사이클러뷰에 리스트 추가
+                    }
+                }
+
                 //리스트가 변경됨을 어댑터에 알림
                 ListAdapter.notifyDataSetChanged()
             }
