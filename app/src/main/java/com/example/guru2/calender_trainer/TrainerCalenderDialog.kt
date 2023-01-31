@@ -57,11 +57,7 @@ class TrainerCalenderDialog : DialogFragment() {
         var end_hour :Int = 0 //수업 일정 끝나는 시간
         var edit_minute:Int= 0 //수업 일정 분
         val timePicker = view?.findViewById<TimePicker>(R.id.time_trainer)
-        var date = arguments?.getString("key2").toString()
 
-
-        if(date=="null")//null일 경우 오늘 날짜 넣기
-            date=todayDate.toString()
 
         timePicker?.setOnTimeChangedListener{ timePicker, hourOfDay, minute ->
 
@@ -88,12 +84,18 @@ class TrainerCalenderDialog : DialogFragment() {
             else
                 hour="$edit_hour"
 
+            var date = arguments?.getString("key2").toString()
+
+
+            if(date=="null")//null일 경우 오늘 날짜 넣기
+                date=todayDate.toString()
+
             val dataInput= TrainerItem("$hour:$minute","$end_hour:$minute","$joinsize","PT수업","$date") //db에 저장할 데이터
 
             val mActivity = activity as NaviActivity
 
             //db에 저장
-            databaseReference.child("schedule-trainer").child(mActivity.loginUser()!!).push().setValue(dataInput)
+            databaseReference.child("scheduleTrainer").child(mActivity.loginUser()!!).push().setValue(dataInput)
             //db에 저장
             databaseReference.child("class").push().setValue(dataInput)
 
