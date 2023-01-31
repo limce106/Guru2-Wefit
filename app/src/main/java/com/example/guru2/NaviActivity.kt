@@ -47,6 +47,7 @@ class NaviActivity : AppCompatActivity() {
     var mAuth : FirebaseAuth= Firebase.auth
     var mDbRef: DatabaseReference = FirebaseDatabase.getInstance().reference
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityNaviBinding.inflate(layoutInflater)
@@ -97,18 +98,23 @@ class NaviActivity : AppCompatActivity() {
 
     //프래그먼트 세팅
     fun setFragment(tag:String, fragment: Fragment) {
+
+
+
         val manager: FragmentManager = supportFragmentManager
         val fragTransition = manager.beginTransaction()
-
-        if (manager.findFragmentByTag(tag) == null) {
-            fragTransition.add(R.id.main_frame, fragment, tag)
-        }
 
         val recommend = manager.findFragmentByTag(TAG_RECOMMEND)
         val record = manager.findFragmentByTag(TAG_RECORD)
         val calender = manager.findFragmentByTag(TAG_CALENDAR)
         val graph = manager.findFragmentByTag(TAG_GRAPH)
         val message = manager.findFragmentByTag(TAG_MESSAGE)
+
+
+        if (manager.findFragmentByTag(tag) == null) {
+            fragTransition.add(R.id.main_frame, fragment, tag)
+        }
+
 
         if (recommend != null) {
             fragTransition.hide(recommend)
@@ -151,6 +157,11 @@ class NaviActivity : AppCompatActivity() {
 
             fragTransition.commitAllowingStateLoss()
 
+    }
+
+
+    fun replaceChat(fragment: Fragment){
+        supportFragmentManager.beginTransaction().add(R.id.main_frame,fragment, TAG_MESSAGE).addToBackStack(null).commit()
     }
 
 

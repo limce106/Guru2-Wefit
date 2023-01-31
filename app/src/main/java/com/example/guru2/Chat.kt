@@ -69,7 +69,7 @@ class Chat : Fragment() {
         chat_RecyclerView.adapter=messageAdapter
 
         //액션바에 상대방 이름 보여주기
-        NaviActivity().supportActionBar?.title =receiverName
+        //NaviActivity().supportActionBar?.title =receiverName
 
 
 

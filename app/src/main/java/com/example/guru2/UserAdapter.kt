@@ -35,14 +35,17 @@ class UserAdapter(private val context: UserListFrag, private val userList:ArrayL
         holder.itemView.setOnClickListener{
 
 
-            context.activity?.supportFragmentManager?.let { fragmentManager ->
-            }
+           // context.activity?.supportFragmentManager?.let { fragmentManager -> chat}
 
             bundle.putString("name",currentUser.reg_name)
             bundle.putString("name",currentUser.uId)
 
 
+            val mActivity = context.activity as NaviActivity
 
+            mActivity.replaceChat(chat)
+
+            mActivity.supportFragmentManager.beginTransaction().hide(context)
 
 
 
