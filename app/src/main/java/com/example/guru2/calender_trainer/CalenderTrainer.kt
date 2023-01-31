@@ -111,7 +111,7 @@ class CalenderTrainer : Fragment() {
             @RequiresApi(Build.VERSION_CODES.O)
             override fun onSelectedDayChange(p0: CalendarView, p1: Int, p2: Int, p3: Int) {
                 itemList.clear()
-                date = p1.toString() + "-" + p2 + 1.toString() + "-" + p3.toString()
+                date = p1.toString() + "-" + (p2 + 1).toString() + "-" + p3.toString()
 
                 var bundle = Bundle() //번들 생성
                 bundle.putString("key2", date) //번들에 값 담기

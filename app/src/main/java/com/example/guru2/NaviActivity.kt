@@ -10,7 +10,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.example.guru2.Recommend.Instructure_Recommend_Fragment
+import com.example.guru2.Recommend.Trainer_Recommend_Fragment
+import com.example.guru2.Records.RecordMain
 import com.example.guru2.calender_trainer.CalenderTrainer
+import com.example.guru2.calender_user.Calender
 import com.example.guru2.databinding.ActivityNaviBinding
 import com.example.guru2.graph_user.Graph
 import com.google.firebase.auth.FirebaseAuth
@@ -48,16 +51,16 @@ class NaviActivity : AppCompatActivity() {
         binding = ActivityNaviBinding.inflate(layoutInflater)
         setContentView(binding.root)
         supportActionBar?.setDisplayHomeAsUpEnabled(true) //뒤로가기 버튼 생성
-        setFragment(TAG_CALENDAR, CalenderTrainer()) //시작 프래그먼트
+        setFragment(TAG_CALENDAR, Calender()) //시작 프래그먼트
         bottomNavigationView.selectedItemId = R.id.calendarFragment
 
 
         binding.bottomNavigationView.setOnItemSelectedListener { item ->
             when(item.itemId){
                 //각 프래그먼트 연결하기
-                R.id.recommendFragment -> setFragment(TAG_RECOMMEND,Instructure_Recommend_Fragment())
-                R.id.recordFragment-> setFragment(TAG_RECORD, Instructure_Record_Main())
-                R.id.calendarFragment -> setFragment(TAG_CALENDAR, CalenderTrainer())
+                R.id.recommendFragment -> setFragment(TAG_RECOMMEND,Trainer_Recommend_Fragment())
+                R.id.recordFragment-> setFragment(TAG_RECORD, RecordMain())
+                R.id.calendarFragment -> setFragment(TAG_CALENDAR, Calender())
                 R.id.graphFragment -> setFragment(TAG_GRAPH, Graph())
                 R.id.messageFragment -> setFragment(TAG_MESSAGE,myPage())
             }
