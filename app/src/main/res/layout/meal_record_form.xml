@@ -29,7 +29,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="80"
-                android:paddingTop="20dp"
+                android:paddingTop="22dp"
                 android:text="아침"
                 android:textAlignment="center"
                 android:textColor="@color/black"

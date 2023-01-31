@@ -1,24 +1,26 @@
 package com.example.guru2
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.example.guru2.Recommend.Trainer_Recommend_Fragment
 import com.example.guru2.calender_trainer.CalenderTrainer
+import com.example.guru2.Records.InputExerciseFragment
+import com.example.guru2.Records.RecordMain
 import com.example.guru2.calender_user.Calender
 import com.example.guru2.databinding.ActivityNaviBinding
 import com.example.guru2.graph_trainer.GraphTrainer
 import com.example.guru2.graph_user.Graph
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
-import instructure_record.Instructure_Record_Main
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.*
+import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_navi.*
 
 
@@ -40,6 +42,8 @@ class NaviActivity : AppCompatActivity() {
     var isCheckID: String = ""
     var uidByID: String = ""
     var strTabPosition: String = ""
+    var mAuth : FirebaseAuth= Firebase.auth
+    var mDbRef: DatabaseReference = FirebaseDatabase.getInstance().reference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,8 +57,8 @@ class NaviActivity : AppCompatActivity() {
         binding.bottomNavigationView.setOnItemSelectedListener { item ->
             when(item.itemId){
                 //각 프래그먼트 연결하기
-                R.id.recommendFragment -> setFragment(TAG_RECOMMEND, Trainer_Recommend_Fragment())
-                R.id.recordFragment-> setFragment(TAG_RECORD, Instructure_Record_Main())
+                R.id.recommendFragment -> setFragment(TAG_RECOMMEND, InputExerciseFragment())
+                R.id.recordFragment-> setFragment(TAG_RECORD, RecordMain())
                 R.id.calendarFragment -> setFragment(TAG_CALENDAR, Calender())
                 R.id.graphFragment -> setFragment(TAG_GRAPH, Graph())
                 R.id.messageFragment -> setFragment(TAG_MESSAGE,UserListFrag())
@@ -71,20 +75,21 @@ class NaviActivity : AppCompatActivity() {
         }
     }
 
-    //뒤로가기 조건
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
-        when (item?.itemId){
-            android.R.id.home -> {
-                finish()
-                return true
-            }
-            else -> {
-                return super.onOptionsItemSelected(item!!)
-            }
-
+        if(item.itemId==R.id.logout){
+            mAuth.signOut()
+            val intent= Intent(this,activity_login::class.java)
+            startActivity(intent)
+            finish()
         }
 
+        if(item.itemId==R.id.mypage){
+            val intent= Intent(this,activity_login::class.java)
+            startActivity(intent)
+        }
+        return true
     }
 
 
@@ -184,7 +189,6 @@ class NaviActivity : AppCompatActivity() {
             @SuppressLint("NotifyDataSetChanged")
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 for (snapshot in dataSnapshot.children) { // 반복문으로 데이터 List를 추출해냄
-                    Log.e("uiD", snapshot.child("reg_id").value.toString())
                     if(snapshot.child("reg_id").value.toString() == id){
                         uid = snapshot.child("uid").value.toString()
                         uidByID = uid
@@ -199,8 +203,15 @@ class NaviActivity : AppCompatActivity() {
         })
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.page_menu,menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
     fun refreshFrag(fragment: Fragment){
         //기록 프래그먼트 새로 불러오기
         supportFragmentManager.beginTransaction().detach(fragment).attach(fragment).commit()
     }
+
+
 }

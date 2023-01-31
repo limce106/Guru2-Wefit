@@ -9,7 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
-import android.widget.SearchView
 import android.widget.Toast
 import androidx.annotation.NonNull
 import androidx.fragment.app.Fragment
@@ -21,7 +20,6 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import kotlinx.android.synthetic.main.fragment_input_exercise.view.*
 
 class Instructure_Recommend_Fragment : Fragment() {
     lateinit var strNickname: String
@@ -173,21 +171,6 @@ class Instructure_Recommend_Fragment : Fragment() {
         val rv_exerciseName: RecyclerView = rootView.findViewById(R.id.rv_exerciseName)
         val RVExerNameadapter = RecyclerAdapterExerName(list)
         rv_exerciseName.adapter = RVExerNameadapter
-
-        // 검색 기능
-        var searchViewTextListener: SearchView.OnQueryTextListener =
-            object : SearchView.OnQueryTextListener {
-                override fun onQueryTextSubmit(query: String?): Boolean {
-                    return false
-                }
-
-                override fun onQueryTextChange(s: String?): Boolean {
-                    RVExerNameadapter.filter.filter(s)
-                    Log.d("Search", "SearchVies Text is changed : $s")
-                    return false
-                }
-            }
-        rootView.searchView.setOnQueryTextListener(searchViewTextListener)
 
         // 닉네임 입력 변화 확인
         var edtNickName = rootView.findViewById<EditText>(R.id.edtNickName)

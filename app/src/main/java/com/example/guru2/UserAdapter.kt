@@ -12,6 +12,7 @@ class UserAdapter(private val context: UserListFrag, private val userList:ArrayL
     RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
 
 
+
     class UserViewHolder(itemView: View):RecyclerView.ViewHolder(itemView){
         // val nameText: TextView =itemView.findViewById(R.id.name_text)
     }
@@ -20,8 +21,9 @@ class UserAdapter(private val context: UserListFrag, private val userList:ArrayL
 
 
 
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
-        val view:View=LayoutInflater.from(parent.context).inflate(R.layout.fragment_user_list, parent, false)
+        val view:View=LayoutInflater.from(parent.context).inflate(R.layout.user_layout, parent, false)
         return UserViewHolder(view)
 
     }
@@ -41,10 +43,12 @@ class UserAdapter(private val context: UserListFrag, private val userList:ArrayL
             bundle.putString("name",currentUser.reg_name)
             bundle.putString("name",currentUser.uId)
 
-//            intent.putExtra("name", currentUser.reg_name)
-//            intent.putExtra("name", currentUser.uId)
 
-   //         context.startActivity(intent)
         }
     }
+
+    class UserViewHolder(itemView: View):RecyclerView.ViewHolder(itemView){
+        val nameText: TextView =itemView.findViewById(R.id.name_text)
+    }
+
 }
