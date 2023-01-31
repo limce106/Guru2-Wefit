@@ -25,6 +25,7 @@
         android:layout_marginRight="20dp"
         android:hint="ID (Email)"
         android:inputType="textEmailAddress"
+        android:fontFamily="@font/wefitfont"
         android:paddingStart="15dp"/>
 
     <EditText
@@ -37,6 +38,7 @@
         android:layout_marginRight="20dp"
         android:hint="Password"
         android:inputType="numberPassword"
+        android:fontFamily="@font/wefitfont"
         android:paddingStart="15dp"/>
 
     <androidx.appcompat.widget.AppCompatButton
@@ -46,6 +48,7 @@
         android:layout_below="@id/edit_pw"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
+        android:fontFamily="@font/wefitfont"
         android:text="LogIn"
         android:textSize="20sp"/>
 

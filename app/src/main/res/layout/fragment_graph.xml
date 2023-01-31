@@ -27,6 +27,7 @@
                 android:layout_marginBottom="10dp"
                 android:text="체중 (kg)"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                android:fontFamily="@font/wefitfont"
                 android:textSize="18dp" />
 
             <com.github.mikephil.charting.charts.LineChart
@@ -43,6 +44,7 @@
                 android:layout_marginBottom="10dp"
                 android:text="골격근량 (kg)"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                android:fontFamily="@font/wefitfont"
                 android:textSize="18dp" />
 
             <com.github.mikephil.charting.charts.LineChart
@@ -61,6 +63,7 @@
                 android:layout_marginBottom="10dp"
                 android:text="체지방률 (%)"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                android:fontFamily="@font/wefitfont"
                 android:textSize="18dp" />
 
             <com.github.mikephil.charting.charts.LineChart

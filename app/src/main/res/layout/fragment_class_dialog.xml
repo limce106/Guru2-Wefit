@@ -23,6 +23,7 @@
             android:layout_height="wrap_content"
             android:paddingBottom="20dp"
             android:text="0월 0일 예약"
+            android:fontFamily="@font/wefitfont"
             android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
         <androidx.recyclerview.widget.RecyclerView

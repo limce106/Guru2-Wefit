@@ -19,6 +19,7 @@
             android:id="@+id/ExerciseTab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/wefitfont"
             android:text="운동 기록" />
 
         <com.google.android.material.tabs.TabItem
@@ -26,6 +27,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="식단 기록"
+            android:fontFamily="@font/wefitfont"
             tools:layout_editor_absoluteX="198dp"
             tools:layout_editor_absoluteY="-3dp" />
     </com.google.android.material.tabs.TabLayout>

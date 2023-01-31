@@ -13,6 +13,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
+        android:fontFamily="@font/wefitfont"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
@@ -22,6 +23,7 @@
         android:text="loginTest"
         app:layout_constraintEnd_toStartOf="@+id/frag"
         app:layout_constraintStart_toStartOf="parent"
+        android:fontFamily="@font/wefitfont"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
@@ -31,6 +33,7 @@
         android:layout_marginEnd="50dp"
         android:text="fragment"
         app:layout_constraintEnd_toEndOf="parent"
+        android:fontFamily="@font/wefitfont"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button

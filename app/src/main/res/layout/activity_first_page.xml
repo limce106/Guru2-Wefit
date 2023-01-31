@@ -19,6 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/imageView2"
         android:layout_centerInParent="true"
+        android:fontFamily="@font/wefitfont"
         android:text="시작하기" />
 
 </RelativeLayout>

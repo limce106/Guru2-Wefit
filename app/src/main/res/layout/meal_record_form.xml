@@ -34,6 +34,7 @@
                 android:textAlignment="center"
                 android:textColor="@color/black"
                 android:textSize="20sp"
+                android:fontFamily="@font/wefitfont"
                 android:textStyle="bold" />
 
             <LinearLayout
@@ -50,6 +51,7 @@
                     android:layout_weight="80"
                     android:paddingTop="10dp"
                     android:text="메뉴명"
+                    android:fontFamily="@font/wefitfont"
                     android:textAlignment="textStart"
                     android:textSize="18sp" />
 
@@ -58,6 +60,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="20"
+                    android:fontFamily="@font/wefitfont"
                     android:text="20220126" />
             </LinearLayout>
 

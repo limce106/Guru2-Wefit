@@ -2,10 +2,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item android:title="마이페이지"
+        android:fontFamily="@font/wefitfont"
         android:id="@+id/mypage"/>
 
 
     <item android:title="로그아웃"
+        android:fontFamily="@font/wefitfont"
         android:id="@+id/logout"/>
 
 

@@ -12,6 +12,7 @@
         android:background="@color/main"
         android:padding="10dp"
         android:text="받는 메시지"
+        android:fontFamily="@font/wefitfont"
         android:textSize="18sp"/>
 
 

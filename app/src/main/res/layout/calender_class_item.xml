@@ -23,6 +23,7 @@
             android:layout_weight="1"
             android:text="00:00"
             android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:fontFamily="@font/wefitfont"
             android:textSize="18dp" />
 
         <TextView
@@ -32,6 +33,7 @@
             android:layout_weight="1"
             android:text="~"
             android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:fontFamily="@font/wefitfont"
             android:textSize="18dp" />
 
         <TextView
@@ -41,6 +43,7 @@
             android:layout_weight="1"
             android:text="00:00"
             android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:fontFamily="@font/wefitfont"
             android:textSize="18dp" />
 
         <TextView
@@ -50,6 +53,7 @@
             android:layout_weight="1"
             android:text="("
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:fontFamily="@font/wefitfont"
             android:textSize="18dp" />
 
         <TextView
@@ -59,6 +63,7 @@
             android:layout_weight="1"
             android:text="00"
             android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:fontFamily="@font/wefitfont"
             android:textSize="18dp" />
 
         <TextView
@@ -68,6 +73,7 @@
             android:layout_weight="1"
             android:text="/"
             android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:fontFamily="@font/wefitfont"
             android:textSize="18dp" />
 
         <TextView
@@ -77,6 +83,7 @@
             android:layout_weight="1"
             android:text="00"
             android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:fontFamily="@font/wefitfont"
             android:textSize="18dp" />
 
         <TextView
@@ -86,6 +93,7 @@
             android:layout_weight="1"
             android:text=")"
             android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:fontFamily="@font/wefitfont"
             android:textSize="18dp" />
 
         <Button
@@ -96,6 +104,7 @@
             android:layout_marginRight="20dp"
             android:layout_weight="1"
             android:text="예약"
+            android:fontFamily="@font/wefitfont"
             android:textSize="15dp" />
     </LinearLayout>
 </LinearLayout>

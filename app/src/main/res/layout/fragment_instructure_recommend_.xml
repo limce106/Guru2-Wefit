@@ -28,6 +28,7 @@
         android:inputType="textPersonName"
         app:layout_constraintEnd_toStartOf="@+id/btnNicknameOk"
         app:layout_constraintStart_toStartOf="parent"
+        android:fontFamily="@font/wefitfont"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
@@ -41,6 +42,7 @@
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/edtNickName"
+        android:fontFamily="@font/wefitfont"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
@@ -53,6 +55,7 @@
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tvCustom"
+        android:fontFamily="@font/wefitfont"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -67,6 +70,7 @@
         app:layout_constraintBottom_toTopOf="@+id/searchView"
         app:layout_constraintEnd_toStartOf="@+id/btnCustom"
         app:layout_constraintStart_toStartOf="parent"
+        android:fontFamily="@font/wefitfont"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -93,6 +97,7 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:fontFamily="@font/wefitfont"
         app:queryHint="검색어를 입력하시오" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,6 +10,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:cardCornerRadius="8dp"
+        android:fontFamily="@font/wefitfont"
         app:cardUseCompatPadding="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -23,6 +24,7 @@
             android:layout_height="wrap_content"
             app:queryHint="Search here..."
             app:iconifiedByDefault="false"
+            android:fontFamily="@font/wefitfont"
             app:queryBackground="@android:color/transparent"/>
 
 </com.google.android.material.card.MaterialCardView>
@@ -30,6 +32,7 @@
 
 <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/user_recyclerView"
+        android:fontFamily="@font/wefitfont"
         android:layout_marginTop="50dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

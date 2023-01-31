@@ -32,6 +32,7 @@
                 android:paddingTop="25dp"
                 android:text="운동명"
                 android:textColor="@color/black"
+                android:fontFamily="@font/wefitfont"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -49,6 +50,7 @@
                     android:layout_weight="70"
                     android:paddingTop="20dp"
                     android:text="횟수/세트"
+                    android:fontFamily="@font/wefitfont"
                     android:textAlignment="textStart"
                     android:textSize="16sp" />
 
@@ -58,6 +60,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="20"
                     android:text="날짜"
+                    android:fontFamily="@font/wefitfont"
                     android:textSize="14sp" />
             </LinearLayout>
 

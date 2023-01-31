@@ -21,6 +21,7 @@
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tvCustom"
+        android:fontFamily="@font/wefitfont"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -33,6 +34,7 @@
         android:textSize="16sp"
         app:layout_constraintEnd_toStartOf="@+id/btnCustom"
         app:layout_constraintStart_toStartOf="parent"
+        android:fontFamily="@font/wefitfont"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView

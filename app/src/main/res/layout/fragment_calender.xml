@@ -16,6 +16,7 @@
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@id/btn_add"
         app:layout_constraintStart_toStartOf="parent"
+        android:fontFamily="@font/wefitfont"
         app:layout_constraintTop_toTopOf="@id/btn_add" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -80,6 +81,7 @@
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@id/btn_add"
         app:layout_constraintStart_toStartOf="parent"
+        android:fontFamily="@font/wefitfont"
         app:layout_constraintTop_toTopOf="@id/btn_add" />
 
     <LinearLayout

@@ -23,6 +23,7 @@
             android:textAlignment="center"
             android:textColor="@color/black"
             android:textSize="18sp"
+            android:fontFamily="@font/wefitfont"
             android:textStyle="bold" />
 
     </LinearLayout>
