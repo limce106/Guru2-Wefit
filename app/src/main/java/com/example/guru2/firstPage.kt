@@ -15,24 +15,14 @@ class firstPage : AppCompatActivity() {
 
         btn_start.setOnClickListener {
 
+            val intent = Intent(this,Choice::class.java)
+            startActivity(intent)
+            finish()
 
         }
 
-        moveMain(1);
 
     }
 
 
-    fun moveMain(sec:Int){
-        try {
-            Thread.sleep(2000)
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-
-        val intent = Intent(this,Choice::class.java)
-        startActivity(intent)
-        finish()
-
-    }
 }

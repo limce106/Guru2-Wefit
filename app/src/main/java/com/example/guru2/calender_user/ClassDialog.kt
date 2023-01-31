@@ -55,8 +55,9 @@ class ClassDialog : DialogFragment() {
 
         var text_date = view?.findViewById<TextView>(R.id.class_date)
         val recyclerviewclass= view?.findViewById<RecyclerView>(R.id.recyclerviewclass) //리사이클러 뷰 객체
-        val itemList = arrayListOf<ClassScheduleItem>() //아이템 배열
+        var itemList = arrayListOf<ClassScheduleItem>() //아이템 배열
         val ListAdapter = RecyclerViewClassAdapter(itemList, this) //어댑터
+        var dataList = arrayListOf<ClassScheduleItem>() //db 데이터 배열
 
         text_date?.text = "$date" //캘린더에서 선택한 날짜
 
@@ -68,14 +69,25 @@ class ClassDialog : DialogFragment() {
             @RequiresApi(Build.VERSION_CODES.O)
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 itemList.clear()
+                dataList.clear()
                 //db에서 데이터 불러오기
                 dataSnapshot.children.forEach{
                     val class_schedule = it.getValue(ClassScheduleItem::class.java)
                     class_schedule ?:return
 
-                    itemList.add(class_schedule) //리사이클러뷰에 리스트 추가
+                    dataList.add(class_schedule) //데이터리스트에 추가
 
                 }
+
+                //날짜별 데이터 넣기
+                for(i in 0 until dataList.size)
+                {
+                    if(dataList[i].date==date)
+                    {
+                        itemList.add(dataList[i]) //리사이클러뷰에 리스트 추가
+                    }
+                }
+
                 //리스트가 변경됨을 어댑터에 알림
                 ListAdapter.notifyDataSetChanged()
             }
@@ -85,6 +97,20 @@ class ClassDialog : DialogFragment() {
             }
 
         })
+
+        //처음 일정 예약 페이지를 로딩했을 때 수업 뜨기
+        itemList.clear()
+        //날짜별 데이터 넣기
+        for(i in 0 until dataList.size)
+        {
+            if(dataList[i].date==date)
+            {
+                itemList.add(dataList[i]) //리사이클러뷰에 리스트 추가
+            }
+        }
+        //리스트가 변경됨을 어댑터에 알림
+        ListAdapter.notifyDataSetChanged()
+
 
         recyclerviewclass?.adapter = ListAdapter //어댑터 연결
         recyclerviewclass?.layoutManager = LinearLayoutManager(activity)

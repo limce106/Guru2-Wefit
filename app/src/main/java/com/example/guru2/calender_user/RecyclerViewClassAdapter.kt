@@ -72,7 +72,6 @@ class RecyclerViewClassAdapter(val itemList: ArrayList<ClassScheduleItem>, conte
     inner class RecyclerViewHolder(itemView: View):RecyclerView.ViewHolder(itemView){
         val class_start_time = itemView.findViewById<TextView>(R.id.class_start_time)
         val class_end_time = itemView.findViewById<TextView>(R.id.class_end_time)
-        val join_size = itemView.findViewById<TextView>(R.id.join_size)
         val join_max_size = itemView.findViewById<TextView>(R.id.join_max_size)
         val btn_join = itemView.findViewById<Button>(R.id.btn_join)
 

@@ -55,11 +55,11 @@ class NaviActivity : AppCompatActivity() {
         binding.bottomNavigationView.setOnItemSelectedListener { item ->
             when(item.itemId){
                 //각 프래그먼트 연결하기
-                R.id.recommendFragment -> setFragment(TAG_RECOMMEND, Trainer_Recommend_Fragment())
+                R.id.recommendFragment -> setFragment(TAG_RECOMMEND,Trainer_Recommend_Fragment())
                 R.id.recordFragment-> setFragment(TAG_RECORD, RecordMain())
                 R.id.calendarFragment -> setFragment(TAG_CALENDAR, Calender())
                 R.id.graphFragment -> setFragment(TAG_GRAPH, Graph())
-                R.id.messageFragment -> setFragment(TAG_MESSAGE,UserListFrag())
+                R.id.messageFragment -> setFragment(TAG_MESSAGE,myPage())
             }
             true
         }
@@ -83,10 +83,6 @@ class NaviActivity : AppCompatActivity() {
             finish()
         }
 
-        if(item.itemId==R.id.mypage){
-            val intent= Intent(this,activity_login::class.java)
-            startActivity(intent)
-        }
         return true
     }
 
