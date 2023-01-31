@@ -15,7 +15,6 @@ import kotlinx.android.synthetic.main.activity_register.*
 class activity_login : AppCompatActivity() {
 
     lateinit var mAuth:FirebaseAuth
-    lateinit var btn_register: Button
     lateinit var btn_login:Button
     lateinit var edit_id:EditText
     lateinit var edit_pw:EditText
@@ -30,15 +29,11 @@ class activity_login : AppCompatActivity() {
         mAuth= Firebase.auth
 
         btn_login=findViewById(R.id.btn_login)
-        btn_register=findViewById(R.id.btn_register)
         edit_id=findViewById(R.id.edit_id)
         edit_pw=findViewById(R.id.edit_pw)
 
 
-        btn_register.setOnClickListener {
-            val intent=Intent(this, RegisterActivity::class.java)
-            startActivity(intent)
-        }
+
 
         btn_login.setOnClickListener {
             val loginID = edit_id.text.toString()

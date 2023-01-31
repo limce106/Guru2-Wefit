@@ -71,38 +71,11 @@ class UserListFrag : Fragment() {
 
         })
 
-       // user_searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-       //     override fun onQueryTextSubmit(query: String?): Boolean {
-       //         return false
-       //     }
-
-        //    override fun onQueryTextChange(newText: String?): Boolean {
-        //        filterList(newText)
-        //        return true
-       //     }
-
-      //  }
-      //  )
 
         return view
     }
 
-//    private fun filterList(query:String?){
-//        if(query!=null){
-//            val filteredList=ArrayList<User>()
-//            for(i in list){
-//                if(i.reg_name.lowercase(Locale.ROOT).contains(query)){
-//                    filteredList.add(i)
-//                }
-//            }
-//            if(filteredList.isEmpty()){
-//                Toast.makeText(activity, "No Data found", Toast.LENGTH_SHORT).show()
-//            }else{
-//                adapter.setFilteredList(filteredList)
-//            }
-//        }
-//
-//    }
+
 
 
 }
