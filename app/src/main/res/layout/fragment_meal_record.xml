@@ -31,13 +31,11 @@
             android:clickable="true"
             android:contentDescription="추가하기"
             android:focusable="auto"
-            android:src="@drawable/ic_add_record"
+            android:src="@drawable/ic_baseline_add_24"
             app:backgroundTint="@color/main"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:maxImageSize="70.5dp"
-            app:rippleColor="#FFFFFF"
-            app:tint="@null" />
+            app:rippleColor="#FFFFFF" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

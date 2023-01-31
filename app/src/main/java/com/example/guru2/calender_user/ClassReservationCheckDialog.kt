@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.DialogFragment
 import com.example.guru2.R
 
@@ -27,7 +26,6 @@ class ClassReservationCheckDialog : DialogFragment() {
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT)) //다이얼로그 배경 투명하게
         return inflater.inflate(R.layout.fragment_class_reservation_check_dialog, container, false)
     }
-
 
 
 }

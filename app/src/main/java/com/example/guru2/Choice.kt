@@ -32,7 +32,7 @@ class Choice : AppCompatActivity() {
         }
 
         btn_trainer.setOnClickListener {
-            val intent = Intent(this,trainerRegister::class.java)
+            val intent = Intent(this,RegisterActivity::class.java)
             startActivity(intent)
         }
 

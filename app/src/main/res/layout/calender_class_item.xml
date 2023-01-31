@@ -44,12 +44,29 @@
             android:textSize="18dp" />
 
         <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="("
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="18dp" />
+
+        <TextView
             android:id="@+id/join_size"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="6dp"
             android:layout_weight="1"
-            android:text="수강 정원:"
+            android:text="00"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:textSize="18dp" />
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="/"
             android:textAppearance="@style/TextAppearance.AppCompat.Body2"
             android:textSize="18dp" />
 
@@ -59,6 +76,15 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="00"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:textSize="18dp" />
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text=")"
             android:textAppearance="@style/TextAppearance.AppCompat.Body2"
             android:textSize="18dp" />
 

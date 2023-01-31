@@ -112,7 +112,7 @@ class CalenderTrainer : Fragment() {
                 itemList.clear()
                 date = p1.toString() + "-" + p2 + 1.toString() + "-" + p3.toString()
 
-                var bundle = Bundle() //번들 생성
+                val bundle = Bundle() //번들 생성
                 bundle.putString("key2", date) //번들에 값 담기
                 trainerDialog.arguments = bundle //값이 담긴 번들을 argunments에 담기
                 //날짜별 데이터 넣기
@@ -128,8 +128,6 @@ class CalenderTrainer : Fragment() {
                 Log.d("hhh", date)
             }
         })
-
-
 
 
         return view

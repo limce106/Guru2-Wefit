@@ -53,7 +53,7 @@ class NaviActivity : AppCompatActivity() {
         binding = ActivityNaviBinding.inflate(layoutInflater)
         setContentView(binding.root)
         supportActionBar?.setDisplayHomeAsUpEnabled(true) //뒤로가기 버튼 생성
-        setFragment(TAG_CALENDAR, Calender()) //시작 프래그먼트
+        setFragment(TAG_CALENDAR, CalenderTrainer()) //시작 프래그먼트
         bottomNavigationView.selectedItemId = R.id.calendarFragment
 
 
@@ -63,7 +63,7 @@ class NaviActivity : AppCompatActivity() {
                 R.id.recommendFragment -> setFragment(TAG_RECOMMEND, Instructure_Recommend_Fragment())
                 R.id.recordFragment-> setFragment(TAG_RECORD, Instructure_Record_Main())
                 R.id.calendarFragment -> setFragment(TAG_CALENDAR, Calender())
-                R.id.graphFragment -> setFragment(TAG_GRAPH, GraphTrainer())
+                R.id.graphFragment -> setFragment(TAG_GRAPH, Graph())
                 R.id.messageFragment -> setFragment(TAG_MESSAGE,UserListFrag())
             }
             true
