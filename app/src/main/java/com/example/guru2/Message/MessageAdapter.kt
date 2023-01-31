@@ -1,4 +1,4 @@
-package com.example.guru2
+package com.example.guru2.Message
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -6,8 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.guru2.R
 import com.google.firebase.auth.FirebaseAuth
-import org.w3c.dom.Text
 
 class MessageAdapter(private val context: Context, private val messageList:ArrayList<Message>) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>(){
@@ -36,7 +36,7 @@ class MessageAdapter(private val context: Context, private val messageList:Array
         val currentMessage=messageList[position]
 
         //보내는 데이터
-        if(holder.javaClass==SendViewHolder::class.java){
+        if(holder.javaClass== SendViewHolder::class.java){
             val viewHolder=holder as SendViewHolder
             viewHolder.sendMessage.text=currentMessage.message
         }else{//받는 데이터

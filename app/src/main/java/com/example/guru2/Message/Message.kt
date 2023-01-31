@@ -1,4 +1,4 @@
-package com.example.guru2
+package com.example.guru2.Message
 
 data class Message(
     var message:String?,

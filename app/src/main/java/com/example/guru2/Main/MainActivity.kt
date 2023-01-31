@@ -1,13 +1,17 @@
-package com.example.guru2
+package com.example.guru2.Main
 
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
+import com.example.guru2.Message.UserListFrag
+import com.example.guru2.NaviActivity
+import com.example.guru2.R
 import com.example.guru2.Records.ExerciseRecordFragment
 import com.example.guru2.Records.InputExerciseFragment
 import com.example.guru2.Records.InputMealFragment
 import com.example.guru2.Records.MealRecordFragment
+import com.example.guru2.RegisterActivity
 import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : AppCompatActivity() {
@@ -22,17 +26,17 @@ class MainActivity : AppCompatActivity() {
         val frag = findViewById<Button>(R.id.frag)
         val chatTest=findViewById<Button>(R.id.chatTest)
 
-        frag.setOnClickListener {   val intent = Intent(this,NaviActivity::class.java)
+        frag.setOnClickListener {   val intent = Intent(this, NaviActivity::class.java)
             startActivity(intent)  }
 
 
         loginTest.setOnClickListener {
-            val intent = Intent(this,RegisterActivity::class.java)
+            val intent = Intent(this, RegisterActivity::class.java)
             startActivity(intent)
         }
 
         chatTest.setOnClickListener {
-            val intent = Intent(this,UserListFrag::class.java)
+            val intent = Intent(this, UserListFrag::class.java)
             startActivity(intent)
         }
 
@@ -64,7 +68,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     companion object{
-        private var instance:MainActivity? = null
+        private var instance: MainActivity? = null
         fun getInstance(): MainActivity? {
             return instance
         }

@@ -1,4 +1,4 @@
-package com.example.guru2
+package com.example.guru2.Message
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.guru2.NaviActivity
+import com.example.guru2.R
 
 
 class UserAdapter(private val context: UserListFrag, private val userList:ArrayList<User>):
@@ -30,7 +32,7 @@ class UserAdapter(private val context: UserListFrag, private val userList:ArrayL
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
         val currentUser=userList[position]
         holder.nameText.text=currentUser.reg_name
-        val chat: Chat=Chat()
+        val chat: Chat = Chat()
         val bundle = Bundle()
         holder.itemView.setOnClickListener{
 

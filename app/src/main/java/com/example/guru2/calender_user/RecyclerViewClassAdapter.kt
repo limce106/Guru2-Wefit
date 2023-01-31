@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.guru2.Chat
+import com.example.guru2.Message.Chat
 import com.example.guru2.R
 import kotlinx.android.synthetic.main.calender_class_item.view.*
 
@@ -18,7 +18,7 @@ class RecyclerViewClassAdapter(val itemList: ArrayList<ClassScheduleItem>, conte
 
     val classReservation :ClassReservationDialog = ClassReservationDialog() //수업 팝업창
     val mcontext = context
-    val chat: Chat=Chat()
+    val chat: Chat = Chat()
 
 
 

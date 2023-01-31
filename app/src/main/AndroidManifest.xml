@@ -30,11 +30,11 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".Choice"
+            android:name=".Main.Choice"
 
             android:exported="false"></activity>
         <activity
-            android:name=".firstPage"
+            android:name=".Main.firstPage"
             android:exported="true"
             android:icon="@drawable/logo">
         
@@ -78,7 +78,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".Main.MainActivity"
 
             android:exported="false"></activity>
 

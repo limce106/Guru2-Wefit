@@ -1,8 +1,7 @@
-package com.example.guru2
+package com.example.guru2.Message
 
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +11,7 @@ import android.widget.EditText
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.guru2.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 
@@ -62,7 +62,7 @@ class Chat : Fragment() {
         //    var name = arguments?.getString("name").toString()
         //    var uid = arguments?.getString("uid").toString()
 
-        val messageAdapter: MessageAdapter= MessageAdapter(requireActivity(), messageList)
+        val messageAdapter: MessageAdapter = MessageAdapter(requireActivity(), messageList)
 
 
         chat_RecyclerView.layoutManager= LinearLayoutManager(activity)
@@ -78,7 +78,7 @@ class Chat : Fragment() {
         btn_send.setOnClickListener {
 
             val message=message_edit.text.toString()
-            val messageObject=Message(message,senderUid)
+            val messageObject= Message(message,senderUid)
 
             //데이터 저장
             mDbRef.child("chats").child(senderRoom).child("messages").push()

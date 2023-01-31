@@ -1,9 +1,10 @@
-package com.example.guru2
+package com.example.guru2.Main
 
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
+import com.example.guru2.R
 
 class firstPage : AppCompatActivity() {
     lateinit var btn_start:Button
@@ -15,7 +16,7 @@ class firstPage : AppCompatActivity() {
 
         btn_start.setOnClickListener {
 
-            val intent = Intent(this,Choice::class.java)
+            val intent = Intent(this, Choice::class.java)
             startActivity(intent)
             finish()
 
