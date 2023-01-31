@@ -62,7 +62,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="100"
-                android:src="@drawable/ic_baseline_check_circle_24"
+                android:src="@drawable/ic_baseline_check_circle_outline_24"
                 app:tint="@color/main" />
         </LinearLayout>
 

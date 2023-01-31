@@ -178,6 +178,7 @@ class Instructure_Recommend_Fragment : Fragment() {
 
         val database = FirebaseDatabase.getInstance()
         val databaseReference = database.getReference("user")
+        val mActivity = activity as NaviActivity
 
         val btnOk = rootView.findViewById<Button>(R.id.btnNicknameOk)
         btnOk.setOnClickListener() {
@@ -190,6 +191,11 @@ class Instructure_Recommend_Fragment : Fragment() {
                         if(dataSnapshot.exists()){
                             Toast.makeText(context, "확인되었습니다.", Toast.LENGTH_SHORT).show()
                             isTrainerExist = true
+                            // 입력한 id 사용자의 uid 찾기
+                            mActivity.strID = strNickname
+                            Log.e("uiD", strNickname)
+                            mActivity.findUidByID(mActivity.strID)
+                            Log.e("uid", mActivity.strID)
                         } else {
                             Toast.makeText(context, "존재하지 않는 회원입니다." +
                                     " 다시 입력하세요.", Toast.LENGTH_SHORT).show()
@@ -203,10 +209,6 @@ class Instructure_Recommend_Fragment : Fragment() {
                 }
             })
         }
-
-        // 입력한 id 사용자의 uid 찾기
-        val mActivity = activity as NaviActivity
-        mActivity.findUidByID(mActivity.strID)
 
         // 운동 항목 클릭 이벤트
         RVExerNameadapter.setItemClickListener(object: RecyclerAdapterExerName.OnItemClickListener {
@@ -224,6 +226,7 @@ class Instructure_Recommend_Fragment : Fragment() {
                     // 횟수 세트/입력 팝업창 띄우기
                     val dialog = popup_exerciseCount(v.context, activity as NaviActivity)
                     dialog.saveData2(clickedExerciseName, "exerciserecommend", mActivity.uidByID)
+                    Log.e("uid", mActivity.uidByID)
                 }
             }
         })
