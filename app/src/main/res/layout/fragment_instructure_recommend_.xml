@@ -60,9 +60,11 @@
         android:layout_width="277dp"
         android:layout_height="23dp"
         android:layout_marginTop="85dp"
+        android:layout_marginBottom="25dp"
         android:text="찾으시는 운동이 없다면 추가해보세요!"
         android:textAlignment="center"
         android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/searchView"
         app:layout_constraintEnd_toStartOf="@+id/btnCustom"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -70,15 +72,27 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_exerciseName"
         android:layout_width="0dp"
-        android:layout_height="460dp"
-        android:layout_marginTop="30dp"
+        android:layout_height="410dp"
         android:paddingTop="8dp"
         android:scrollbars="vertical"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvCustom"
         tools:listitem="@layout/exercise_name_form" />
+
+    <android.widget.SearchView
+        android:id="@+id/searchView"
+        android:layout_width="410dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="132dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/rv_exerciseName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:queryHint="검색어를 입력하시오" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
