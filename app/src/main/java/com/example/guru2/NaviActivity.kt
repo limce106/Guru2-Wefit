@@ -9,20 +9,15 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import com.example.guru2.Recommend.Instructure_Recommend_Fragment
 import com.example.guru2.Recommend.Trainer_Recommend_Fragment
-import com.example.guru2.calender_trainer.CalenderTrainer
-import com.example.guru2.Records.InputExerciseFragment
 import com.example.guru2.Records.RecordMain
 import com.example.guru2.calender_user.Calender
 import com.example.guru2.databinding.ActivityNaviBinding
-import com.example.guru2.graph_trainer.GraphTrainer
 import com.example.guru2.graph_user.Graph
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.*
 import com.google.firebase.ktx.Firebase
-import instructure_record.Instructure_Record_Main
 import kotlinx.android.synthetic.main.activity_navi.*
 
 
