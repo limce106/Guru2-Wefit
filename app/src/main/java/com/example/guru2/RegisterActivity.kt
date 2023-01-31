@@ -116,7 +116,7 @@ class RegisterActivity : AppCompatActivity() {
                 if(task.isSuccessful){
                     //성공 시 실행
                     Toast.makeText(this, "회원가입 성공", Toast.LENGTH_SHORT).show()
-                    val intent = Intent(this,MainActivity::class.java)
+                    val intent = Intent(this,activity_login::class.java)
                     startActivity(intent)
                     addUserToDatabase(reg_id, reg_pw, reg_name, reg_tel,
                         str_gender, str_purpose, mAuth.currentUser?.uid!!)
