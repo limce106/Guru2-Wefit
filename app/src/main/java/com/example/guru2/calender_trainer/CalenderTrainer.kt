@@ -40,6 +40,7 @@ class CalenderTrainer : Fragment() {
     val trainerDialog: TrainerCalenderDialog = TrainerCalenderDialog()
     val dialog: TrainerCalenderDialog = TrainerCalenderDialog().getInstance() //수업 예약 팝업창
 
+
     @RequiresApi(Build.VERSION_CODES.O)
     @SuppressLint("MissingInflatedId")
     override fun onCreateView(
@@ -49,12 +50,12 @@ class CalenderTrainer : Fragment() {
 
         val view = inflater.inflate(R.layout.fragment_calender_trainer, container, false)
         val recyclerview = view.findViewById<RecyclerView>(R.id.recyclerview_calender_trainer) //리사이클러 뷰 객체
-        val calenderview = view.findViewById<CalendarView>(R.id.cal_trainer) //캘린더
+        val calenderviewTrainer = view.findViewById<CalendarView>(R.id.cal_trainer) //캘린더
         firestore = FirebaseFirestore.getInstance() //파이어스토어 인스턴스 초기화
         val mActivity = activity as NaviActivity
 
         //새로운 데이터 저장할 때 마다 데이터 불러오기
-        val databaseReference: DatabaseReference = firebaseDatabase.getReference("schedule-trainer").child(mActivity.loginUser()!!) //db 연결
+        val databaseReference: DatabaseReference = firebaseDatabase.getReference("scheduleTrainer").child(mActivity.loginUser()!!) //db 연결
         databaseReference.addValueEventListener(object : ValueEventListener {
             @SuppressLint("SuspiciousIndentation")
             @RequiresApi(Build.VERSION_CODES.O)
@@ -106,13 +107,13 @@ class CalenderTrainer : Fragment() {
 
 
         //날짜별로 클릭시
-        calenderview.setOnDateChangeListener(object : CalendarView.OnDateChangeListener {
+        calenderviewTrainer.setOnDateChangeListener(object : CalendarView.OnDateChangeListener {
             @RequiresApi(Build.VERSION_CODES.O)
             override fun onSelectedDayChange(p0: CalendarView, p1: Int, p2: Int, p3: Int) {
                 itemList.clear()
                 date = p1.toString() + "-" + p2 + 1.toString() + "-" + p3.toString()
 
-                val bundle = Bundle() //번들 생성
+                var bundle = Bundle() //번들 생성
                 bundle.putString("key2", date) //번들에 값 담기
                 trainerDialog.arguments = bundle //값이 담긴 번들을 argunments에 담기
                 //날짜별 데이터 넣기
