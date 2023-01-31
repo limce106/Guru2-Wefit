@@ -1,18 +1,15 @@
 package com.example.guru2.Records
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.SearchView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.example.guru2.NaviActivity
 import com.example.guru2.R
-import kotlinx.android.synthetic.main.fragment_input_exercise.view.*
 
 class InputExerciseFragment : Fragment() {
 
@@ -165,21 +162,6 @@ class InputExerciseFragment : Fragment() {
         val rv_exerciseName: RecyclerView = rootView.findViewById(R.id.rv_exerciseName)
         val RVExerNameadapter = RecyclerAdapterExerName(list)
         rv_exerciseName.adapter = RVExerNameadapter
-
-        // 검색 기능
-        var searchViewTextListener: SearchView.OnQueryTextListener =
-            object : SearchView.OnQueryTextListener {
-                override fun onQueryTextSubmit(query: String?): Boolean {
-                    return false
-                }
-
-                override fun onQueryTextChange(s: String?): Boolean {
-                    RVExerNameadapter.filter.filter(s)
-                    Log.d("Search", "SearchVies Text is changed : $s")
-                    return false
-                }
-            }
-        rootView.searchView.setOnQueryTextListener(searchViewTextListener)
 
         // 운동 항목 클릭 이벤트
         RVExerNameadapter.setItemClickListener(object: RecyclerAdapterExerName.OnItemClickListener {

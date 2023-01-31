@@ -15,6 +15,7 @@
         android:id="@+id/btnCustom"
         android:layout_width="117dp"
         android:layout_height="56dp"
+        android:layout_marginTop="16dp"
         android:text="커스텀
         운동 추가"
         android:textSize="12sp"
@@ -26,12 +27,10 @@
         android:id="@+id/tvCustom"
         android:layout_width="277dp"
         android:layout_height="23dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="25dp"
+        android:layout_marginTop="32dp"
         android:text="찾으시는 운동이 없다면 추가해보세요!"
         android:textAlignment="center"
         android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/searchView"
         app:layout_constraintEnd_toStartOf="@+id/btnCustom"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -39,27 +38,15 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_exerciseName"
         android:layout_width="0dp"
-        android:layout_height="479dp"
+        android:layout_height="500dp"
+        android:layout_marginTop="32dp"
         android:paddingTop="8dp"
         android:scrollbars="vertical"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnCustom"
         tools:listitem="@layout/exercise_name_form" />
-
-    <android.widget.SearchView
-        android:id="@+id/searchView"
-        android:layout_width="410dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="64dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/rv_exerciseName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:queryHint="검색어를 입력하시오" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

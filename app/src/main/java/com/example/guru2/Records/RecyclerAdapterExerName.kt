@@ -1,18 +1,14 @@
 package com.example.guru2.Records
 
-import android.annotation.SuppressLint
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Filter
-import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
 import com.example.guru2.R
 import kotlinx.android.synthetic.main.exercise_name_form.view.*
 
 class RecyclerAdapterExerName(private var ExerciseNames: ArrayList<ExerciseNameModel>):
-    RecyclerView.Adapter<RecyclerAdapterExerName.ViewHolder>(), Filterable {
+    RecyclerView.Adapter<RecyclerAdapterExerName.ViewHolder>() {
 
     override fun getItemCount(): Int = ExerciseNames.size
 
@@ -37,55 +33,6 @@ class RecyclerAdapterExerName(private var ExerciseNames: ArrayList<ExerciseNameM
         private var view: View = v
         fun bind(item: ExerciseNameModel) {
             view.tv_exerciseName.text = item.exerciseName
-        }
-    }
-
-    // 검색 기능
-    var filteredExernames = ArrayList<ExerciseNameModel>()
-    var exernameFilter = ExerNameFilter()
-
-    init {
-        filteredExernames.addAll(ExerciseNames)
-    }
-
-    override fun getFilter(): Filter {
-        return exernameFilter
-    }
-
-    inner class ExerNameFilter : Filter() {
-        // 입력받은 문자열에 대한 처리
-        override fun performFiltering(charSequence: CharSequence): FilterResults {
-            val filterString = charSequence.toString()
-            val results = FilterResults()
-            Log.d("Search2", "charSequence : $charSequence")
-
-            //검색이 필요없을 경우를 위해 원본배열 복제
-            val filterList : ArrayList<ExerciseNameModel> = ArrayList<ExerciseNameModel>()
-
-            if (filterString.trim { it <= ' ' }.isEmpty()) {
-                results.values = ExerciseNames
-                results.count = ExerciseNames.size
-
-                return results
-            } else{
-                for (searchExerName in ExerciseNames) {
-                    if (searchExerName.exerciseName.contains(filterString)) {
-                        filterList.add(searchExerName)
-                    }
-                }
-            }
-            results.values = filterList
-            results.count = filterList.size
-
-            return results
-        }
-
-        //처리에 대한 결과물
-        @SuppressLint("NotifyDataSetChanged")
-        override fun publishResults(constraint: CharSequence?, results: FilterResults) {
-            filteredExernames.clear()
-            filteredExernames.addAll(results.values as ArrayList<ExerciseNameModel>)
-            notifyDataSetChanged()
         }
     }
 
