@@ -94,6 +94,8 @@ class TrainerCalenderDialog : DialogFragment() {
 
             //db에 저장
             databaseReference.child("schedule-trainer").child(mActivity.loginUser()!!).push().setValue(dataInput)
+            //db에 저장
+            databaseReference.child("class").push().setValue(dataInput)
 
             //다이얼 로그 종료하기
             try{this.dismiss()} catch (e: Exception){

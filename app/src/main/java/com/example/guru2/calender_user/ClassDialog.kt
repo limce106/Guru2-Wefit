@@ -62,7 +62,7 @@ class ClassDialog : DialogFragment() {
 
 
         //새로운 데이터 저장할 때 마다 데이터 불러오기
-        val databaseReference: DatabaseReference = firebaseDatabase.getReference("schedule-trainer") //db 연결
+        val databaseReference: DatabaseReference = firebaseDatabase.getReference("class") //db 연결
         databaseReference.addValueEventListener(object : ValueEventListener {
             @SuppressLint("SuspiciousIndentation")
             @RequiresApi(Build.VERSION_CODES.O)

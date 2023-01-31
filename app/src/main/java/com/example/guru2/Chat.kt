@@ -35,11 +35,10 @@ class Chat : Fragment() {
         val view = inflater.inflate(R.layout.fragment_chat, container, false)
 
         //넘어온 데이터 변수에 담기
-        var receiverName = arguments?.getString("name").toString()
-        var receiverUid = arguments?.getString("uid").toString()
+        var receiverName = arguments?.getString("name").toString()//대화상대 이름
+        var receiverUid = arguments?.getString("uid").toString()//대화상대 Uid
 
-     //   var receiverName: String = intent.getStringExtra("reg_name").toString()//대화상대 이름
-     //   var receiverUid : String = intent.getStringExtra("uId").toString()//대화상대 Uid
+
 
         var mAuth = FirebaseAuth.getInstance() //인증 객체
         var mDbRef:DatabaseReference = FirebaseDatabase.getInstance().reference //DB 객체
@@ -60,8 +59,8 @@ class Chat : Fragment() {
 
         var chat_RecyclerView: RecyclerView = view.findViewById(R.id.chat_recyclerView)    //RecyclerView
 
-        var name = arguments?.getString("name").toString()
-        var uid = arguments?.getString("uid").toString()
+        //    var name = arguments?.getString("name").toString()
+        //    var uid = arguments?.getString("uid").toString()
 
         val messageAdapter: MessageAdapter= MessageAdapter(requireActivity(), messageList)
 
@@ -107,6 +106,7 @@ class Chat : Fragment() {
                 }
 
                 override fun onCancelled(error: DatabaseError) {
+
                 }
 
             })

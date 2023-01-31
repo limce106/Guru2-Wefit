@@ -13,11 +13,6 @@ class UserAdapter(private val context: UserListFrag, private val userList:ArrayL
 
 
 
-    class UserViewHolder(itemView: View):RecyclerView.ViewHolder(itemView){
-        // val nameText: TextView =itemView.findViewById(R.id.name_text)
-    }
-
-
 
 
 
@@ -34,14 +29,21 @@ class UserAdapter(private val context: UserListFrag, private val userList:ArrayL
 
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
         val currentUser=userList[position]
-        // holder.nameText.text=currentUser.reg_name
-
+        holder.nameText.text=currentUser.reg_name
+        val chat: Chat=Chat()
         val bundle = Bundle()
         holder.itemView.setOnClickListener{
 
 
+            context.activity?.supportFragmentManager?.let { fragmentManager ->
+            }
+
             bundle.putString("name",currentUser.reg_name)
             bundle.putString("name",currentUser.uId)
+
+
+
+
 
 
         }
